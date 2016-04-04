@@ -1,0 +1,36 @@
+/* Light material design boilerplate. */
+html, body {
+  background: rgb(225, 225, 225);
+  font-family: Verdana, Helvetica, sans-serif;
+  text-align: center;
+}
+button {
+  background: #FFF; border: none;
+  font-size: 1.5em;
+  width: 400px; padding: 0.5em; margin: 10px 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: all 150ms;
+}
+button:hover {
+  background: #FFA;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  transform: translateY(-2px);
+}
+button.success {
+  background: #AFA;
+}
+button.error {
+  background: #FAA;
+}
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+table td {
+  border: 1px solid #888;
+  padding: 8px;
+}
+table td:first-child {
+  text-align: right;
+}
