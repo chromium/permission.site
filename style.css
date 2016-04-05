@@ -1,8 +1,19 @@
 /* Light material design boilerplate. */
 html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
   background: rgb(225, 225, 225);
   font-family: Verdana, Helvetica, sans-serif;
   text-align: center;
+}
+body {
+  box-sizing: border-box;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 button {
   background: #FFF; border: none;
