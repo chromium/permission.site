@@ -109,6 +109,14 @@ window.addEventListener("load", function() {
         displayOutcome("midi", "error")
       );
     },
+    "bluetooth": function() {
+      navigator.bluetooth.requestDevice({
+        filters: [{services: ['battery_service']}]
+      }).then(
+        displayOutcome("bluetooth", "success"),
+        displayOutcome("bluetooth", "error")
+      );
+    },
     "usb": function() {
       navigator.usb.requestDevice({filters: [{}]}).then(
         displayOutcome("usb", "success"),
