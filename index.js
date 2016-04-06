@@ -4,11 +4,13 @@
 
 window.addEventListener("load", function() {
 
+  var toggle = document.querySelector("#toggle");
   if (window.location.protocol == "https:") {
-    document.querySelector("#toggle").classList.add("https");
-    document.querySelector("#toggle").href = "http://permission.site";
+    toggle.classList.add("https");
+    toggle.protocol = "http:";
   } else if (window.location.protocol == "http:") {
-    document.querySelector("#toggle").classList.add("http");
+    toggle.classList.add("http");
+    toggle.protocol = "https:";
   }
 
   function displayOutcome(type, outcome) {
