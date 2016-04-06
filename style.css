@@ -60,14 +60,17 @@ table td:first-child {
   text-align: right;
 }
 
+#toggle-wrapper {
+  display: block;
+  margin: 2em 0 3em;
+}
 
 #toggle {
-  display: block;
   font-size: 1.5em;
-  padding: 1em 0em;
-  margin-bottom: 1em;
-  text-decoration: none;
+  padding: 1em;
+  margin: 1em;
   color: black;
+  text-decoration: none;
 }
 
 #toggle .http,
