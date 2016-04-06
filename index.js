@@ -4,6 +4,13 @@
 
 window.addEventListener("load", function() {
 
+  if (window.location.protocol == "https:") {
+    document.querySelector("#toggle").classList.add("https");
+    document.querySelector("#toggle").href = "http://permission.site";
+  } else if (window.location.protocol == "http:") {
+    document.querySelector("#toggle").classList.add("http");
+  }
+
   function displayOutcome(type, outcome) {
     return function() {
       console.info(outcome, type, arguments);

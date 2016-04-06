@@ -1,20 +1,27 @@
 /* Light material design boilerplate. */
 html, body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
-  background: rgb(225, 225, 225);
+  background: #EEEEEE;
   font-family: Verdana, Helvetica, sans-serif;
   text-align: center;
+  display: flex;
 }
+
 body {
   box-sizing: border-box;
   padding: 2em;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
 }
+
+.content {
+  align-self: center;
+}
+
 button {
   background: #FFF; border: none;
   font-size: 1.5em;
@@ -44,4 +51,103 @@ table td {
 }
 table td:first-child {
   text-align: right;
+}
+
+
+#toggle {
+  display: block;
+  font-size: 1.5em;
+  padding: 1em 0em;
+  margin-bottom: 1em;
+  text-decoration: none;
+  color: black;
+}
+
+#toggle .http,
+#toggle .https
+{
+  color: rgba(0, 0, 0, 0.5);
+  transition: color 0.25s;
+}
+
+#toggle.https .http,
+#toggle.http .https
+{
+  color: rgba(0, 0, 0, 0.5);
+}
+
+#toggle.http:not(:hover) .http {
+  color: #DB4437;
+}
+
+#toggle.https:not(:hover) .https {
+  color: #1AC222;
+}
+
+#toggle.http:hover .https {
+  text-decoration: underline;
+  color: #1AC222;
+}
+
+#toggle.https:hover .http {
+  text-decoration: underline;
+  color: #DB4437;
+}
+
+a#toggle:hover {
+  color: black;
+}
+
+
+.switch {
+  display: inline-block;
+  width: 34px;
+  height: 14px;
+  border-radius: 7px;
+  background-color: rgba(34, 31, 31, 0.26);
+  margin: auto 0.5em;
+  transition: background-color 0.25s;
+}
+
+.switch .knob {
+  width: 20px;
+  height: 20px;
+  margin: -3px;
+  border-radius: 10px;
+  background-color: #F1F1F1;
+  border:
+    inset 0.5px rgba(255, 255, 255, 0.12),
+    inset 0.5px rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0px 0px 2px 0px rgba(0, 0, 0, 0.12),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.24);
+
+  transform: translateX(10px);
+  transition: transform 0.25s, background-color 0.25s;
+}
+
+.http:not(:hover)  .switch,
+.https:hover       .switch
+{
+  background-color: rgba(219, 68, 55, 0.26);
+}
+
+.http:not(:hover)  .switch .knob,
+.https:hover       .switch .knob
+{
+  background-color: rgb(219, 68, 55);
+  transform: translateX(0px);
+}
+
+.http:hover        .switch,
+.https:not(:hover) .switch
+{
+  background-color: rgba(29, 194, 34, 0.5);
+}
+
+.http:hover        .switch .knob,
+.https:not(:hover) .switch .knob
+{
+  background-color: rgb(29, 194, 34);
+  transform: translateX(20px);
 }
