@@ -189,12 +189,12 @@ window.addEventListener("load", function() {
         if (interceptCopy) {
           // From http://www.w3.org/TR/clipboard-apis/#h4_the-copy-action
           e.clipboardData.setData("text/plain",
-            "This text was copied from the all-permissions demo."
+            "This text was copied from the permission.site clipboard example."
           );
           e.clipboardData.setData("text/html",
-            "This text was <b>copied</b> from the " + 
-            "<a href='https://adrifelt.github.io/demos/all-permissions.html'>" + 
-            "all-permissions demo</a>."
+            "This text was copied from the " + 
+            "<a href='https://permission.site/'>" + 
+            "permission.site</a> clipboard example."
           );
           e.preventDefault();
         }
