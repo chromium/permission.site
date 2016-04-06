@@ -15,11 +15,18 @@ body {
   padding: 2em;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
 }
 
 .content {
   align-self: center;
+}
+
+.before {
+  flex: 1 1 5%;
+}
+
+.after {
+  flex: 2 2 10%;
 }
 
 button {
