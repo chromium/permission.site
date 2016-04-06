@@ -5,6 +5,7 @@
 window.addEventListener("load", function() {
 
   var toggle = document.querySelector("#toggle");
+  toggle.classList.add("instant");
   if (window.location.protocol == "https:") {
     toggle.classList.add("https");
     toggle.protocol = "http:";
@@ -12,6 +13,9 @@ window.addEventListener("load", function() {
     toggle.classList.add("http");
     toggle.protocol = "https:";
   }
+  setTimeout(function() {
+    toggle.classList.remove("instant");
+  }, 10);
 
   function displayOutcome(type, outcome) {
     return function() {

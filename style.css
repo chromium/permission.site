@@ -136,6 +136,14 @@ a#toggle:hover {
   transition: transform 0.25s ease-in-out, background-color 0.25s ease-in-out;
 }
 
+#toggle.instant .switch,
+#toggle.instant .switch .knob,
+#toggle.instant .http,
+#toggle.instant .https
+{
+  transition: transform 0s;
+}
+
 .http:not(:hover)  .switch,
 .https:hover       .switch
 {
