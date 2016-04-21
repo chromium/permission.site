@@ -19,7 +19,17 @@ window.addEventListener("load", function() {
 
   function displayOutcome(type, outcome) {
     return function() {
-      console.info(outcome, type, arguments);
+      var argList = [outcome, type].concat([].slice.call(arguments));
+      switch(outcome) {
+        case "success":
+          console.info.apply(console, argList);
+          break;
+        case "error":
+          console.error.apply(console, argList);
+          break;
+        default:
+          console.log.apply(console, argList);
+      }
       document.getElementById(type).classList.add(outcome);
     }
   };
