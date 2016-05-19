@@ -31,7 +31,7 @@ window.addEventListener("load", function() {
           console.log.apply(console, argList);
       }
       document.getElementById(type).classList.add(outcome);
-    }
+    };
   };
 
   function displayOutcomeForNotifications(outcome) {
@@ -208,8 +208,8 @@ window.addEventListener("load", function() {
             "This text was copied from the permission.site clipboard example."
           );
           e.clipboardData.setData("text/html",
-            "This text was copied from the " + 
-            "<a href='https://permission.site/'>" + 
+            "This text was copied from the " +
+            "<a href='https://permission.site/'>" +
             "permission.site</a> clipboard example."
           );
           e.preventDefault();
@@ -220,7 +220,7 @@ window.addEventListener("load", function() {
         interceptCopy = true;
         document.execCommand("copy");
         interceptCopy = false;
-      }
+      };
     }()),
     "fullscreen": function() {
       // Note: As of 2014-12-16, fullscreen only allows "ask" and "allow" in Chrome.
@@ -241,11 +241,21 @@ window.addEventListener("load", function() {
     "keygen": function() {
       var keygen = document.createElement("keygen");
       document.getElementById("keygen-container").appendChild(keygen);
+    },
+    "persistent": function() {
+      // https://storage.spec.whatwg.org
+      navigator.storage.persist()
+        .then(function(result) {
+          displayOutcome("persistent", result ? "success" : "default")(result);
+        })
+        .catch(function(error) {
+          displayOutcome("persistent", "error")(error);
+        });
     }
-  }
+  };
 
-  for (type in register) {
-    document.getElementById(type).addEventListener('click', 
+  for (var type in register) {
+    document.getElementById(type).addEventListener('click',
       register[type]
     );
   }

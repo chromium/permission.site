@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" /> 
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=0.6">
   <!-- Origin trial token needed for Web Bluetooth -->
   <meta http-equiv="origin-trial" content="AkMD+TFNGTdcUvm9dn63kps/29QgcXl1IvNPrOb0hYvURXG8Vd8QchPya7FFga//6F2gM9691aqk5+PuDvrPaggAAABaeyJvcmlnaW4iOiAiaHR0cHM6Ly9wZXJtaXNzaW9uLnNpdGU6NDQzIiwgImZlYXR1cmUiOiAiV2ViQmx1ZXRvb3RoIiwgImV4cGlyeSI6IDE0NjM3Njc4MDh9">
   <!-- Origin trial token needed for Web USB -->
   <meta http-equiv="origin-trial" content="AsxscPRBb7U1KJIlQrsFrZ3ea0LHwRhNkbqBKsSuLP5y3sqIqnanjKbGk4oe5+/HkownaJhI2wP6m1S70Y8xkQsAAABUeyJvcmlnaW4iOiAiaHR0cHM6Ly9wZXJtaXNzaW9uLnNpdGU6NDQzIiwgImZlYXR1cmUiOiAiV2ViVVNCIiwgImV4cGlyeSI6IDE0NjUzODkxOTd9">
+  <!-- Origin trial token needed for Durable (Persistent) Storage -->
+  <meta http-equiv="origin-trial" content="AlnAAyELCmVjmtG2RyavQ3JeRcYiTuakTf03aAInR3sZVD+SN990FZVa0wUrwXJ/8L7NnXLySPYJqmzRPlqS8QQAAABceyJvcmlnaW4iOiAiaHR0cHM6Ly9wZXJtaXNzaW9uLnNpdGU6NDQzIiwgImZlYXR1cmUiOiAiRHVyYWJsZVN0b3JhZ2UiLCAiZXhwaXJ5IjogMTQ2NzIyOTUyNn0=">
   <title>permission.site</title>
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="app-icon.png"/>
@@ -37,6 +39,7 @@
 <button id="bluetooth">Bluetooth</button>
 <button id="usb">USB</button>
 <button id="eme">Encrypted Media (EME)</button>
+<button id="persistent">Persistent Storage</button>
 
 <button id="keygen">&lt;keygen&gt;</button>
 
@@ -68,6 +71,14 @@
   <td>May succeed without permission depending on the implementation.<br>
     Attempts to use known key systems. (See the source for the list of supported key systems.)
     <!-- Clear Key is not supported because it is not expected to require permissions. -->
+  </td>
+</tr>
+<tr>
+  <td>Persistent Storage</td>
+  <td>
+    Implemented behind the experimental flag <code>chrome://flags/#enable-experimental-web-platform-features</code>.
+    In Chrome, granted based on user agent heuristics (e.g. "is site bookmarked?"); no permission prompt.
+    (<a target=_blank href="https://storage.spec.whatwg.org">spec</a>)
   </td>
 </tr>
 </table>
