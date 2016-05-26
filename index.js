@@ -242,15 +242,14 @@ window.addEventListener("load", function() {
       var keygen = document.createElement("keygen");
       document.getElementById("keygen-container").appendChild(keygen);
     },
-    "persistent": function() {
+    "persistent-storage": function() {
       // https://storage.spec.whatwg.org
-      navigator.storage.persist()
-        .then(function(result) {
-          displayOutcome("persistent", result ? "success" : "default")(result);
-        })
-        .catch(function(error) {
-          displayOutcome("persistent", "error")(error);
-        });
+      navigator.storage.persist().then(
+        function(persisted) {
+          displayOutcome("persistent-storage", persisted ? "success" : "default")(persisted);
+        },
+        displayOutcome("persistent-storage", "error")
+      )
     }
   };
 
