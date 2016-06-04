@@ -103,25 +103,25 @@ window.addEventListener("load", function() {
         displayOutcome("location", "error")
       );
     },
-    "audio": function() {
-      navigator.getUserMedia(
-        {audio: true},
-        displayOutcome("audio", "success"),
-        displayOutcome("audio", "error")
-      );
-    },
-    "video": function() {
+    "camera": function() {
       navigator.getUserMedia(
         {video: true},
-        displayOutcome("video", "success"),
-        displayOutcome("video", "error")
+        displayOutcome("camera", "success"),
+        displayOutcome("camera", "error")
       );
     },
-    "audio+video": function() {
+    "microphone": function() {
+      navigator.getUserMedia(
+        {audio: true},
+        displayOutcome("microphone", "success"),
+        displayOutcome("microphone", "error")
+      );
+    },
+    "camera+microphone": function() {
       navigator.getUserMedia(
         {audio: true, video: true},
-        displayOutcome("audio+video", "success"),
-        displayOutcome("audio+video", "error")
+        displayOutcome("camera+microphone", "success"),
+        displayOutcome("camera+microphone", "error")
       );
     },
     "midi": function() {
