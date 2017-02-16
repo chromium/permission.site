@@ -164,20 +164,33 @@ window.addEventListener("load", function() {
         "com.example.somesystem"  // Ensure no real system is the last tried.
       ];
       var tryKeySystem = function(keySystem) {
+        // http://w3c.github.io/encrypted-media/#idl-def-mediakeysystemconfiguration
+        // One of videoCapabilities or audioCapabilities must be present. Pick
+        // a set that all browsers should support at least one of.
+        var capabilities = [
+          { contentType: 'audio/mp4; codecs="mp4a.40.2"' },
+          { contentType: 'audio/webm; codecs="opus"' },
+        ];
         navigator.requestMediaKeySystemAccess(
           keySystem,
           [
             { distinctiveIdentifier: "required",
               persistentState: "required",
+              audioCapabilities: capabilities,
               label: "'distinctiveIdentifier' and 'persistentState' required"
             },
             { distinctiveIdentifier: "required",
+              audioCapabilities: capabilities,
               label: "'distinctiveIdentifier' required"
             },
             { persistentState: "required",
+              audioCapabilities: capabilities,
               label: "'persistentState' required"
             },
-            { label: "empty" }
+            { audioCapabilities: capabilities,
+              label: "empty"
+            },
+            { label: "no capabilities" }
           ]
         ).then(
           function (mediaKeySystemAccess) {
