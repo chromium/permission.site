@@ -17,6 +17,7 @@ window.addEventListener("load", function() {
     toggle.classList.remove("instant");
   }, 10);
 
+
   function displayOutcome(type, outcome) {
     return function() {
       var argList = [outcome, type].concat([].slice.call(arguments));
@@ -33,7 +34,6 @@ window.addEventListener("load", function() {
       document.getElementById(type).classList.add(outcome);
     };
   };
-
   function displayOutcomeForNotifications(outcome) {
     switch(outcome) {
       case "granted":
@@ -268,6 +268,15 @@ window.addEventListener("load", function() {
         },
         displayOutcome("persistent-storage", "error")
       )
+    },
+    "protocol-handler": function() {
+      // https://www.w3.org/TR/html5/webappapis.html#navigatorcontentutils
+      var url = window.location + '%s';
+      try {
+        navigator.registerProtocolHandler('web+permission.site', url, 'title');
+      } catch(e) {
+        displayOutcome("protocol-handler", "error")(e);
+      }
     }
   };
 
