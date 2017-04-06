@@ -17,7 +17,6 @@ window.addEventListener("load", function() {
     toggle.classList.remove("instant");
   }, 10);
 
-
   function displayOutcome(type, outcome) {
     return function() {
       var argList = [outcome, type].concat([].slice.call(arguments));
@@ -34,6 +33,7 @@ window.addEventListener("load", function() {
       document.getElementById(type).classList.add(outcome);
     };
   };
+
   function displayOutcomeForNotifications(outcome) {
     switch(outcome) {
       case "granted":
