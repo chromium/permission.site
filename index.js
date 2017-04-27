@@ -30,6 +30,7 @@ window.addEventListener("load", function() {
         default:
           console.log.apply(console, argList);
       }
+      document.getElementById(type).classList.remove('success', 'error', 'default');
       document.getElementById(type).classList.add(outcome);
     };
   };
@@ -280,6 +281,20 @@ window.addEventListener("load", function() {
           displayOutcome("persistent-storage", persisted ? "success" : "default")(persisted);
         },
         displayOutcome("persistent-storage", "error")
+      )
+    },
+    "quota-management": function() {
+      // https://www.w3.org/TR/2012/WD-quota-api-20120703/
+      navigator.webkitPersistentStorage.queryUsageAndQuota(
+        function(currentUsageInBytes, currentQuotaInBytes) {
+          var quota = currentQuotaInBytes + 1024 * 1024;
+          navigator.webkitPersistentStorage.requestQuota(quota,
+            function(newQuota) {
+              displayOutcome("quota-management", (newQuota == quota) ? "success" : "default")(newQuota);
+            },
+            displayOutcome("quota-management", "error"));
+        },
+        displayOutcome("quota-management", "error")
       )
     },
     "protocol-handler": function() {
