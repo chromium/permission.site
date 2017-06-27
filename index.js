@@ -135,7 +135,7 @@ window.addEventListener("load", function() {
     },
     "bluetooth": function() {
       navigator.bluetooth.requestDevice({
-        filters: [{services: ['battery_service']}]
+        acceptAllDevices: true
       }).then(
         displayOutcome("bluetooth", "success"),
         displayOutcome("bluetooth", "error")
