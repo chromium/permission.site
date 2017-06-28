@@ -5,16 +5,16 @@ html, body {
   margin: 0;
   padding: 0;
   background: #EEEEEE;
-  font-family: Verdana, Helvetica, sans-serif;
-  text-align: center;
-  display: flex;
 }
 
 body {
+  font-family: Verdana, Helvetica, sans-serif;
+  text-align: center;
   box-sizing: border-box;
   padding: 2em;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 }
 
 .content {
