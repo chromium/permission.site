@@ -307,7 +307,67 @@ window.addEventListener("load", function() {
       } catch(e) {
         displayOutcome("protocol-handler", "error")(e);
       }
-    }
+    },
+
+    "read-text": function() {
+      console.log("read-text");
+      var cb = navigator.clipboard;
+      if (cb) {
+        cb.readText().then(function(data) {
+          console.log("Successfully read data from clipboard: '" + data + "'");
+        }, function() {
+          console.log("Failed to read from clipboard");
+        });
+      } else {
+        console.log("navigator.clipboard not available");
+      }
+    },
+
+    "write-text": function() {
+      console.log("write-text");
+      var cb = navigator.clipboard;
+      if (cb) {
+        navigator.clipboard.writeText("new clipboard data").then(function() {
+          console.log("Successfully wrote data to clipboard");
+        }, function() {
+          console.log("Failed to write to clipboard");
+        });
+      } else {
+        console.log("navigator.clipboard not available");
+      }
+    },
+
+    "read-text-delayed": function() {
+      var cb = navigator.clipboard;
+      if (cb) {
+        setTimeout(function() {
+          console.log("read-text-delayed");
+          navigator.clipboard.readText().then(function(data) {
+            console.log("Successfully read data from clipboard: '" + data + "'");
+          }, function() {
+            console.log("Failed to read from clipboard");
+          });
+        }, 2000);
+      } else {
+        console.log("navigator.clipboard not available");
+      }
+    },
+
+    "write-text-delayed": function() {
+      var cb = navigator.clipboard;
+      if (cb) {
+        setTimeout(function() {
+          console.log("write-text-delayed");
+          navigator.clipboard.writeText("new (delayed) clipboard data").then(function() {
+            console.log("Successfully wrote data to clipboard");
+          }, function() {
+            console.log("Failed to write to clipboard");
+          });
+        }, 2000);
+      } else {
+        console.log("navigator.clipboard not available");
+      }
+    },
   };
 
   for (var type in register) {

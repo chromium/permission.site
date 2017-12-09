@@ -42,10 +42,7 @@
 <button id="protocol-handler">Protocol Handler</button>
 
 <button id="keygen">&lt;keygen&gt;</button>
-
-<div id="keygen-container">
-</div>
-
+<div id="keygen-container"></div>
 
 <hr>
 
@@ -59,6 +56,17 @@
 <button id="popup">Popup</button>
 <button id="popup-delayed">Popup (delayed 2 seconds)</button>
 
+<hr>
+
+<p>Async Clipboard API</p>
+
+<button id="read-text">Read text</button>
+<button id="write-text">Write text</button>
+<br>
+<button id="read-text-delayed">Read text (delayed)</button>
+<button id="write-text-delayed">Write text (delayed)</button>
+
+<hr>
 
 <br><br><br>
 <p>Notes:</p>
@@ -78,6 +86,17 @@
     Implemented behind the experimental flag <code>chrome://flags/#enable-experimental-web-platform-features</code>.
     In Chrome, granted based on user agent heuristics (e.g. "is site bookmarked?"); no permission prompt.
     (<a target=_blank href="https://storage.spec.whatwg.org">spec</a>)
+  </td>
+</tr>
+<tr>
+  <td>Async Clipboard</td>
+  <td>
+    Implemented behind the experimental flag <code>chrome://flags/#enable-experimental-web-platform-features</code>.
+    <br>
+    To enable the Content Settings UX for setting clipboard permission, you'll also need to enable
+    <code>chrome://flags/#clipboard-content-setting</code>
+    <br>
+    Note: Only available for secure connections (https).
   </td>
 </tr>
 </table>
