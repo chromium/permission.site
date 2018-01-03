@@ -89,7 +89,12 @@
 <tr>
   <td>Async Clipboard</td>
   <td>
-    Implemented behind the experimental flag <code>chrome://flags/#enable-experimental-web-platform-features</code>.
+    These buttons test the new <a href="https://w3c.github.io/clipboard-apis/">Async Clipboard API</a>.
+    <br>
+    Note that these tests are different from the "Copy" button on this page, which uses the old
+    (synchronous) <code>execCommand</code> method to write to the clipboard.
+    <br>
+    This feature is implemented behind the experimental flag <code>chrome://flags/#enable-experimental-web-platform-features</code>.
     <br>
     To enable the Content Settings UX for setting clipboard permission, you'll also need to enable
     <code>chrome://flags/#clipboard-content-setting</code>
