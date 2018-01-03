@@ -307,7 +307,63 @@ window.addEventListener("load", function() {
       } catch(e) {
         displayOutcome("protocol-handler", "error")(e);
       }
-    }
+    },
+
+    "read-text": function() {
+      var cb = navigator.clipboard;
+      if (cb) {
+        cb.readText().then(function(data) {
+          displayOutcome("read-text", "success")("Successfully read data from clipboard: '" + data + "'");
+        }, function() {
+          displayOutcome("read-text", "error")("Failed to read from clipboard");
+        });
+      } else {
+        displayOutcome("read-text", "error")("navigator.clipboard not available");
+      }
+    },
+
+    "write-text": function() {
+      var cb = navigator.clipboard;
+      if (cb) {
+        navigator.clipboard.writeText("new clipboard data").then(function() {
+          displayOutcome("write-text", "success")("Successfully wrote data to clipboard");
+        }, function() {
+          displayOutcome("write-text", "error")("Failed to write to clipboard");
+        });
+      } else {
+        displayOutcome("write-text", "error")("navigator.clipboard not available");
+      }
+    },
+
+    "read-text-delayed": function() {
+      var cb = navigator.clipboard;
+      if (cb) {
+        setTimeout(function() {
+          navigator.clipboard.readText().then(function(data) {
+            displayOutcome("read-text-delayed", "success")("Successfully read data from clipboard: '" + data + "'");
+          }, function() {
+            displayOutcome("read-text-delayed", "error")("Failed to read from clipboard");
+          });
+        }, 2000);
+      } else {
+        displayOutcome("read-text-delayed", "error")("navigator.clipboard not available");
+      }
+    },
+
+    "write-text-delayed": function() {
+      var cb = navigator.clipboard;
+      if (cb) {
+        setTimeout(function() {
+          navigator.clipboard.writeText("new (delayed) clipboard data").then(function() {
+            displayOutcome("write-text-delayed", "success")("Successfully wrote data to clipboard");
+          }, function() {
+            displayOutcome("write-text-delayed", "error")("Failed to write to clipboard");
+          });
+        }, 2000);
+      } else {
+        displayOutcome("write-text-delayed", "error")("navigator.clipboard not available");
+      }
+    },
   };
 
   for (var type in register) {
