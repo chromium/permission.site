@@ -138,7 +138,9 @@ window.addEventListener("load", function() {
         // filters: [...] <- Prefer filters to save energy & show relevant devices.
         // acceptAllDevices here ensures dialog can populate, we don't care with what.
         acceptAllDevices:true
-      }).then(
+      })
+      .then(device => device.gatt.connect())
+      .then(
         displayOutcome("bluetooth", "success"),
         displayOutcome("bluetooth", "error")
       );
