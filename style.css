@@ -1,10 +1,16 @@
 /* Light material design boilerplate. */
 html, body {
   width: 100%;
-  min-height: 100%;
   margin: 0;
   padding: 0;
   background: #EEEEEE;
+}
+
+/* Only apply min-height to non-print media */
+@media not print {
+  html, body {
+    min-height: 100%;
+  }
 }
 
 body {
