@@ -152,7 +152,7 @@ window.addEventListener("load", function() {
       );
     },
     "serial": function() {
-      navigator.serial.requestPort({}).then(
+      navigator.serial.requestPort({filters: []}).then(
         displayOutcome("serial", "success"),
         displayOutcome("serial", "error")
       );
