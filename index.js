@@ -151,6 +151,12 @@ window.addEventListener("load", function() {
         displayOutcome("usb", "error")
       );
     },
+    "serial": function() {
+      navigator.serial.requestPort({filters: []}).then(
+        displayOutcome("serial", "success"),
+        displayOutcome("serial", "error")
+      );
+    },
     "eme": function() {
       // https://w3c.github.io/encrypted-media/#requestMediaKeySystemAccess
       // Tries multiple configuration per key system. The configurations are in
