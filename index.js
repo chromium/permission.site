@@ -262,7 +262,7 @@ window.addEventListener("load", function() {
           "resizable,scrollbars,status"
         )
         displayOutcome("popup-delayed", w ? "success" : "error")(w);
-      }, 2000);
+      }, 5000);
     },
     "fullscreen": function() {
       // Note: As of 2014-12-16, fullscreen only allows "ask" and "allow" in Chrome.
@@ -352,7 +352,7 @@ window.addEventListener("load", function() {
           }, function() {
             displayOutcome("read-text-delayed", "error")("Failed to read from clipboard");
           });
-        }, 2000);
+        }, 5000);
       } else {
         displayOutcome("read-text-delayed", "error")("navigator.clipboard not available");
       }
@@ -367,7 +367,7 @@ window.addEventListener("load", function() {
           }, function() {
             displayOutcome("write-text-delayed", "error")("Failed to write to clipboard");
           });
-        }, 2000);
+        }, 5000);
       } else {
         displayOutcome("write-text-delayed", "error")("navigator.clipboard not available");
       }
