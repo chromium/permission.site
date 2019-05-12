@@ -133,14 +133,14 @@ window.addEventListener("load", function() {
     "camera+microphone": function() {
       navigator.mediaDevices ?
         navigator.mediaDevices.getUserMedia(
-          {audio: true}).then(
-            displayOutcome("microphone", "success"),
-            displayOutcome("microphone", "error")
+          {audio: true, video: true}).then(
+            displayOutcome("camera+microphone", "success"),
+            displayOutcome("camera+microphone", "error")
         ) :
         navigator.getUserMedia(
           {audio: true, video: true},
-          displayOutcome("microphone", "success"),
-          displayOutcome("microphone", "error")
+          displayOutcome("camera+microphone", "success"),
+          displayOutcome("camera+microphone", "error")
         );
     },
     "screenshare": function() {
