@@ -105,24 +105,48 @@ window.addEventListener("load", function() {
       );
     },
     "camera": function() {
-      navigator.getUserMedia(
-        {video: true},
-        displayOutcome("camera", "success"),
-        displayOutcome("camera", "error")
-      );
+      navigator.mediaDevices ?
+        navigator.mediaDevices.getUserMedia(
+          {video: true}).then(
+            displayOutcome("camera", "success"),
+            displayOutcome("camera", "error")
+        ) :
+        navigator.getUserMedia(
+          {video: true},
+          displayOutcome("camera", "success"),
+          displayOutcome("camera", "error")
+        );
     },
     "microphone": function() {
-      navigator.getUserMedia(
-        {audio: true},
-        displayOutcome("microphone", "success"),
-        displayOutcome("microphone", "error")
-      );
+      navigator.mediaDevices ?
+        navigator.mediaDevices.getUserMedia(
+          {audio: true}).then(
+            displayOutcome("microphone", "success"),
+            displayOutcome("microphone", "error")
+        ) :
+        navigator.getUserMedia(
+          {audio: true},
+          displayOutcome("microphone", "success"),
+          displayOutcome("microphone", "error")
+        );
     },
     "camera+microphone": function() {
-      navigator.getUserMedia(
-        {audio: true, video: true},
-        displayOutcome("camera+microphone", "success"),
-        displayOutcome("camera+microphone", "error")
+      navigator.mediaDevices ?
+        navigator.mediaDevices.getUserMedia(
+          {audio: true}).then(
+            displayOutcome("microphone", "success"),
+            displayOutcome("microphone", "error")
+        ) :
+        navigator.getUserMedia(
+          {audio: true, video: true},
+          displayOutcome("microphone", "success"),
+          displayOutcome("microphone", "error")
+        );
+    },
+    "screenshare": function() {
+      navigator.mediaDevices.getDisplayMedia().then(
+        displayOutcome("screenshare", "success"),
+        displayOutcome("screenshare", "error")
       );
     },
     "midi": function() {
