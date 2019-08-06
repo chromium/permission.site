@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "org.chromium.twa.permissionsite",
+    "sha256_cert_fingerprints": [
+      "6A:54:B4:F8:E8:45:3F:83:C6:95:57:F6:74:E8:29:BD:A0:18:44:FC:8B:83:13:11:9F:AE:57:F2:D8:9C:1D:85"
+    ]
+  }
+}]
