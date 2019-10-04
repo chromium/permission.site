@@ -41,6 +41,7 @@
 <button id="quota-management">Quota Management</button>
 <button id="protocol-handler">Protocol Handler</button>
 <button id="webauthn-attestation">WebAuthn Attestation</button>
+<button id="nfc">NFC</button>
 
 <button id="keygen">&lt;keygen&gt;</button>
 <div id="keygen-container"></div>
@@ -70,7 +71,12 @@
 <br><br><br>
 <p>Notes:</p>
 <table>
-<tr><td>Serial</td>
+<tr>
+  <td>NFC</td>
+  <td>Android only - Implemented behind the experimental flag <code>chrome://flags/#enable-webnfc</code>.</td>
+</tr>
+<tr>
+  <td>Serial</td>
   <td>Implemented behind the experimental flag <code>chrome://flags/#enable-experimental-web-platform-features</code>.</td>
 </tr>
 <tr><td>Encrypted Media (EME)</td>
