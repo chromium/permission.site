@@ -466,6 +466,10 @@ window.addEventListener("load", function() {
             displayOutcome("webauthn-attestation", "error")(err);
           });
     },
+    "nfc": function() {
+      const reader = new NFCReader();
+      reader.scan();
+    },
   };
 
   for (var type in register) {
