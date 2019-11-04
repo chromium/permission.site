@@ -467,7 +467,7 @@ window.addEventListener("load", function() {
           });
     },
     "nfc": function() {
-      const reader = new NFCReader();
+      const reader = new NDEFReader();
       reader.scan();
     },
   };
