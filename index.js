@@ -467,8 +467,12 @@ window.addEventListener("load", function() {
           });
     },
     "nfc": function() {
-      const reader = new NFCReader();
-      reader.scan();
+      if ('NDEFReader' in window) {
+        const reader = new NDEFReader();
+        reader.scan();
+      } else {
+        displayOutcome("nfc", "error")("NDEFReader is not available");
+      }
     },
   };
 
