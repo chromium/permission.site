@@ -469,7 +469,13 @@ window.addEventListener("load", function() {
     "nfc": function() {
       if ('NDEFReader' in window) {
         const reader = new NDEFReader();
-        reader.scan();
+        reader.scan()
+        .then(() => {
+          displayOutcome("nfc", "success")("Successfully started NFC scan");
+        })
+        .catch((err) => {
+          displayOutcome("nfc", "error")(err);
+        });
       } else {
         displayOutcome("nfc", "error")("NDEFReader is not available");
       }
