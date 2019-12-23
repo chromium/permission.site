@@ -480,6 +480,32 @@ window.addEventListener("load", function() {
         displayOutcome("nfc", "error")("NDEFReader is not available");
       }
     },
+    "vr": function() {
+      if ('xr' in navigator) {
+        navigator.xr.requestSession('immersive-vr')
+        .then(() => {
+          displayOutcome("vr", "success")("Successfully entered VR");
+        })
+        .catch((err) => {
+          displayOutcome("vr", "error")(err);
+        });
+      } else {
+        displayOutcome("vr", "error")("navigator.xr is not available");
+      }
+    },
+    "ar": function() {
+      if ('xr' in navigator) {
+        navigator.xr.requestSession('immersive-ar')
+        .then(() => {
+          displayOutcome("ar", "success")("Successfully entered AR");
+        })
+        .catch((err) => {
+          displayOutcome("ar", "error")(err);
+        });
+      } else {
+        displayOutcome("ar", "error")("navigator.xr is not available");
+      }
+    }
   };
 
   for (var type in register) {
