@@ -143,6 +143,32 @@ window.addEventListener("load", function() {
           displayOutcome("camera+microphone", "error")
         );
     },
+    "pan-tilt-zoom": function() {
+      navigator.mediaDevices ?
+        navigator.mediaDevices.getUserMedia(
+          {video: {pan: true, tilt: true, zoom: true}}).then(
+            displayOutcome("pan-tilt-zoom", "success"),
+            displayOutcome("pan-tilt-zoom", "error")
+        ) :
+        navigator.getUserMedia(
+          {video: {pan: true, tilt: true, zoom: true}},
+          displayOutcome("pan-tilt-zoom", "success"),
+          displayOutcome("pan-tilt-zoom", "error")
+        );
+    },
+    "pan-tilt-zoom+microphone": function() {
+      navigator.mediaDevices ?
+        navigator.mediaDevices.getUserMedia(
+          {video: {pan: true, tilt: true, zoom: true}, audio: true}).then(
+            displayOutcome("pan-tilt-zoom+microphone", "success"),
+            displayOutcome("pan-tilt-zoom+microphone", "error")
+        ) :
+        navigator.getUserMedia(
+          {video: {pan: true, tilt: true, zoom: true}, audio: true},
+          displayOutcome("pan-tilt-zoom+microphone", "success"),
+          displayOutcome("pan-tilt-zoom+microphone", "error")
+        );
+    },
     "screenshare": function() {
       navigator.mediaDevices.getDisplayMedia().then(
         displayOutcome("screenshare", "success"),
