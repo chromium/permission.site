@@ -207,6 +207,12 @@ window.addEventListener("load", function() {
         displayOutcome("serial", "error")
       );
     },
+    "hid": function() {
+      navigator.hid.requestDevice({filters: []}).then(
+        displayOutcome("hid", "success"),
+        displayOutcome("hid", "error")
+      );
+    },
     "eme": function() {
       // https://w3c.github.io/encrypted-media/#requestMediaKeySystemAccess
       // Tries multiple configuration per key system. The configurations are in
