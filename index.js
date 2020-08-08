@@ -278,6 +278,37 @@ window.addEventListener("load", function() {
       };
       tryKeySystem(knownKeySystems.shift());
     },
+    "idle-detection": (function () {
+      let controller = null;
+
+      return async function () {
+        if (controller) {
+          controller.abort();
+          controller = null;
+          displayOutcome("idle-detection", "default")();
+          return;
+        }
+
+        try {
+          const status = await IdleDetector.requestPermission();
+          if (status != "granted") {
+            displayOutcome("idle-detection", "error")(`Permission status: ${status}`);
+            return;
+          }
+
+          controller = new AbortController();
+          const detector = new IdleDetector();
+          detector.addEventListener('change', () => {
+            console.log(`Idle change: ${detector.userState}, ${detector.screenState}.`);
+          });
+          await detector.start({signal: controller.signal});
+          displayOutcome("idle-detection", "success")();
+        } catch (e) {
+          controller = null;
+          displayOutcome("idle-detection", "error")(e);
+        }
+      };
+    }()),
     "copy": (function() {
       var interceptCopy = false;
 
