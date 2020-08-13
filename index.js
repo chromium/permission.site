@@ -209,7 +209,9 @@ window.addEventListener("load", function() {
     },
     "hid": function() {
       navigator.hid.requestDevice({filters: []}).then(
-        displayOutcome("hid", "success"),
+        devices => {
+          displayOutcome("hid", devices.length > 0 ? "success" : "error")();
+        },
         displayOutcome("hid", "error")
       );
     },
