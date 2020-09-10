@@ -400,7 +400,7 @@ window.addEventListener("load", function() {
       // https://www.w3.org/TR/html5/webappapis.html#navigatorcontentutils
       var url = window.location + '%s';
       try {
-        navigator.registerProtocolHandler('web+permission.site', url, 'title');
+        navigator.registerProtocolHandler('web+permissionsite', url, 'title');
       } catch(e) {
         displayOutcome("protocol-handler", "error")(e);
       }
