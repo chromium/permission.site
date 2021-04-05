@@ -91,22 +91,8 @@ table td:first-child {
   color: rgba(0, 0, 0, 0.5);
 }
 
-#toggle.http:not(:hover) .http {
-  color: #DB4437;
-}
-
-#toggle.https:not(:hover) .https {
-  color: #1AC222;
-}
-
-#toggle.http:hover .https {
-  text-decoration: underline;
-  color: #1AC222;
-}
-
-#toggle.https:hover .http {
-  text-decoration: underline;
-  color: #DB4437;
+#toggle svg {
+  transform: translateY(2px);
 }
 
 a#toggle:hover {
@@ -149,28 +135,46 @@ a#toggle:hover {
   transition: transform 0s;
 }
 
-.http:not(:hover)  .switch,
-.https:hover       .switch
-{
-  background-color: rgba(219, 68, 55, 0.26);
-}
-
-.http:not(:hover)  .switch .knob,
-.https:hover       .switch .knob
-{
+#toggle.http .knob {
   background-color: rgb(219, 68, 55);
   transform: translateX(0px);
 }
 
-.http:hover        .switch,
-.https:not(:hover) .switch
-{
-  background-color: rgba(29, 194, 34, 0.5);
-}
-
-.http:hover        .switch .knob,
-.https:not(:hover) .switch .knob
-{
+#toggle.https .knob {
   background-color: rgb(29, 194, 34);
   transform: translateX(20px);
+}
+
+#toggle.http .http {
+  color: #db4437;
+}
+
+#toggle.https .https {
+  color: #1ac222;
+}
+
+#toggle.http .http svg {
+  fill: #db4437;
+  opacity: 1;
+}
+#toggle.http .https svg {
+  fill: #000000;
+  opacity: 0.5;
+}
+
+#toggle.https .https svg {
+  fill: #1ac222;
+  opacity: 1;
+}
+#toggle.https .http svg {
+  fill: #000000;
+  opacity: 0.5;
+}
+
+.http .switch {
+  background-color: rgba(219, 68, 55, 0.26);
+}
+
+.https .switch {
+  background-color: rgba(29, 194, 34, 0.5);
 }
