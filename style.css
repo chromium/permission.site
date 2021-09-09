@@ -174,3 +174,8 @@ a#toggle:hover {
   background-color: rgb(29, 194, 34);
   transform: translateX(20px);
 }
+
+#icon{
+  width: 30px;
+  cursor: pointer;
+}
