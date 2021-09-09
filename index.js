@@ -2,7 +2,7 @@
 //  - Information about clearing settings in Chrome (can't link to chrome:// URLs)
 //  - Indicate if permissions are already granted, if the relevant API allows it.
 
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
 
   var toggle = document.querySelector("#toggle");
   toggle.classList.add("instant");
@@ -13,14 +13,14 @@ window.addEventListener("load", function() {
     toggle.classList.add("http");
     toggle.protocol = "https:";
   }
-  setTimeout(function() {
+  setTimeout(function () {
     toggle.classList.remove("instant");
   }, 10);
 
   function displayOutcome(type, outcome) {
-    return function() {
+    return function () {
       var argList = [outcome, type].concat([].slice.call(arguments));
-      switch(outcome) {
+      switch (outcome) {
         case "success":
           console.info.apply(console, argList);
           break;
@@ -36,7 +36,7 @@ window.addEventListener("load", function() {
   };
 
   function displayOutcomeForNotifications(outcome) {
-    switch(outcome) {
+    switch (outcome) {
       case "granted":
         console.info(outcome, "notifications");
         document.getElementById("notifications").classList.add("success");
@@ -98,84 +98,84 @@ window.addEventListener("load", function() {
         displayOutcomeForNotifications
       );
     },
-    "location": function() {
+    "location": function () {
       navigator.geolocation.getCurrentPosition(
         displayOutcome("location", "success"),
         displayOutcome("location", "error")
       );
     },
-    "camera": function() {
+    "camera": function () {
       navigator.mediaDevices ?
         navigator.mediaDevices.getUserMedia(
-          {video: true}).then(
+          { video: true }).then(
             displayOutcome("camera", "success"),
             displayOutcome("camera", "error")
-        ) :
+          ) :
         navigator.getUserMedia(
-          {video: true},
+          { video: true },
           displayOutcome("camera", "success"),
           displayOutcome("camera", "error")
         );
     },
-    "microphone": function() {
+    "microphone": function () {
       navigator.mediaDevices ?
         navigator.mediaDevices.getUserMedia(
-          {audio: true}).then(
+          { audio: true }).then(
             displayOutcome("microphone", "success"),
             displayOutcome("microphone", "error")
-        ) :
+          ) :
         navigator.getUserMedia(
-          {audio: true},
+          { audio: true },
           displayOutcome("microphone", "success"),
           displayOutcome("microphone", "error")
         );
     },
-    "camera+microphone": function() {
+    "camera+microphone": function () {
       navigator.mediaDevices ?
         navigator.mediaDevices.getUserMedia(
-          {audio: true, video: true}).then(
+          { audio: true, video: true }).then(
             displayOutcome("camera+microphone", "success"),
             displayOutcome("camera+microphone", "error")
-        ) :
+          ) :
         navigator.getUserMedia(
-          {audio: true, video: true},
+          { audio: true, video: true },
           displayOutcome("camera+microphone", "success"),
           displayOutcome("camera+microphone", "error")
         );
     },
-    "pan-tilt-zoom": function() {
+    "pan-tilt-zoom": function () {
       navigator.mediaDevices ?
         navigator.mediaDevices.getUserMedia(
-          {video: {pan: true, tilt: true, zoom: true}}).then(
+          { video: { pan: true, tilt: true, zoom: true } }).then(
             displayOutcome("pan-tilt-zoom", "success"),
             displayOutcome("pan-tilt-zoom", "error")
-        ) :
+          ) :
         navigator.getUserMedia(
-          {video: {pan: true, tilt: true, zoom: true}},
+          { video: { pan: true, tilt: true, zoom: true } },
           displayOutcome("pan-tilt-zoom", "success"),
           displayOutcome("pan-tilt-zoom", "error")
         );
     },
-    "pan-tilt-zoom+microphone": function() {
+    "pan-tilt-zoom+microphone": function () {
       navigator.mediaDevices ?
         navigator.mediaDevices.getUserMedia(
-          {video: {pan: true, tilt: true, zoom: true}, audio: true}).then(
+          { video: { pan: true, tilt: true, zoom: true }, audio: true }).then(
             displayOutcome("pan-tilt-zoom+microphone", "success"),
             displayOutcome("pan-tilt-zoom+microphone", "error")
-        ) :
+          ) :
         navigator.getUserMedia(
-          {video: {pan: true, tilt: true, zoom: true}, audio: true},
+          { video: { pan: true, tilt: true, zoom: true }, audio: true },
           displayOutcome("pan-tilt-zoom+microphone", "success"),
           displayOutcome("pan-tilt-zoom+microphone", "error")
         );
     },
-    "screenshare": function() {
+    "screenshare": function () {
       navigator.mediaDevices.getDisplayMedia().then(
         displayOutcome("screenshare", "success"),
         displayOutcome("screenshare", "error")
       );
     },
-    "midi": function() {
+    "midi": function () {
       navigator.requestMIDIAccess({
         sysex: true
       }).then(
@@ -183,39 +183,39 @@ window.addEventListener("load", function() {
         displayOutcome("midi", "error")
       );
     },
-    "bluetooth": function() {
+    "bluetooth": function () {
       navigator.bluetooth.requestDevice({
         // filters: [...] <- Prefer filters to save energy & show relevant devices.
         // acceptAllDevices here ensures dialog can populate, we don't care with what.
-        acceptAllDevices:true
+        acceptAllDevices: true
       })
-      .then(device => device.gatt.connect())
-      .then(
-        displayOutcome("bluetooth", "success"),
-        displayOutcome("bluetooth", "error")
-      );
+        .then(device => device.gatt.connect())
+        .then(
+          displayOutcome("bluetooth", "success"),
+          displayOutcome("bluetooth", "error")
+        );
     },
-    "usb": function() {
-      navigator.usb.requestDevice({filters: [{}]}).then(
+    "usb": function () {
+      navigator.usb.requestDevice({ filters: [{}] }).then(
         displayOutcome("usb", "success"),
         displayOutcome("usb", "error")
       );
     },
-    "serial": function() {
-      navigator.serial.requestPort({filters: []}).then(
+    "serial": function () {
+      navigator.serial.requestPort({ filters: [] }).then(
         displayOutcome("serial", "success"),
         displayOutcome("serial", "error")
       );
     },
-    "hid": function() {
-      navigator.hid.requestDevice({filters: []}).then(
+    "hid": function () {
+      navigator.hid.requestDevice({ filters: [] }).then(
         devices => {
           displayOutcome("hid", devices.length > 0 ? "success" : "error")();
         },
         displayOutcome("hid", "error")
       );
     },
-    "eme": function() {
+    "eme": function () {
       // https://w3c.github.io/encrypted-media/#requestMediaKeySystemAccess
       // Tries multiple configuration per key system. The configurations are in
       // descending order of privileges such that a supported permission-requiring
@@ -232,7 +232,7 @@ window.addEventListener("load", function() {
         "com.apple.fps.1_0",
         "com.example.somesystem"  // Ensure no real system is the last tried.
       ];
-      var tryKeySystem = function(keySystem) {
+      var tryKeySystem = function (keySystem) {
         // http://w3c.github.io/encrypted-media/#idl-def-mediakeysystemconfiguration
         // One of videoCapabilities or audioCapabilities must be present. Pick
         // a set that all browsers should support at least one of.
@@ -243,20 +243,24 @@ window.addEventListener("load", function() {
         navigator.requestMediaKeySystemAccess(
           keySystem,
           [
-            { distinctiveIdentifier: "required",
+            {
+              distinctiveIdentifier: "required",
               persistentState: "required",
               audioCapabilities: capabilities,
               label: "'distinctiveIdentifier' and 'persistentState' required"
             },
-            { distinctiveIdentifier: "required",
+            {
+              distinctiveIdentifier: "required",
               audioCapabilities: capabilities,
               label: "'distinctiveIdentifier' required"
             },
-            { persistentState: "required",
+            {
+              persistentState: "required",
               audioCapabilities: capabilities,
               label: "'persistentState' required"
             },
-            { audioCapabilities: capabilities,
+            {
+              audioCapabilities: capabilities,
               label: "empty"
             },
             { label: "no capabilities" }
@@ -303,7 +307,7 @@ window.addEventListener("load", function() {
           detector.addEventListener('change', () => {
             console.log(`Idle change: ${detector.userState}, ${detector.screenState}.`);
           });
-          await detector.start({signal: controller.signal});
+          await detector.start({ signal: controller.signal });
           displayOutcome("idle-detection", "success")();
         } catch (e) {
           controller = null;
@@ -311,10 +315,10 @@ window.addEventListener("load", function() {
         }
       };
     }()),
-    "copy": (function() {
+    "copy": (function () {
       var interceptCopy = false;
 
-      document.addEventListener("copy", function(e){
+      document.addEventListener("copy", function (e) {
         if (interceptCopy) {
           // From http://www.w3.org/TR/clipboard-apis/#h4_the-copy-action
           e.clipboardData.setData("text/plain",
@@ -329,13 +333,13 @@ window.addEventListener("load", function() {
         }
       });
 
-      return function() {
+      return function () {
         interceptCopy = true;
         document.execCommand("copy");
         interceptCopy = false;
       };
     }()),
-    "popup": function() {
+    "popup": function () {
       var w = window.open(
         location.href,
         "Popup",
@@ -343,8 +347,8 @@ window.addEventListener("load", function() {
       )
       displayOutcome("popup", w ? "success" : "error")(w);
     },
-    "popup-delayed": function() {
-      setTimeout(function() {
+    "popup-delayed": function () {
+      setTimeout(function () {
         var w = window.open(
           location.href,
           "Popup",
@@ -353,42 +357,42 @@ window.addEventListener("load", function() {
         displayOutcome("popup-delayed", w ? "success" : "error")(w);
       }, 5000);
     },
-    "fullscreen": function() {
+    "fullscreen": function () {
       // Note: As of 2014-12-16, fullscreen only allows "ask" and "allow" in Chrome.
       document.body.requestFullScreen(
         /* no callback */
       );
     },
-    "pointerlock": function() {
+    "pointerlock": function () {
       document.body.requestPointerLock(
         /* no callback */
       );
     },
-    "download": function() {
+    "download": function () {
       // Two downloads at the same time trigger a permission prompt in Chrome.
       triggerDownload();
       triggerDownload();
     },
-    "keygen": function() {
+    "keygen": function () {
       var keygen = document.createElement("keygen");
       document.getElementById("keygen-container").appendChild(keygen);
     },
-    "persistent-storage": function() {
+    "persistent-storage": function () {
       // https://storage.spec.whatwg.org
       navigator.storage.persist().then(
-        function(persisted) {
+        function (persisted) {
           displayOutcome("persistent-storage", persisted ? "success" : "default")(persisted);
         },
         displayOutcome("persistent-storage", "error")
       )
     },
-    "quota-management": function() {
+    "quota-management": function () {
       // https://www.w3.org/TR/2012/WD-quota-api-20120703/
       navigator.webkitPersistentStorage.queryUsageAndQuota(
-        function(currentUsageInBytes, currentQuotaInBytes) {
+        function (currentUsageInBytes, currentQuotaInBytes) {
           var quota = currentQuotaInBytes + 1024 * 1024;
           navigator.webkitPersistentStorage.requestQuota(quota,
-            function(newQuota) {
+            function (newQuota) {
               displayOutcome("quota-management", (newQuota == quota) ? "success" : "default")(newQuota);
             },
             displayOutcome("quota-management", "error"));
@@ -396,22 +400,22 @@ window.addEventListener("load", function() {
         displayOutcome("quota-management", "error")
       )
     },
-    "protocol-handler": function() {
+    "protocol-handler": function () {
       // https://www.w3.org/TR/html5/webappapis.html#navigatorcontentutils
       var url = window.location + '%s';
       try {
         navigator.registerProtocolHandler('web+permissionsite', url, 'title');
-      } catch(e) {
+      } catch (e) {
         displayOutcome("protocol-handler", "error")(e);
       }
     },
 
-    "read-text": function() {
+    "read-text": function () {
       var cb = navigator.clipboard;
       if (cb) {
-        cb.readText().then(function(data) {
+        cb.readText().then(function (data) {
           displayOutcome("read-text", "success")("Successfully read data from clipboard: '" + data + "'");
-        }, function() {
+        }, function () {
           displayOutcome("read-text", "error")("Failed to read from clipboard");
         });
       } else {
@@ -419,12 +423,12 @@ window.addEventListener("load", function() {
       }
     },
 
-    "write-text": function() {
+    "write-text": function () {
       var cb = navigator.clipboard;
       if (cb) {
-        navigator.clipboard.writeText("new clipboard data").then(function() {
+        navigator.clipboard.writeText("new clipboard data").then(function () {
           displayOutcome("write-text", "success")("Successfully wrote data to clipboard");
-        }, function() {
+        }, function () {
           displayOutcome("write-text", "error")("Failed to write to clipboard");
         });
       } else {
@@ -432,13 +436,13 @@ window.addEventListener("load", function() {
       }
     },
 
-    "read-text-delayed": function() {
+    "read-text-delayed": function () {
       var cb = navigator.clipboard;
       if (cb) {
-        setTimeout(function() {
-          navigator.clipboard.readText().then(function(data) {
+        setTimeout(function () {
+          navigator.clipboard.readText().then(function (data) {
             displayOutcome("read-text-delayed", "success")("Successfully read data from clipboard: '" + data + "'");
-          }, function() {
+          }, function () {
             displayOutcome("read-text-delayed", "error")("Failed to read from clipboard");
           });
         }, 5000);
@@ -447,13 +451,13 @@ window.addEventListener("load", function() {
       }
     },
 
-    "write-text-delayed": function() {
+    "write-text-delayed": function () {
       var cb = navigator.clipboard;
       if (cb) {
-        setTimeout(function() {
-          navigator.clipboard.writeText("new (delayed) clipboard data").then(function() {
+        setTimeout(function () {
+          navigator.clipboard.writeText("new (delayed) clipboard data").then(function () {
             displayOutcome("write-text-delayed", "success")("Successfully wrote data to clipboard");
-          }, function() {
+          }, function () {
             displayOutcome("write-text-delayed", "error")("Failed to write to clipboard");
           });
         }, 5000);
@@ -462,111 +466,111 @@ window.addEventListener("load", function() {
       }
     },
 
-    "webauthn-attestation": function() {
+    "webauthn-attestation": function () {
       // From https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API
       // This code is public domain, per https://developer.mozilla.org/en-US/docs/MDN/About#Copyrights_and_licenses
 
       // sample arguments for registration
       var createCredentialDefaultArgs = {
-          publicKey: {
-              // Relying Party (a.k.a. - Service):
-              rp: {
-                  name: "Acme"
-              },
+        publicKey: {
+          // Relying Party (a.k.a. - Service):
+          rp: {
+            name: "Acme"
+          },
 
-              // User:
-              user: {
-                  id: new Uint8Array(16),
-                  name: "john.p.smith@example.com",
-                  displayName: "John P. Smith"
-              },
+          // User:
+          user: {
+            id: new Uint8Array(16),
+            name: "john.p.smith@example.com",
+            displayName: "John P. Smith"
+          },
 
-              pubKeyCredParams: [{
-                  type: "public-key",
-                  alg: -7
-              }],
+          pubKeyCredParams: [{
+            type: "public-key",
+            alg: -7
+          }],
 
-              attestation: "direct",
+          attestation: "direct",
 
-              timeout: 60000,
+          timeout: 60000,
 
-              challenge: new Uint8Array([ // must be a cryptographically random number sent from a server
-                  0x8C, 0x0A, 0x26, 0xFF, 0x22, 0x91, 0xC1, 0xE9, 0xB9, 0x4E, 0x2E, 0x17, 0x1A, 0x98, 0x6A, 0x73,
-                  0x71, 0x9D, 0x43, 0x48, 0xD5, 0xA7, 0x6A, 0x15, 0x7E, 0x38, 0x94, 0x52, 0x77, 0x97, 0x0F, 0xEF
-              ]).buffer
-          }
+          challenge: new Uint8Array([ // must be a cryptographically random number sent from a server
+            0x8C, 0x0A, 0x26, 0xFF, 0x22, 0x91, 0xC1, 0xE9, 0xB9, 0x4E, 0x2E, 0x17, 0x1A, 0x98, 0x6A, 0x73,
+            0x71, 0x9D, 0x43, 0x48, 0xD5, 0xA7, 0x6A, 0x15, 0x7E, 0x38, 0x94, 0x52, 0x77, 0x97, 0x0F, 0xEF
+          ]).buffer
+        }
       };
 
       // sample arguments for login
       var getCredentialDefaultArgs = {
-          publicKey: {
-              timeout: 60000,
-              // allowCredentials: [newCredential] // see below
-              challenge: new Uint8Array([ // must be a cryptographically random number sent from a server
-                  0x79, 0x50, 0x68, 0x71, 0xDA, 0xEE, 0xEE, 0xB9, 0x94, 0xC3, 0xC2, 0x15, 0x67, 0x65, 0x26, 0x22,
-                  0xE3, 0xF3, 0xAB, 0x3B, 0x78, 0x2E, 0xD5, 0x6F, 0x81, 0x26, 0xE2, 0xA6, 0x01, 0x7D, 0x74, 0x50
-              ]).buffer
-          },
+        publicKey: {
+          timeout: 60000,
+          // allowCredentials: [newCredential] // see below
+          challenge: new Uint8Array([ // must be a cryptographically random number sent from a server
+            0x79, 0x50, 0x68, 0x71, 0xDA, 0xEE, 0xEE, 0xB9, 0x94, 0xC3, 0xC2, 0x15, 0x67, 0x65, 0x26, 0x22,
+            0xE3, 0xF3, 0xAB, 0x3B, 0x78, 0x2E, 0xD5, 0x6F, 0x81, 0x26, 0xE2, 0xA6, 0x01, 0x7D, 0x74, 0x50
+          ]).buffer
+        },
       };
 
       // register / create a new credential
       navigator.credentials.create(createCredentialDefaultArgs)
-          .then((cred) => {
-              console.log("NEW CREDENTIAL", cred);
+        .then((cred) => {
+          console.log("NEW CREDENTIAL", cred);
 
-              // normally the credential IDs available for an account would come from a server
-              // but we can just copy them from above...
-              var idList = [{
-                  id: cred.rawId,
-                  transports: ["usb", "nfc", "ble"],
-                  type: "public-key"
-              }];
-              getCredentialDefaultArgs.publicKey.allowCredentials = idList;
-              return navigator.credentials.get(getCredentialDefaultArgs);
-          })
-          .then((assertion) => {
-            displayOutcome("webauthn-attestation", "success")(assertion);
-          })
-          .catch((err) => {
-            displayOutcome("webauthn-attestation", "error")(err);
-          });
+          // normally the credential IDs available for an account would come from a server
+          // but we can just copy them from above...
+          var idList = [{
+            id: cred.rawId,
+            transports: ["usb", "nfc", "ble"],
+            type: "public-key"
+          }];
+          getCredentialDefaultArgs.publicKey.allowCredentials = idList;
+          return navigator.credentials.get(getCredentialDefaultArgs);
+        })
+        .then((assertion) => {
+          displayOutcome("webauthn-attestation", "success")(assertion);
+        })
+        .catch((err) => {
+          displayOutcome("webauthn-attestation", "error")(err);
+        });
     },
-    "nfc": function() {
+    "nfc": function () {
       if ('NDEFReader' in window) {
         const reader = new NDEFReader();
         reader.scan()
-        .then(() => {
-          displayOutcome("nfc", "success")("Successfully started NFC scan");
-        })
-        .catch((err) => {
-          displayOutcome("nfc", "error")(err);
-        });
+          .then(() => {
+            displayOutcome("nfc", "success")("Successfully started NFC scan");
+          })
+          .catch((err) => {
+            displayOutcome("nfc", "error")(err);
+          });
       } else {
         displayOutcome("nfc", "error")("NDEFReader is not available");
       }
     },
-    "vr": function() {
+    "vr": function () {
       if ('xr' in navigator) {
         navigator.xr.requestSession('immersive-vr')
-        .then(() => {
-          displayOutcome("vr", "success")("Successfully entered VR");
-        })
-        .catch((err) => {
-          displayOutcome("vr", "error")(err);
-        });
+          .then(() => {
+            displayOutcome("vr", "success")("Successfully entered VR");
+          })
+          .catch((err) => {
+            displayOutcome("vr", "error")(err);
+          });
       } else {
         displayOutcome("vr", "error")("navigator.xr is not available");
       }
     },
-    "ar": function() {
+    "ar": function () {
       if ('xr' in navigator) {
         navigator.xr.requestSession('immersive-ar')
-        .then(() => {
-          displayOutcome("ar", "success")("Successfully entered AR");
-        })
-        .catch((err) => {
-          displayOutcome("ar", "error")(err);
-        });
+          .then(() => {
+            displayOutcome("ar", "success")("Successfully entered AR");
+          })
+          .catch((err) => {
+            displayOutcome("ar", "error")(err);
+          });
       } else {
         displayOutcome("ar", "error")("navigator.xr is not available");
       }
@@ -580,3 +584,5 @@ window.addEventListener("load", function() {
   }
 
 });
+
+var icon = document.getElementById("icon")
