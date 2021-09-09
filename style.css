@@ -10,9 +10,13 @@ html, body {
 :root{
   /* --primary-color : #FFF;
   --secondary-color : #101020; */
+  
+
+}
+
+.dark-theme{
   --primary-color : #101020;
   --secondary-color : #FFF;
-
 }
 
 /* Only apply min-height to non-print media */
