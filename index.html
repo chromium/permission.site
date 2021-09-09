@@ -1,125 +1,136 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=0.6">
   <!-- Origin trial token needed for Web USB -->
-  <meta http-equiv="origin-trial" content="AsxscPRBb7U1KJIlQrsFrZ3ea0LHwRhNkbqBKsSuLP5y3sqIqnanjKbGk4oe5+/HkownaJhI2wP6m1S70Y8xkQsAAABUeyJvcmlnaW4iOiAiaHR0cHM6Ly9wZXJtaXNzaW9uLnNpdGU6NDQzIiwgImZlYXR1cmUiOiAiV2ViVVNCIiwgImV4cGlyeSI6IDE0NjUzODkxOTd9">
+  <meta http-equiv="origin-trial"
+    content="AsxscPRBb7U1KJIlQrsFrZ3ea0LHwRhNkbqBKsSuLP5y3sqIqnanjKbGk4oe5+/HkownaJhI2wP6m1S70Y8xkQsAAABUeyJvcmlnaW4iOiAiaHR0cHM6Ly9wZXJtaXNzaW9uLnNpdGU6NDQzIiwgImZlYXR1cmUiOiAiV2ViVVNCIiwgImV4cGlyeSI6IDE0NjUzODkxOTd9">
   <title>permission.site</title>
   <link rel="shortcut icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="app-icon.png"/>
+  <link rel="apple-touch-icon" href="app-icon.png" />
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.google.com/icons?selected=Material%20Icons%3Adark_mode%3A" rel="stylesheet">
+
   <script src="index.js"></script>
 </head>
+
 <body>
 
-<div class="before"></div>
-<div class="content">
+  <div class="before"></div>
+  <div class="content">
 
-<div id="toggle-wrapper">
-  <a id="toggle" class="neutral" href="" title="Switch between HTTP and HTTPS.">
-    <span class="http">HTTP</span>
-    <div class="switch">
-      <div class="knob"></div>
+    <div id="toggle-wrapper">
+      <a id="toggle" class="neutral" href="" title="Switch between HTTP and HTTPS.">
+        <span class="http">HTTP</span>
+        <div class="switch">
+          <div class="knob"></div>
+        </div>
+        <span class="https">HTTPS</span>
+      </a>
+      <img src="darkmode.png" id="icon">
     </div>
-    <span class="https">HTTPS</span>
-  </a>
-</div>
 
-<button id="notifications">Notifications</button>
-<button id="location">Location</button>
-<button id="camera">Camera</button>
-<button id="microphone">Microphone</button>
-<button id="camera+microphone">Camera + Microphone</button>
-<button id="pan-tilt-zoom">Pan-Tilt-Zoom</button>
-<button id="pan-tilt-zoom+microphone">Pan-Tilt-Zoom + Microphone</button>
-<button id="screenshare">Screen Share</button>
-<button id="midi">MIDI</button>
-<button id="bluetooth">Bluetooth</button>
-<button id="usb">USB</button>
-<button id="serial">Serial</button>
-<button id="hid">HID</button>
-<button id="eme">Encrypted Media (EME)</button>
-<button id="idle-detection">Idle Detection</button>
-<button id="persistent-storage">Persistent Storage</button>
-<button id="quota-management">Quota Management</button>
-<button id="protocol-handler">Protocol Handler</button>
-<button id="webauthn-attestation">WebAuthn Attestation</button>
-<button id="nfc">NFC</button>
-<button id="vr">Virtual Reality (VR)</button>
-<button id="ar">Augmented Reality (AR)</button>
+    <button id="notifications">Notifications</button>
+    <button id="location">Location</button>
+    <button id="camera">Camera</button>
+    <button id="microphone">Microphone</button>
+    <button id="camera+microphone">Camera + Microphone</button>
+    <button id="pan-tilt-zoom">Pan-Tilt-Zoom</button>
+    <button id="pan-tilt-zoom+microphone">Pan-Tilt-Zoom + Microphone</button>
+    <button id="screenshare">Screen Share</button>
+    <button id="midi">MIDI</button>
+    <button id="bluetooth">Bluetooth</button>
+    <button id="usb">USB</button>
+    <button id="serial">Serial</button>
+    <button id="hid">HID</button>
+    <button id="eme">Encrypted Media (EME)</button>
+    <button id="idle-detection">Idle Detection</button>
+    <button id="persistent-storage">Persistent Storage</button>
+    <button id="quota-management">Quota Management</button>
+    <button id="protocol-handler">Protocol Handler</button>
+    <button id="webauthn-attestation">WebAuthn Attestation</button>
+    <button id="nfc">NFC</button>
+    <button id="vr">Virtual Reality (VR)</button>
+    <button id="ar">Augmented Reality (AR)</button>
 
-<button id="keygen">&lt;keygen&gt;</button>
-<div id="keygen-container"></div>
+    <button id="keygen">&lt;keygen&gt;</button>
+    <div id="keygen-container"></div>
 
-<hr>
+    <hr>
 
-<button id="fullscreen">Fullscreen</button>
-<button id="pointerlock">Pointer Lock</button>
+    <button id="fullscreen">Fullscreen</button>
+    <button id="pointerlock">Pointer Lock</button>
 
-<hr>
+    <hr>
 
-<button id="copy">Copy</button>
-<button id="download">Auto Download</button>
-<button id="popup">Popup</button>
-<button id="popup-delayed">Popup (delayed 5 seconds)</button>
+    <button id="copy">Copy</button>
+    <button id="download">Auto Download</button>
+    <button id="popup">Popup</button>
+    <button id="popup-delayed">Popup (delayed 5 seconds)</button>
 
-<hr>
+    <hr>
 
-<p>Async Clipboard API</p>
+    <p>Async Clipboard API</p>
 
-<button id="read-text">Read text</button>
-<button id="write-text">Write text</button>
-<br>
-<button id="read-text-delayed">Read text (delayed)</button>
-<button id="write-text-delayed">Write text (delayed)</button>
-
-<br><br><br>
-<p>Notes:</p>
-<table>
-<tr>
-  <td>Augmented Reality (AR)</td>
-  <td>Implemented behind the experimental flag <code>chrome://flags/#enable-experimental-web-platform-features</code>.</td>
-</tr>
-<tr><td>Encrypted Media (EME)</td>
-  <td>May succeed without permission depending on the implementation.<br>
-    Attempts to use known key systems. (See the source for the list of supported key systems.)
-    <!-- Clear Key is not supported because it is not expected to require permissions. -->
-  </td>
-</tr>
-<tr>
-  <td>Async Clipboard</td>
-  <td>
-    These buttons test the new <a href="https://w3c.github.io/clipboard-apis/">Async Clipboard API</a>.
+    <button id="read-text">Read text</button>
+    <button id="write-text">Write text</button>
     <br>
-    Note that these tests are different from the "Copy" button on this page, which uses the old
-    (synchronous) <code>execCommand</code> method to write to the clipboard.
-    <br>
-    This feature is implemented behind the experimental flag <code>chrome://flags/#enable-experimental-web-platform-features</code>.
-    <br>
-    To enable the Content Settings UX for setting clipboard permission, you'll also need to enable
-    <code>chrome://flags/#clipboard-content-setting</code>
-    <br>
-    Note: Only available for secure connections (https).
-  </td>
-</tr>
-<tr>
-  <td>WebAuthn Attestation</td>
-  <td>
-    After pressing the button, you may need to touch your security key before you can see an attestation prompt.
-  </td>
-</tr>
-</table>
+    <button id="read-text-delayed">Read text (delayed)</button>
+    <button id="write-text-delayed">Write text (delayed)</button>
 
-</div>
-<div class="after"></div>
+    <br><br><br>
+    <p>Notes:</p>
+    <table>
+      <tr>
+        <td>Augmented Reality (AR)</td>
+        <td>Implemented behind the experimental flag
+          <code>chrome://flags/#enable-experimental-web-platform-features</code>.
+        </td>
+      </tr>
+      <tr>
+        <td>Encrypted Media (EME)</td>
+        <td>May succeed without permission depending on the implementation.<br>
+          Attempts to use known key systems. (See the source for the list of supported key systems.)
+          <!-- Clear Key is not supported because it is not expected to require permissions. -->
+        </td>
+      </tr>
+      <tr>
+        <td>Async Clipboard</td>
+        <td>
+          These buttons test the new <a href="https://w3c.github.io/clipboard-apis/">Async Clipboard API</a>.
+          <br>
+          Note that these tests are different from the "Copy" button on this page, which uses the old
+          (synchronous) <code>execCommand</code> method to write to the clipboard.
+          <br>
+          This feature is implemented behind the experimental flag
+          <code>chrome://flags/#enable-experimental-web-platform-features</code>.
+          <br>
+          To enable the Content Settings UX for setting clipboard permission, you'll also need to enable
+          <code>chrome://flags/#clipboard-content-setting</code>
+          <br>
+          Note: Only available for secure connections (https).
+        </td>
+      </tr>
+      <tr>
+        <td>WebAuthn Attestation</td>
+        <td>
+          After pressing the button, you may need to touch your security key before you can see an attestation prompt.
+        </td>
+      </tr>
+    </table>
 
-<div class="github-fork-ribbon-wrapper right">
+  </div>
+  <div class="after"></div>
+
+  <div class="github-fork-ribbon-wrapper right">
     <div class="github-fork-ribbon">
-        <a href="https://github.com/chromium/permission.site">On GitHub</a>
+      <a href="https://github.com/chromium/permission.site">On GitHub</a>
     </div>
-</div>
-<link rel="stylesheet" href="third_party/github.css">
+  </div>
+  <link rel="stylesheet" href="third_party/github.css">
 
 </body>
+
 </html>
