@@ -570,6 +570,48 @@ window.addEventListener("load", function() {
       } else {
         displayOutcome("ar", "error")("navigator.xr is not available");
       }
+    },
+    "orientation": function() {
+      if ('DeviceOrientationEvent' in window) {
+        if (window.DeviceOrientationEvent.requestPermission) {
+          window.DeviceOrientationEvent.requestPermission()
+          .then((permissionState) => {
+            if (permissionState == "granted") {
+              displayOutcome("orientation", "success")(`Permission state: ${permissionState}`);
+            } else {
+              displayOutcome("orientation", "error")(`Permission state: ${permissionState}`);
+            }
+          })
+          .catch((err) => {
+            displayOutcome("orientation", "error")(err);
+          });
+        } else {
+          displayOutcome("orientation", "success")("window.DeviceOrientationEvent doesn't require permission request");
+        }
+      } else {
+        displayOutcome("orientation", "error")("window.DeviceOrientationEvent is not available");
+      }
+    },
+    "motion": function() {
+      if ('DeviceMotionEvent' in window) {
+        if (window.DeviceMotionEvent.requestPermission) {
+          window.DeviceMotionEvent.requestPermission()
+          .then((permissionState) => {
+            if (permissionState == "granted") {
+              displayOutcome("motion", "success")(`Permission state: ${permissionState}`);
+            } else {
+              displayOutcome("motion", "error")(`Permission state: ${permissionState}`);
+            }
+          })
+          .catch((err) => {
+            displayOutcome("motion", "error")(err);
+          });
+        } else {
+          displayOutcome("motion", "success")("window.DeviceMotionEvent doesn't require permission request");
+        }
+      } else {
+        displayOutcome("motion", "error")("window.DeviceMotionEvent is not available");
+      }
     }
   };
 

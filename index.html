@@ -48,6 +48,8 @@
 <button id="nfc">NFC</button>
 <button id="vr">Virtual Reality (VR)</button>
 <button id="ar">Augmented Reality (AR)</button>
+<button id="orientation">Device Orientation</button>
+<button id="motion">Device Motion</button>
 
 <button id="keygen">&lt;keygen&gt;</button>
 <div id="keygen-container"></div>
@@ -107,6 +109,15 @@
   <td>WebAuthn Attestation</td>
   <td>
     After pressing the button, you may need to touch your security key before you can see an attestation prompt.
+  </td>
+</tr>
+<tr>
+  <td>Device Orientation/Motion</td>
+  <td>
+    Currently, only WebKit on iOS <a href="https://developer.apple.com/documentation/safari-release-notes/safari-13-release-notes">requires</a>
+    the permission request.
+    <br>
+    Green doesn't mean device has the required sensors.
   </td>
 </tr>
 </table>
