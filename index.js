@@ -572,45 +572,69 @@ window.addEventListener("load", function() {
       }
     },
     "orientation": function() {
-      if ('DeviceOrientationEvent' in window) {
-        if (window.DeviceOrientationEvent.requestPermission) {
+      if ("ondeviceorientation" in window) {
+        window.addEventListener("deviceorientation", (event) => {
+          if (event.alpha === null && event.beta === null && event.gamma === null) {
+            displayOutcome("orientation", "error")("Device has no the required sensors");
+          } else {
+            displayOutcome("orientation", "success")("Device has the required sensors");
+          }
+        }, { once: true });
+
+        if (window.DeviceOrientationEvent && window.DeviceOrientationEvent.requestPermission) {
           window.DeviceOrientationEvent.requestPermission()
-          .then((permissionState) => {
-            if (permissionState == "granted") {
-              displayOutcome("orientation", "success")(`Permission state: ${permissionState}`);
-            } else {
-              displayOutcome("orientation", "error")(`Permission state: ${permissionState}`);
-            }
-          })
-          .catch((err) => {
-            displayOutcome("orientation", "error")(err);
-          });
+            .then((permissionState) => {
+              console.log(`Permission state: ${permissionState}`);
+              if (permissionState === "denied") {
+                displayOutcome("orientation", "error")(`Permission state: ${permissionState}`);
+              }
+            })
+            .catch((error) => {
+              displayOutcome("orientation", "error")(error);
+            });
         } else {
-          displayOutcome("orientation", "success")("window.DeviceOrientationEvent doesn't require permission request");
+          console.log("Device Orientation doesn't require permission request");
         }
       } else {
-        displayOutcome("orientation", "error")("window.DeviceOrientationEvent is not available");
+        displayOutcome("orientation", "error")("Device Orientation is not supported");
       }
     },
     "motion": function() {
-      if ('DeviceMotionEvent' in window) {
-        if (window.DeviceMotionEvent.requestPermission) {
+      if ("ondevicemotion" in window) {
+        window.addEventListener("devicemotion", (event) => {
+          if (
+            event.acceleration.x === null &&
+            event.acceleration.y === null &&
+            event.acceleration.z === null &&
+            event.accelerationIncludingGravity.x === null &&
+            event.accelerationIncludingGravity.y === null &&
+            event.accelerationIncludingGravity.z === null &&
+            event.rotationRate.alpha === null &&
+            event.rotationRate.beta === null &&
+            event.rotationRate.gamma === null
+          ) {
+            displayOutcome("motion", "error")("Device has no the required sensors");
+          } else {
+            displayOutcome("motion", "success")("Device has the required sensors");
+          }
+        }, { once: true });
+
+        if (window.DeviceMotionEvent && window.DeviceMotionEvent.requestPermission) {
           window.DeviceMotionEvent.requestPermission()
-          .then((permissionState) => {
-            if (permissionState == "granted") {
-              displayOutcome("motion", "success")(`Permission state: ${permissionState}`);
-            } else {
-              displayOutcome("motion", "error")(`Permission state: ${permissionState}`);
-            }
-          })
-          .catch((err) => {
-            displayOutcome("motion", "error")(err);
-          });
+            .then((permissionState) => {
+              console.log(`Permission state: ${permissionState}`);
+              if (permissionState === "denied") {
+                displayOutcome("motion", "error")(`Permission state: ${permissionState}`);
+              }
+            })
+            .catch((error) => {
+              displayOutcome("motion", "error")(error);
+            });
         } else {
-          displayOutcome("motion", "success")("window.DeviceMotionEvent doesn't require permission request");
+          console.log("Device Motion doesn't require permission request");
         }
       } else {
-        displayOutcome("motion", "error")("window.DeviceMotionEvent is not available");
+        displayOutcome("motion", "error")("Device Motion is not supported");
       }
     }
   };
