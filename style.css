@@ -174,3 +174,9 @@ a#toggle:hover {
   background-color: rgb(29, 194, 34);
   transform: translateX(20px);
 }
+
+.jswarning
+{
+  color: rgb(219, 68, 55);
+  font-size: 2em;
+}
