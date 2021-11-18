@@ -585,8 +585,11 @@ window.addEventListener("load", function() {
           window.DeviceOrientationEvent.requestPermission()
             .then((permissionState) => {
               console.log(`Permission state: ${permissionState}`);
-              if (permissionState === "denied") {
+              if (permissionState !== "granted") {
                 displayOutcome("orientation", "error")(`Permission state: ${permissionState}`);
+                // If permission prompt is ignored or dismissed,
+                // the permission state value is `default`, and permission can be requested again.
+                // https://w3c.github.io/deviceorientation/#id=permission-model
               }
             })
             .catch((error) => {
@@ -623,8 +626,11 @@ window.addEventListener("load", function() {
           window.DeviceMotionEvent.requestPermission()
             .then((permissionState) => {
               console.log(`Permission state: ${permissionState}`);
-              if (permissionState === "denied") {
+              if (permissionState !== "granted") {
                 displayOutcome("motion", "error")(`Permission state: ${permissionState}`);
+                // If permission prompt is ignored or dismissed,
+                // the permission state value is `default`, and permission can be requested again.
+                // https://w3c.github.io/deviceorientation/#id=permission-model
               }
             })
             .catch((error) => {
