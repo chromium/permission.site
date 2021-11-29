@@ -573,7 +573,7 @@ window.addEventListener("load", function() {
     },
     "orientation": function() {
       if ("ondeviceorientation" in window) {
-        window.addEventListener("deviceorientation", (event) => {
+        const handleDeviceOrientation = () => window.addEventListener("deviceorientation", (event) => {
           if (event.alpha === null && event.beta === null && event.gamma === null) {
             displayOutcome("orientation", "error")("Device has no the required sensors");
           } else {
@@ -584,12 +584,14 @@ window.addEventListener("load", function() {
         if (window.DeviceOrientationEvent && window.DeviceOrientationEvent.requestPermission) {
           window.DeviceOrientationEvent.requestPermission()
             .then((permissionState) => {
-              console.log(`Permission state: ${permissionState}`);
+              console.log(`Device Orientation permission state: ${permissionState}`);
               if (permissionState !== "granted") {
-                displayOutcome("orientation", "error")(`Permission state: ${permissionState}`);
                 // If permission prompt is ignored or dismissed,
                 // the permission state value is `default`, and permission can be requested again.
                 // https://w3c.github.io/deviceorientation/#id=permission-model
+                displayOutcome("orientation", "error")(`Device Orientation permission state: ${permissionState}`);
+              } else {
+                handleDeviceOrientation();
               }
             })
             .catch((error) => {
@@ -597,6 +599,7 @@ window.addEventListener("load", function() {
             });
         } else {
           console.log("Device Orientation doesn't require permission request");
+          handleDeviceOrientation();
         }
       } else {
         displayOutcome("orientation", "error")("Device Orientation is not supported");
@@ -604,7 +607,7 @@ window.addEventListener("load", function() {
     },
     "motion": function() {
       if ("ondevicemotion" in window) {
-        window.addEventListener("devicemotion", (event) => {
+        const handleDeviceMotion = window.addEventListener("devicemotion", (event) => {
           if (
             event.acceleration.x === null &&
             event.acceleration.y === null &&
@@ -625,12 +628,14 @@ window.addEventListener("load", function() {
         if (window.DeviceMotionEvent && window.DeviceMotionEvent.requestPermission) {
           window.DeviceMotionEvent.requestPermission()
             .then((permissionState) => {
-              console.log(`Permission state: ${permissionState}`);
+              console.log(`Device Motion permission state: ${permissionState}`);
               if (permissionState !== "granted") {
-                displayOutcome("motion", "error")(`Permission state: ${permissionState}`);
                 // If permission prompt is ignored or dismissed,
                 // the permission state value is `default`, and permission can be requested again.
                 // https://w3c.github.io/deviceorientation/#id=permission-model
+                displayOutcome("motion", "error")(`Device Motion permission state: ${permissionState}`);
+              } else {
+                handleDeviceMotion();
               }
             })
             .catch((error) => {
@@ -638,6 +643,7 @@ window.addEventListener("load", function() {
             });
         } else {
           console.log("Device Motion doesn't require permission request");
+          handleDeviceMotion();
         }
       } else {
         displayOutcome("motion", "error")("Device Motion is not supported");
