@@ -570,6 +570,84 @@ window.addEventListener("load", function() {
       } else {
         displayOutcome("ar", "error")("navigator.xr is not available");
       }
+    },
+    "orientation": function() {
+      if ("ondeviceorientation" in window) {
+        const handleDeviceOrientation = () => window.addEventListener("deviceorientation", (event) => {
+          if (event.alpha === null && event.beta === null && event.gamma === null) {
+            displayOutcome("orientation", "error")("Device has no the required sensors");
+          } else {
+            displayOutcome("orientation", "success")("Device has the required sensors");
+          }
+        }, { once: true });
+
+        if (window.DeviceOrientationEvent && window.DeviceOrientationEvent.requestPermission) {
+          window.DeviceOrientationEvent.requestPermission()
+            .then((permissionState) => {
+              console.log(`Device Orientation permission state: ${permissionState}`);
+              if (permissionState !== "granted") {
+                // If permission prompt is ignored or dismissed,
+                // the permission state value is `default`, and permission can be requested again.
+                // https://w3c.github.io/deviceorientation/#id=permission-model
+                displayOutcome("orientation", "error")(`Device Orientation permission state: ${permissionState}`);
+              } else {
+                handleDeviceOrientation();
+              }
+            })
+            .catch((error) => {
+              displayOutcome("orientation", "error")(error);
+            });
+        } else {
+          console.log("Device Orientation doesn't require permission request");
+          handleDeviceOrientation();
+        }
+      } else {
+        displayOutcome("orientation", "error")("Device Orientation is not supported");
+      }
+    },
+    "motion": function() {
+      if ("ondevicemotion" in window) {
+        const handleDeviceMotion = () => window.addEventListener("devicemotion", (event) => {
+          if (
+            event.acceleration.x === null &&
+            event.acceleration.y === null &&
+            event.acceleration.z === null &&
+            event.accelerationIncludingGravity.x === null &&
+            event.accelerationIncludingGravity.y === null &&
+            event.accelerationIncludingGravity.z === null &&
+            event.rotationRate.alpha === null &&
+            event.rotationRate.beta === null &&
+            event.rotationRate.gamma === null
+          ) {
+            displayOutcome("motion", "error")("Device has no the required sensors");
+          } else {
+            displayOutcome("motion", "success")("Device has the required sensors");
+          }
+        }, { once: true });
+
+        if (window.DeviceMotionEvent && window.DeviceMotionEvent.requestPermission) {
+          window.DeviceMotionEvent.requestPermission()
+            .then((permissionState) => {
+              console.log(`Device Motion permission state: ${permissionState}`);
+              if (permissionState !== "granted") {
+                // If permission prompt is ignored or dismissed,
+                // the permission state value is `default`, and permission can be requested again.
+                // https://w3c.github.io/deviceorientation/#id=permission-model
+                displayOutcome("motion", "error")(`Device Motion permission state: ${permissionState}`);
+              } else {
+                handleDeviceMotion();
+              }
+            })
+            .catch((error) => {
+              displayOutcome("motion", "error")(error);
+            });
+        } else {
+          console.log("Device Motion doesn't require permission request");
+          handleDeviceMotion();
+        }
+      } else {
+        displayOutcome("motion", "error")("Device Motion is not supported");
+      }
     }
   };
 
