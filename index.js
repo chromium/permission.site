@@ -607,7 +607,7 @@ window.addEventListener("load", function() {
     },
     "motion": function() {
       if ("ondevicemotion" in window) {
-        const handleDeviceMotion = window.addEventListener("devicemotion", (event) => {
+        const handleDeviceMotion = () => window.addEventListener("devicemotion", (event) => {
           if (
             event.acceleration.x === null &&
             event.acceleration.y === null &&
