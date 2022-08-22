@@ -648,6 +648,16 @@ window.addEventListener("load", function() {
       } else {
         displayOutcome("motion", "error")("Device Motion is not supported");
       }
+    },
+    "window-close":function(){
+      if(confirm("Confirm before Closing Window?")){
+        addEventListener('beforeunload',function(event){
+          event.preventDefault()
+          return event.returnValue="";
+        })
+      }else{
+        return false;
+      }
     }
   };
 
