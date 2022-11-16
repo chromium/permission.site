@@ -650,14 +650,20 @@ window.addEventListener("load", function() {
       }
     },
     "window-close":function(){
-      if(confirm("Confirm before Closing Window?")){
-        addEventListener('beforeunload',function(event){
+        
+      try{
+        window.addEventListener('beforeunload',function(event){
           event.preventDefault()
           return event.returnValue="";
         })
-      }else{
-        return false;
+
+        displayOutcome('window-close','success')("Successfully Added onbeforeunload")
+      }catch(e){
+        // document.getElementById('window-close').classList.add('error')
+        displayOutcome('window-close','error')("Error Occured")
       }
+        
+     
     }
   };
 
