@@ -180,3 +180,14 @@ a#toggle:hover {
   color: rgb(219, 68, 55);
   font-size: 2em;
 }
+
+/* for dark theme */
+#dark-theme{
+  height: 30px;
+  width: 30px;
+}
+
+.dark{
+  background-color: rgb(16, 39, 39);
+  color: aliceblue;
+}
