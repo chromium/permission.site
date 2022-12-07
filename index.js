@@ -664,5 +664,5 @@ window.addEventListener("load", function() {
 var icon=document.getElementById("dark-theme");
 icon.onclick=function(){
     document.body.classList.toggle("dark");
-    document.querySelector("#toggle").style.backgroundColor="white";
+    document.querySelector("#toggle").style.backgroundColor="#F1F1F1";
 };
