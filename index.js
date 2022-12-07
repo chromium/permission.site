@@ -658,3 +658,11 @@ window.addEventListener("load", function() {
   }
 
 });
+
+//for dark theme and light theme
+
+var icon=document.getElementById("dark-theme");
+icon.onclick=function(){
+    document.body.classList.toggle("dark");
+    document.querySelector("#toggle").style.backgroundColor="white";
+};
