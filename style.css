@@ -180,3 +180,17 @@ a#toggle:hover {
   color: rgb(219, 68, 55);
   font-size: 2em;
 }
+
+#dark {
+  position:fixed;
+  left: 1px;
+  top: 1px;
+  width: 80px;
+  height: 35px;
+  font-size: smaller;
+}
+
+.dark-mode {
+  background-color: #000000c4;
+  color: white;
+}

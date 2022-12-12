@@ -658,3 +658,18 @@ window.addEventListener("load", function() {
   }
 
 });
+
+function myFunction() {
+  const button = document.getElementById('dark');
+  const toggle = document.getElementById('toggle');
+  toggle.style.backgroundColor = "#EEEEEE";
+  var element = document.body;
+  element.classList.toggle("dark-mode");
+  if(button.innerHTML === "Light Mode") {
+      button.innerHTML = "Dark Mode";
+  } 
+  else if(button.innerHTML === "Dark Mode") {
+      button.innerHTML = "Light Mode";
+  }
+}
+
