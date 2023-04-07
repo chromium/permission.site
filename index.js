@@ -177,10 +177,18 @@ window.addEventListener("load", function() {
     },
     "midi": function() {
       navigator.requestMIDIAccess({
-        sysex: true
+        sysex: false
       }).then(
         displayOutcome("midi", "success"),
         displayOutcome("midi", "error")
+      );
+    },
+    "midi+sysex": function() {
+      navigator.requestMIDIAccess({
+        sysex: true
+      }).then(
+        displayOutcome("midi+sysex", "success"),
+        displayOutcome("midi+sysex", "error")
       );
     },
     "bluetooth": function() {
