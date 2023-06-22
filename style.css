@@ -180,3 +180,24 @@ a#toggle:hover {
   color: rgb(219, 68, 55);
   font-size: 2em;
 }
+
+.permission-status, .access-status {
+  font-size: small;
+  text-transform: uppercase;
+  padding-top: .4rem;
+  text-align: left;
+}
+
+.permission-status > span, .access-status > span {
+  font-weight: 800;
+}
+
+.demo-instructions {
+  padding: .5rem 1rem;
+  margin-top: 1rem;
+  text-align: left;
+  border: solid 1px;
+  max-width: 80rem;
+  align-self: center;
+  margin: 1rem auto;
+}
