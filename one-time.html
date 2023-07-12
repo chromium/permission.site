@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+    <title>permission.site (one-time)</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="app-icon.png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="one-time.js"></script>
+  </head>
+  <body>
+    <noscript>
+      <div class="jswarning">
+        This site does not function without JavaScript!
+      </div>
+    </noscript>
+
+    <div class="before"></div>
+    <div class="content">
+      <button id="geolocation">
+        Geolocation
+        <div class="permission-status">
+          Permission status:
+          <span id="geolocation-permission-status">⚫️ N/A*</span>
+        </div>
+        <div class="access-status">
+          Access status: <span id="geolocation-access-status">⚫️ unknown</span>
+        </div>
+      </button>
+      <button id="camera">
+        Camera
+        <div class="permission-status">
+          Permission status: <span id="camera-permission-status">⚫️ N/A*</span>
+        </div>
+        <div class="access-status">
+          Access status: <span id="camera-access-status">⚫️ unknown</span>
+        </div>
+      </button>
+      <button id="microphone">
+        Microphone
+        <div class="permission-status">
+          Permission status:
+          <span id="microphone-permission-status">⚫️ N/A*</span>
+        </div>
+        <div class="access-status">
+          Access status: <span id="microphone-access-status">⚫️ unknown</span>
+        </div>
+      </button>
+      <button id="camera-microphone">
+        Camera + Microphone
+        <div class="permission-status">
+          Permission status:
+          <span id="camera-microphone-permission-status">⚫️ N/A*</span>
+        </div>
+        <div class="access-status">
+          Access status:
+          <span id="camera-microphone-access-status">⚫️ unknown</span>
+        </div>
+      </button>
+
+      <div class="demo-instructions">
+        <h2>👩🏻‍💻 Demo instructions</h2>
+        <strong>Permission status</strong> is the status of this permission returned by
+        the
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Permissions/query"
+          noreferrer
+          noopener
+        >Permissions API</a>
+        when available. *⚫️N/A: In this browser, the status of this permission
+        can't be queried via the Permissions API.
+        <ul>
+            <li>
+                Click the <strong>Geolocation</strong> button to request access. Pick <strong>Allow this time</strong> (one-time permission). Observe the permission status change to <strong>🟢 GRANTED</strong>. Close the tab. Reopen it. Observe that the one-time permission is back to its original <strong>🔵 PROMPT</strong> status.
+              </li>
+          <li>
+            Open a new tab of this origin (<code class="origin"></code>).
+            Observe that permissions are inherited.
+          </li>
+          <li>
+            Close all tabs of this origin (<code class="origin"></code>).
+            Observe that one-time permissions are wiped.
+          </li>
+          <li>
+            Open a new page for this origin:
+            <a id="other-page" href="">other-page.html</a>. Open the site
+            controls in that new page. Observe that same-origin
+            navigations inherit the permissions: other-page.html will have the
+            same permissions you set here in the main demo page.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="github-fork-ribbon-wrapper right">
+      <div class="github-fork-ribbon">
+        <a href="https://github.com/chromium/permission.site">On GitHub</a>
+      </div>
+    </div>
+    <link rel="stylesheet" href="third_party/github.css" />
+  </body>
+</html>
