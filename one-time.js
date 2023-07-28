@@ -1,7 +1,7 @@
 const OTHER_PAGE_HREF = '/other-page.html';
 
 const PERMISSIONS_API_STATUSES = {
-  // status ID: status display string
+  // key = status ID, value: user-friendly string to display
   granted: '🟢 granted',
   denied: '🔴 denied',
   prompt: '🔵 prompt',
@@ -12,22 +12,7 @@ const API_ACCESS_STATUSES = {
   error: '🔴 error',
 };
 
-// Permissions API status
-function updatePermissionsApiStatus(permissionName) {
-  navigator.permissions.query({ name: permissionName }).then(
-    (result) => {
-      const { state } = result;
-      const displayStatus = PERMISSIONS_API_STATUSES[state];
-      document.querySelector(`#${permissionName}-permission-status`).innerText =
-        displayStatus;
-    },
-    // Rejected promise callback
-    () => {
-      console.warn(
-        `${permissionName}: In this browser, the status of this permission can't be queried via the Permissions API`
-      );
-    }
-  );
+// Display the Permissions API status (https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API)
 }
 
 // Feature access status
