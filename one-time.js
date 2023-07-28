@@ -10,30 +10,28 @@ const PERMISSIONS_API_STATUSES = {
 const API_ACCESS_STATUSES = {
   success: '🟢 success',
   error: '🔴 error',
+  unknown: '⚫️ unknown',
 };
 
 // Display the Permissions API status (https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API)
+function updatePermissionsApiStatus(permissionName, permissionStatus) {
+  const textToDisplay = PERMISSIONS_API_STATUSES[permissionStatus];
+  document.querySelector(`#${permissionName}-permission-status`).innerText =
+    textToDisplay;
 }
 
-// Feature access status
+// Display the feature access status (whether the feature can actually be accessed successfully in the browser)
 function updateAccessStatus(permissionName, accessStatus) {
-  const displayStatus = API_ACCESS_STATUSES[accessStatus];
+  const textToDisplay = API_ACCESS_STATUSES[accessStatus];
   document.querySelector(`#${permissionName}-access-status`).innerText =
-    displayStatus;
+    textToDisplay;
 }
-
-// Both statuses
-function displayStatuses(permissionName, accessStatus) {
-  updatePermissionsApiStatus(permissionName);
-  updateAccessStatus(permissionName, accessStatus);
-}
-
 // Utils
 function successCallback(permissionName) {
-  return () => displayStatuses(permissionName, 'success');
+  return () => updateAccessStatus(permissionName, 'success');
 }
 function errorCallback(permissionName) {
-  return () => displayStatuses(permissionName, 'error');
+  return () => updateAccessStatus(permissionName, 'error');
 }
 
 // Main
@@ -98,10 +96,34 @@ window.addEventListener('load', function () {
   };
 
   for (const permissionType in register) {
-    const type = permissionType;
-    updatePermissionsApiStatus(type);
-    document.getElementById(type).addEventListener('click', () => {
-      register[type]();
+    const permissionName = permissionType;
+    // We don't try to access any feature on page load; we wait for user action instead
+    // This is a best practice for permissions, and also allows the demo to better showcase one-time permissions
+
+    navigator.permissions.query({ name: permissionName }).then(
+      (permissionStatus) => {
+        // Display initial Permissions API status
+        updatePermissionsApiStatus(permissionName, permissionStatus.state);
+
+        // Add listener on Permissions API status change
+        permissionStatus.onchange = () => {
+          // Display updated Permissions API status
+          updatePermissionsApiStatus(permissionName, permissionStatus.state);
+          // Log the Permissions API status change in the console
+          console.info(
+            `${permissionName} permission state has changed to '${permissionStatus.state}'`
+          );
+        };
+      }, // Rejected promise callback if Permissions API isn't supported in this browser of for this capability
+      () => {
+        console.warn(
+          `${permissionName}: In this browser, the status of this permission can't be queried via the Permissions API`
+        );
+      }
+    );
+
+    document.getElementById(permissionName).addEventListener('click', () => {
+      register[permissionName]();
     });
   }
 });
