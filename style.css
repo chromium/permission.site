@@ -201,3 +201,13 @@ a#toggle:hover {
   align-self: center;
   margin: 1rem auto;
 }
+
+permission {
+  background: #def0ff;
+  border: solid #005763;  
+  border-radius: 5px;
+  width: 400px;
+  padding: 0.5em;
+  margin: 10px 10px;
+  display: block;
+}
