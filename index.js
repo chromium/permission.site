@@ -105,18 +105,19 @@ window.addEventListener("load", function() {
       );
     },
     "camera": function() {
-      navigator.mediaDevices ?
-        navigator.mediaDevices.getUserMedia(
-          {video: true}).then(
-            displayOutcome("camera", "success"),
-            displayOutcome("camera", "error")
-        ) :
-        navigator.getUserMedia(
-          {video: true},
-          displayOutcome("camera", "success"),
-          displayOutcome("camera", "error")
+    if (navigator.mediaDevices) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(
+            function() {
+                displayOutcome("camera", "success");
+            },
+            function() {
+                displayOutcome("camera", "error");
+            }
         );
-    },
+    } else {
+        displayOutcome("camera", "error");
+    }
+},
     "microphone": function() {
       navigator.mediaDevices ?
         navigator.mediaDevices.getUserMedia(
