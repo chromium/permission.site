@@ -372,6 +372,9 @@ window.addEventListener("load", function() {
         /* no callback */
       );
     },
+    "keyboardlock": function() {
+      navigator.keyboard.lock();
+    },
     "download": function() {
       // Two downloads at the same time trigger a permission prompt in Chrome.
       triggerDownload();
