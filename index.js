@@ -373,7 +373,20 @@ window.addEventListener("load", function() {
       );
     },
     "keyboardlock": function() {
-      navigator.keyboard.lock();
+      // Track requested state manually.
+      if (!window.keyboardLockRequested) {
+        window.keyboardLockRequested = true;
+        navigator.keyboard.lock().then(() => {
+          // Note: As of 2023-12-13, Chrome's promise may resolve before the lock takes effect during fullscreen.
+          displayOutcome("keyboardlock", document.fullscreenElement && window.keyboardLockRequested ? "success" : "default");
+          const handleDeviceOrientation = () => document.addEventListener("fullscreenchange", (event) => {
+            displayOutcome("keyboardlock", document.fullscreenElement && window.keyboardLockRequested ? "success" : "default");
+          });
+        }).catch(() => { displayOutcome("keyboardlock", "error") });
+      } else {
+        window.keyboardLockRequested = false;
+        navigator.keyboard.unlock()
+      }
     },
     "download": function() {
       // Two downloads at the same time trigger a permission prompt in Chrome.
