@@ -375,17 +375,18 @@ window.addEventListener("load", function() {
     "keyboardlock": function() {
       // Track requested state manually.
       if (!window.keyboardLockRequested) {
-        window.keyboardLockRequested = true;
         navigator.keyboard.lock().then(() => {
+          window.keyboardLockRequested = true;
           // Note: As of 2023-12-13, Chrome's promise may resolve before the lock takes effect during fullscreen.
           displayOutcome("keyboardlock", document.fullscreenElement && window.keyboardLockRequested ? "success" : "default");
-          const handleDeviceOrientation = () => document.addEventListener("fullscreenchange", (event) => {
+          document.addEventListener("fullscreenchange", (event) => {
             displayOutcome("keyboardlock", document.fullscreenElement && window.keyboardLockRequested ? "success" : "default");
           });
-        }).catch(() => { displayOutcome("keyboardlock", "error") });
+        }).catch(() => { displayOutcome("keyboardlock", "error"); });
       } else {
         window.keyboardLockRequested = false;
-        navigator.keyboard.unlock()
+        displayOutcome("keyboardlock", "default");
+        navigator.keyboard.unlock();
       }
     },
     "download": function() {
