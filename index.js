@@ -362,10 +362,15 @@ window.addEventListener("load", function() {
       }, 5000);
     },
     "fullscreen": function() {
-      // Note: As of 2014-12-16, fullscreen only allows "ask" and "allow" in Chrome.
-      document.body.requestFullScreen(
-        /* no callback */
-      );
+      try {
+        if (document.fullscreenElement) {
+          document.exitFullscreen().then(() => { displayOutcome("fullscreen", "default") });
+        } else {
+          document.documentElement.requestFullscreen().then(() => { displayOutcome("fullscreen", "success") });
+        }
+      } catch (e) {
+        displayOutcome("fullscreen", "error")(e);
+      }
     },
     "pointerlock": function() {
       document.body.requestPointerLock(
@@ -373,20 +378,23 @@ window.addEventListener("load", function() {
       );
     },
     "keyboardlock": function() {
-      // Track requested state manually.
-      if (!window.keyboardLockRequested) {
-        navigator.keyboard.lock().then(() => {
-          window.keyboardLockRequested = true;
-          // Note: As of 2023-12-13, Chrome's promise may resolve before the lock takes effect during fullscreen.
-          displayOutcome("keyboardlock", document.fullscreenElement && window.keyboardLockRequested ? "success" : "default");
-          document.addEventListener("fullscreenchange", (event) => {
+      try {
+        if (!window.keyboardLockRequested) {
+          navigator.keyboard.lock().then(() => {
+            window.keyboardLockRequested = true;
+            // Note: As of 2023-12-13, Chrome's promise may resolve before the lock takes effect during fullscreen.
             displayOutcome("keyboardlock", document.fullscreenElement && window.keyboardLockRequested ? "success" : "default");
-          });
-        }).catch(() => { displayOutcome("keyboardlock", "error"); });
-      } else {
-        window.keyboardLockRequested = false;
-        displayOutcome("keyboardlock", "default");
-        navigator.keyboard.unlock();
+            document.addEventListener("fullscreenchange", (event) => {
+              displayOutcome("keyboardlock", document.fullscreenElement && window.keyboardLockRequested ? "success" : "default");
+            });
+          }).catch(() => { displayOutcome("keyboardlock", "error"); });
+        } else {
+          window.keyboardLockRequested = false;
+          displayOutcome("keyboardlock", "default");
+          navigator.keyboard.unlock();
+        }
+      } catch (e) {
+        displayOutcome("keyboardlock", "error")(e);
       }
     },
     "download": function() {
