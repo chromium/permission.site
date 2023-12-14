@@ -364,8 +364,8 @@ window.addEventListener("load", function() {
     "fullscreen": function() {
       try {
         if (!document.fullscreenElement) {
-          document.addEventListener("fullscreenchanged", displayOutcome("fullscreen", document.fullscreenElement ? "success" : "default"));
-          document.addEventListener("fullscreenerror", displayOutcome("fullscreen", "error"));
+          document.addEventListener("fullscreenchanged", (e) => { displayOutcome("fullscreen", document.fullscreenElement ? "success" : "default")(e); });
+          document.addEventListener("fullscreenerror", (e) => { displayOutcome("fullscreen", "error")(e); });
           document.documentElement.requestFullscreen().then(
             displayOutcome("fullscreen", "success")("enter"),
             displayOutcome("fullscreen", "error")
@@ -384,8 +384,8 @@ window.addEventListener("load", function() {
       try {
         if (!window.pointerLockRequested) {
           window.pointerLockRequested = true;
-          document.addEventListener("pointerlockchange", displayOutcome("pointerlock", window.pointerLockRequested ? "success" : "default"));
-          document.addEventListener("pointerlockerror", displayOutcome("pointerlock", "error"));
+          document.addEventListener("pointerlockchange", (e) => { displayOutcome("pointerlock", window.pointerLockRequested ? "success" : "default")(e); });
+          document.addEventListener("pointerlockerror", (e) => { displayOutcome("pointerlock", "error")(e); });
           document.body.requestPointerLock().then(
             displayOutcome("pointerlock", "success")("locked"),
             displayOutcome("pointerlock", "error")
