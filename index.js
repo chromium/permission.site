@@ -363,39 +363,55 @@ window.addEventListener("load", function() {
     },
     "fullscreen": function() {
       try {
-        if (document.fullscreenElement) {
-          document.exitFullscreen().then(
-            displayOutcome("fullscreen", "default")("exited with API"),
-            displayOutcome("fullscreen", "error"));
-          document.addEventListener("fullscreenchanged", displayOutcome("fullscreen", document.fullscreenElement ? "success" : "default")(document.fullscreenElement ? "fullscreenchanged enter" : "fullscreenchanged on exit"));
-          document.addEventListener("fullscreenerror", displayOutcome("fullscreen", "error"));
-        } else {
+        if (!document.fullscreenElement) {
+          document.addEventListener("fullscreenchanged", displayOutcome("fullscreen", document.fullscreenElement ? "success" : "default")("change event"));
+          document.addEventListener("fullscreenerror", displayOutcome("fullscreen", "error event"));
           document.documentElement.requestFullscreen().then(
-            displayOutcome("fullscreen", "success")("entered"),
-            displayOutcome("fullscreen", "error"));
+            displayOutcome("fullscreen", "success")("enter"),
+            displayOutcome("fullscreen", "error")
+          );
+        } else {
+          document.exitFullscreen().then(
+            displayOutcome("fullscreen", "default")("exit"),
+            displayOutcome("fullscreen", "error")
+          );
         }
       } catch (e) {
         displayOutcome("fullscreen", "error")(e);
       }
     },
     "pointerlock": function() {
-      document.body.requestPointerLock(
-        /* no callback */
-      );
+      try {
+        if (!window.pointerLockRequested) {
+          window.pointerLockRequested = true;
+          document.addEventListener("pointerlockchange", displayOutcome("pointerlock", window.pointerLockRequested ? "success" : "default")("change event"));
+          document.addEventListener("pointerlockerror", displayOutcome("pointerlock", "error event"));
+          document.body.requestPointerLock().then(
+            displayOutcome("pointerlock", "success")("locked"),
+            displayOutcome("pointerlock", "error")
+          );
+        } else {
+          window.pointerLockRequested = false;
+          document.exitPointerLock();
+          displayOutcome("pointerlock", "default")("unlocked");
+        }
+      } catch (e) {
+        displayOutcome("pointerlock", "error")(e);
+      }
     },
     "keyboardlock": function() {
       try {
         if (!window.keyboardLockRequested) {
+          window.keyboardLockRequested = true;
           // Note: As of 2023-12-13, Chrome's promise may resolve before the lock takes effect during fullscreen.
           navigator.keyboard.lock().then(
-            displayOutcome("keyboardlock", "success")(document.fullscreenElement ? "Locked" : "Will lock in fullscreen"),
+            displayOutcome("keyboardlock", "success")(document.fullscreenElement ? "locked" : "will lock in fullscreen"),
             displayOutcome("keyboardlock", "error")
           );
-          window.keyboardLockRequested = true;
         } else {
+          window.keyboardLockRequested = false;
           navigator.keyboard.unlock();
           displayOutcome("keyboardlock", "default")("unlocked");
-          window.keyboardLockRequested = false;
         }
       } catch (e) {
         displayOutcome("keyboardlock", "error")(e);
