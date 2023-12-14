@@ -367,6 +367,8 @@ window.addEventListener("load", function() {
           document.exitFullscreen().then(
             displayOutcome("fullscreen", "default"),
             displayOutcome("fullscreen", "error"));
+          document.addEventListener("fullscreenchanged", displayOutcome("fullscreen", document.fullscreenElement ? "success" : "default"));
+          document.addEventListener("fullscreenerror", displayOutcome("fullscreen", "error"));
         } else {
           document.documentElement.requestFullscreen().then(
             displayOutcome("fullscreen", "success"),
@@ -386,15 +388,13 @@ window.addEventListener("load", function() {
         if (!window.keyboardLockRequested) {
           // Note: As of 2023-12-13, Chrome's promise may resolve before the lock takes effect during fullscreen.
           navigator.keyboard.lock().then(
-            displayOutcome("keyboardlock", "success"),
+            displayOutcome("keyboardlock", "success")(document.fullscreenElement ? "Locked" : "Will lock in fullscreen"),
             displayOutcome("keyboardlock", "error")
           );
           window.keyboardLockRequested = true;
         } else {
-          navigator.keyboard.unlock().then(
-            displayOutcome("keyboardlock", "default"),
-            displayOutcome("keyboardlock", "error")
-          );
+          navigator.keyboard.unlock();
+          displayOutcome("keyboardlock", "default")();
           window.keyboardLockRequested = false;
         }
       } catch (e) {
