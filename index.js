@@ -364,8 +364,8 @@ window.addEventListener("load", function() {
     "fullscreen": function() {
       try {
         if (!document.fullscreenElement) {
-          document.addEventListener("fullscreenchanged", displayOutcome("fullscreen", document.fullscreenElement ? "success" : "default")("change event"));
-          document.addEventListener("fullscreenerror", displayOutcome("fullscreen", "error event"));
+          document.addEventListener("fullscreenchanged", displayOutcome("fullscreen", document.fullscreenElement ? "success" : "default"));
+          document.addEventListener("fullscreenerror", displayOutcome("fullscreen", "error"));
           document.documentElement.requestFullscreen().then(
             displayOutcome("fullscreen", "success")("enter"),
             displayOutcome("fullscreen", "error")
@@ -384,8 +384,8 @@ window.addEventListener("load", function() {
       try {
         if (!window.pointerLockRequested) {
           window.pointerLockRequested = true;
-          document.addEventListener("pointerlockchange", displayOutcome("pointerlock", window.pointerLockRequested ? "success" : "default")("change event"));
-          document.addEventListener("pointerlockerror", displayOutcome("pointerlock", "error event"));
+          document.addEventListener("pointerlockchange", displayOutcome("pointerlock", window.pointerLockRequested ? "success" : "default"));
+          document.addEventListener("pointerlockerror", displayOutcome("pointerlock", "error"));
           document.body.requestPointerLock().then(
             displayOutcome("pointerlock", "success")("locked"),
             displayOutcome("pointerlock", "error")
@@ -403,7 +403,7 @@ window.addEventListener("load", function() {
       try {
         if (!window.keyboardLockRequested) {
           window.keyboardLockRequested = true;
-          // Note: As of 2023-12-13, Chrome's promise may resolve before the lock takes effect during fullscreen.
+          // Note: As of 2023-12-13, Chrome resolves the promise immediately and holds the lock in a pending state when the document is not fullscreen.
           navigator.keyboard.lock().then(
             displayOutcome("keyboardlock", "success")(document.fullscreenElement ? "locked" : "will lock in fullscreen"),
             displayOutcome("keyboardlock", "error")
