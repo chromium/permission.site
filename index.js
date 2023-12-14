@@ -364,9 +364,13 @@ window.addEventListener("load", function() {
     "fullscreen": function() {
       try {
         if (document.fullscreenElement) {
-          document.exitFullscreen().then(() => { displayOutcome("fullscreen", "default") });
+          document.exitFullscreen().then(
+            displayOutcome("fullscreen", "default"),
+            displayOutcome("fullscreen", "error"));
         } else {
-          document.documentElement.requestFullscreen().then(() => { displayOutcome("fullscreen", "success") });
+          document.documentElement.requestFullscreen().then(
+            displayOutcome("fullscreen", "success"),
+            displayOutcome("fullscreen", "error"));
         }
       } catch (e) {
         displayOutcome("fullscreen", "error")(e);
@@ -380,18 +384,18 @@ window.addEventListener("load", function() {
     "keyboardlock": function() {
       try {
         if (!window.keyboardLockRequested) {
-          navigator.keyboard.lock().then(() => {
-            window.keyboardLockRequested = true;
-            // Note: As of 2023-12-13, Chrome's promise may resolve before the lock takes effect during fullscreen.
-            displayOutcome("keyboardlock", document.fullscreenElement && window.keyboardLockRequested ? "success" : "default");
-            document.addEventListener("fullscreenchange", (event) => {
-              displayOutcome("keyboardlock", document.fullscreenElement && window.keyboardLockRequested ? "success" : "default");
-            });
-          }).catch(() => { displayOutcome("keyboardlock", "error"); });
+          // Note: As of 2023-12-13, Chrome's promise may resolve before the lock takes effect during fullscreen.
+          navigator.keyboard.lock().then(
+            displayOutcome("keyboardlock", "success"),
+            displayOutcome("keyboardlock", "error")
+          );
+          window.keyboardLockRequested = true;
         } else {
+          navigator.keyboard.unlock().then(
+            displayOutcome("keyboardlock", "default"),
+            displayOutcome("keyboardlock", "error")
+          );
           window.keyboardLockRequested = false;
-          displayOutcome("keyboardlock", "default");
-          navigator.keyboard.unlock();
         }
       } catch (e) {
         displayOutcome("keyboardlock", "error")(e);
