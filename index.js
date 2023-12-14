@@ -365,13 +365,13 @@ window.addEventListener("load", function() {
       try {
         if (document.fullscreenElement) {
           document.exitFullscreen().then(
-            displayOutcome("fullscreen", "default"),
+            displayOutcome("fullscreen", "default")("exited with API"),
             displayOutcome("fullscreen", "error"));
-          document.addEventListener("fullscreenchanged", displayOutcome("fullscreen", document.fullscreenElement ? "success" : "default"));
+          document.addEventListener("fullscreenchanged", displayOutcome("fullscreen", document.fullscreenElement ? "success" : "default")(document.fullscreenElement ? "fullscreenchanged enter" : "fullscreenchanged on exit"));
           document.addEventListener("fullscreenerror", displayOutcome("fullscreen", "error"));
         } else {
           document.documentElement.requestFullscreen().then(
-            displayOutcome("fullscreen", "success"),
+            displayOutcome("fullscreen", "success")("entered"),
             displayOutcome("fullscreen", "error"));
         }
       } catch (e) {
@@ -394,7 +394,7 @@ window.addEventListener("load", function() {
           window.keyboardLockRequested = true;
         } else {
           navigator.keyboard.unlock();
-          displayOutcome("keyboardlock", "default")();
+          displayOutcome("keyboardlock", "default")("unlocked");
           window.keyboardLockRequested = false;
         }
       } catch (e) {
