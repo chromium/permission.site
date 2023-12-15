@@ -61,17 +61,25 @@ window.addEventListener("load", function() {
     a.click();
   }
 
+  function isFullscreen() {
+    return document.fullscreenElement ||
+           document.webkitFullscreenElement ||
+           document.mozFullScreenElement ||
+           document.msFullscreenElement;
+  }
+
+  function isPointerLocked() {
+    return document.pointerLockElement ||
+           document.webkitPointerLockElement ||
+           document.mozPointerLockElement ||
+           document.msPointerLockElement;
+  }
+
   navigator.getUserMedia = (
     navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia ||
     navigator.msGetUserMedia
-  );
-  navigator.requestFullscreen = (
-    navigator.requestFullscreen ||
-    navigator.webkitRequestFullscreen ||
-    navigator.mozRequestFullscreen ||
-    navigator.msRequestFullscreen
   );
   navigator.requestMIDIAccess = (
     navigator.requestMIDIAccess ||
@@ -79,11 +87,17 @@ window.addEventListener("load", function() {
     navigator.mozRequestMIDIAccess ||
     navigator.msRequestMIDIAccess
   );
-  document.body.requestFullScreen = (
-    document.body.requestFullScreen ||
-    document.body.webkitRequestFullScreen ||
-    document.body.mozRequestFullScreen ||
-    document.body.msRequestFullScreen
+  document.documentElement.requestFullscreen = (
+    document.documentElement.requestFullscreen ||
+    document.documentElement.webkitRequestFullscreen ||
+    document.documentElement.mozRequestFullscreen ||
+    document.documentElement.msRequestFullscreen
+  );
+  document.exitFullscreen = (
+    document.exitFullscreen ||
+    document.webkitExitFullscreen ||
+    document.mozCancelFullScreen ||
+    document.msExitFullscreen
   );
   document.body.requestPointerLock = (
     document.body.requestPointerLock ||
@@ -91,6 +105,25 @@ window.addEventListener("load", function() {
     document.body.mozRequestPointerLock ||
     document.body.msRequestPointerLock
   );
+  document.exitPointerLock = (
+    document.exitPointerLock ||
+    document.webkitExitPointerLock ||
+    document.mozExitPointerLock ||
+    document.msExitPointerLock
+  );
+
+  document.addEventListener("fullscreenchange", (e) => {
+    displayOutcome("fullscreen", isFullscreen() ? "success" : "default")(e);
+  });
+  document.addEventListener("fullscreenerror", (e) => {
+    displayOutcome("fullscreen", "error")(e);
+  });
+  document.addEventListener("pointerlockchange", (e) => {
+    displayOutcome("pointerlock", isPointerLocked() ? "success" : "default")(e);
+  });
+  document.addEventListener("pointerlockerror", (e) => {
+    displayOutcome("pointerlock", "error")(e);
+  });
 
   var register = {
     "notifications": function () {
@@ -363,13 +396,7 @@ window.addEventListener("load", function() {
     },
     "fullscreen": function() {
       try {
-        if (!document.fullscreenElement) {
-          document.addEventListener("fullscreenchange", (e) => {
-            displayOutcome("fullscreen", document.fullscreenElement ? "success" : "default")(e);
-          });
-          document.addEventListener("fullscreenerror", (e) => {
-            displayOutcome("fullscreen", "error")(e);
-          });
+        if (!isFullscreen()) {
           document.documentElement.requestFullscreen().then(
             displayOutcome("fullscreen", "success")("enter"),
             displayOutcome("fullscreen", "error")
@@ -387,14 +414,6 @@ window.addEventListener("load", function() {
     "pointerlock": function() {
       try {
         if (!window.pointerLocked) {
-          document.addEventListener("pointerlockchange", (e) => {
-            window.pointerLocked = !window.pointerLocked;
-            displayOutcome("pointerlock", window.pointerLocked ? "success" : "default")(e);
-          });
-          document.addEventListener("pointerlockerror", (e) => {
-            window.pointerLocked = false;
-            displayOutcome("pointerlock", "error")(e);
-          });
           document.body.requestPointerLock().then(
             displayOutcome("pointerlock", "success")("locked"),
             displayOutcome("pointerlock", "error")
@@ -411,9 +430,9 @@ window.addEventListener("load", function() {
       try {
         if (!window.keyboardLockRequested) {
           window.keyboardLockRequested = true;
-          // Note: As of 2023-12-13, Chrome resolves the promise immediately and holds the lock in a pending state when the document is not fullscreen.
+          // Note: As of 2023-12-14, Chrome resolves the promise immediately and holds the lock in a pending state when the document is not fullscreen.
           navigator.keyboard.lock().then(
-            displayOutcome("keyboardlock", "success")(document.fullscreenElement ? "locked" : "will lock in fullscreen"),
+            displayOutcome("keyboardlock", "success")(isFullscreen() ? "locked" : "will lock in fullscreen"),
             displayOutcome("keyboardlock", "error")
           );
         } else {
