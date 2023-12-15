@@ -364,8 +364,12 @@ window.addEventListener("load", function() {
     "fullscreen": function() {
       try {
         if (!document.fullscreenElement) {
-          document.addEventListener("fullscreenchange", displayOutcome("fullscreen", document.fullscreenElement ? "success" : "default"));
-          document.addEventListener("fullscreenerror", displayOutcome("fullscreen", "error"));
+          document.addEventListener("fullscreenchange", (e) => {
+            displayOutcome("fullscreen", document.fullscreenElement ? "success" : "default")(e);
+          });
+          document.addEventListener("fullscreenerror", (e) => {
+            displayOutcome("fullscreen", "error")(e);
+          });
           document.documentElement.requestFullscreen().then(
             displayOutcome("fullscreen", "success")("enter"),
             displayOutcome("fullscreen", "error")
@@ -382,16 +386,20 @@ window.addEventListener("load", function() {
     },
     "pointerlock": function() {
       try {
-        if (!window.pointerLockRequested) {
-          window.pointerLockRequested = true;
-          document.addEventListener("pointerlockchange", displayOutcome("pointerlock", window.pointerLockRequested ? "success" : "default"));
-          document.addEventListener("pointerlockerror", displayOutcome("pointerlock", "error"));
+        if (!window.pointerLocked) {
+          document.addEventListener("pointerlockchange", (e) => {
+            window.pointerLocked = !window.pointerLocked;
+            displayOutcome("pointerlock", window.pointerLocked ? "success" : "default")(e);
+          });
+          document.addEventListener("pointerlockerror", (e) => {
+            window.pointerLocked = false;
+            displayOutcome("pointerlock", "error")(e);
+          });
           document.body.requestPointerLock().then(
             displayOutcome("pointerlock", "success")("locked"),
             displayOutcome("pointerlock", "error")
           );
         } else {
-          window.pointerLockRequested = false;
           document.exitPointerLock();
           displayOutcome("pointerlock", "default")("unlocked");
         }
