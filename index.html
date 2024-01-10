@@ -6,8 +6,9 @@
   <!-- Origin trial token needed for Web USB -->
   <meta http-equiv="origin-trial" content="AsxscPRBb7U1KJIlQrsFrZ3ea0LHwRhNkbqBKsSuLP5y3sqIqnanjKbGk4oe5+/HkownaJhI2wP6m1S70Y8xkQsAAABUeyJvcmlnaW4iOiAiaHR0cHM6Ly9wZXJtaXNzaW9uLnNpdGU6NDQzIiwgImZlYXR1cmUiOiAiV2ViVVNCIiwgImV4cGlyeSI6IDE0NjUzODkxOTd9">
   <title>permission.site</title>
-  <link rel="shortcut icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="app-icon.png"/>
+  <link rel="shortcut icon" href="icon-512x512.png">
+  <link rel="apple-touch-icon" href="icon-512x512.png">
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
   <script src="index.js"></script>
 </head>
@@ -32,6 +33,7 @@
   </a>
 </div>
 
+<button id="install">Install</button>
 <button id="notifications">Notifications</button>
 <button id="location">Location</button>
 <button id="camera">Camera</button>
@@ -99,7 +101,7 @@
 <tr>
   <td>Async Clipboard</td>
   <td>
-    These buttons test the new <a href="https://w3c.github.io/clipboard-apis/">Async Clipboard API</a>.
+    These buttons test the new <a href="https://w3c.github.io/clipboard-apis/" target="_blank">Async Clipboard API</a>.
     <br>
     Note that these tests are different from the "Copy" button on this page, which uses the old
     (synchronous) <code>execCommand</code> method to write to the clipboard.
@@ -122,6 +124,15 @@
   <td>Device Orientation/Motion</td>
   <td>
     May succeed without permission request depending on the implementation.
+  </td>
+</tr>
+<tr>
+  <td>Notifications</td>
+  <td>
+    On iOS and iPadOS, to request notification permission, web apps must first be added to the Home Screen.
+    <br>
+    In Meta Quest Browser, to request notification permission, web apps must be
+    <a href="https://web.dev/pwas-on-oculus-2/#packaging-pwas-with-pwabuilder" target="_blank">packaged</a>.
   </td>
 </tr>
 </table>

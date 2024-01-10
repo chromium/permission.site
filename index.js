@@ -3,6 +3,16 @@
 //  - Indicate if permissions are already granted, if the relevant API allows it.
 
 window.addEventListener("load", function() {
+  var deferredInstallEvent;
+
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    deferredInstallEvent = event;
+  });
+
+  window.addEventListener("appinstalled", (event) => {
+    displayOutcome("install", "success")();
+  });
 
   var toggle = document.querySelector("#toggle");
   toggle.classList.add("instant");
@@ -126,6 +136,26 @@ window.addEventListener("load", function() {
   });
 
   var register = {
+    "install": function() {
+      if ("BeforeInstallPromptEvent" in window) {
+        if (deferredInstallEvent) {
+          deferredInstallEvent.prompt();
+          deferredInstallEvent.userChoice
+            .then((choiceResult) => {
+              if (choiceResult.outcome === "accepted") {
+                displayOutcome("install", "success")();
+              }
+              // If install prompt is dismissed, closed or ignored, it can be requested again.
+            })
+            .catch((error) => {
+              displayOutcome("install", "error")(error);
+            });
+          deferredInstallEvent = null;
+        }
+      } else {
+        displayOutcome("install", "error")("Install is not supported");
+      }
+    },
     "notifications": function () {
       Notification.requestPermission(
         displayOutcomeForNotifications
