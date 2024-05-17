@@ -25,8 +25,8 @@ function updateAccessStatus(permissionName, accessStatus, message) {
   const textToDisplay = API_ACCESS_STATUSES[accessStatus];
   document.querySelector(`#${permissionName}-access-status`).innerText =
     textToDisplay;
-  if (!!message) {
-    document.querySelector(`#${permissionName}-message`).innerText = message
+  if (message) {
+    document.querySelector(`#${permissionName}-error-message`).innerText = message
   }
 }
 // Utils
