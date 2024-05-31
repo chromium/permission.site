@@ -44,8 +44,6 @@ window.addEventListener('load', function () {
     .querySelectorAll('.origin')
     .forEach((el) => (el.innerText = document.location.origin));
 
-  document.getElementById('other-page').setAttribute('href', OTHER_PAGE_HREF);
-
   navigator.getUserMedia =
     navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
@@ -101,7 +99,7 @@ window.addEventListener('load', function () {
   for (const permissionType in register) {
     const permissionName = permissionType;
     // We don't try to access any feature on page load; we wait for user action instead
-    // This is a best practice for permissions, and also allows the demo to better showcase one-time permissions
+    // This is a best practice for permissions, and also allows the demo to better showcase features such as one-time permissions
 
     navigator.permissions.query({ name: permissionName }).then(
       (permissionStatus) => {
