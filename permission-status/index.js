@@ -1,5 +1,3 @@
-const OTHER_PAGE_HREF = '/other-page.html';
-
 const PERMISSIONS_API_STATUSES = {
   // key = status ID, value: user-friendly string to display
   granted: '🟢 granted',

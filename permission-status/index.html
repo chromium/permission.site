@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=0.6" />
-  <title>permission.site (one-time)</title>
+  <title>permission.site (PermissionStatus)</title>
   <link rel="shortcut icon" href="../favicon.ico" />
   <link rel="apple-touch-icon" href="../app-icon.png" />
   <link rel="stylesheet" href="../style.css" />
@@ -24,7 +24,7 @@
       Geolocation
       <div class="permission-status">
         Permission status:
-        <span id="geolocation-permission-status">⚫️ N/A*</span>
+        <span id="geolocation-permission-status">⚫️ N/A</span>
       </div>
       <div class="access-status">
         Access status: <span id="geolocation-access-status">⚫️ unknown</span>
@@ -36,7 +36,7 @@
     <button id="camera">
       Camera
       <div class="permission-status">
-        Permission status: <span id="camera-permission-status">⚫️ N/A*</span>
+        Permission status: <span id="camera-permission-status">⚫️ N/A</span>
       </div>
       <div class="access-status">
         Access status: <span id="camera-access-status">⚫️ unknown</span>
@@ -49,7 +49,7 @@
       Microphone
       <div class="permission-status">
         Permission status:
-        <span id="microphone-permission-status">⚫️ N/A*</span>
+        <span id="microphone-permission-status">⚫️ N/A</span>
       </div>
       <div class="access-status">
         Access status: <span id="microphone-access-status">⚫️ unknown</span>
@@ -98,8 +98,12 @@
           </ul>
         </li>
         <li>
-          Close the tab. Reopen it. Observe that if you only granted permission for a single request, the <span class="permission-status">permission
-          status</span> reverts to <span class="permission-status">🔵 prompt</span>.
+          Close the tab. Reopen it. Observe that based on the permission permanence model implemented by the user agent, the permission may or may not revert back to the <span class="permission-status">permission
+          status</span> <span class="permission-status">🔵 prompt</span>.
+        </li>
+        <li>
+          Navigate to <a href="other-page.html">another page</a> from the current origin in the current tab, or another tab, and compare the permissions state to what you set here. 
+          In some user agents, a certain amount of time elapsing, closing all tabs from an origin, and/or having all tabs from an origin in the background for a certain duration will reset the permission state.
         </li>
       </ol>
     </div>
