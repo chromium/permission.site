@@ -21,17 +21,20 @@ function updatePermissionsApiStatus(permissionName, permissionStatus) {
 }
 
 // Display the feature access status (whether the feature can actually be accessed successfully in the browser)
-function updateAccessStatus(permissionName, accessStatus) {
+function updateAccessStatus(permissionName, accessStatus, message) {
   const textToDisplay = API_ACCESS_STATUSES[accessStatus];
   document.querySelector(`#${permissionName}-access-status`).innerText =
     textToDisplay;
+  if (message) {
+    document.querySelector(`#${permissionName}-error-message`).innerText = message
+  }
 }
 // Utils
 function successCallback(permissionName) {
   return () => updateAccessStatus(permissionName, 'success');
 }
 function errorCallback(permissionName) {
-  return () => updateAccessStatus(permissionName, 'error');
+  return (error) => updateAccessStatus(permissionName, 'error', error.message);
 }
 
 // Main
