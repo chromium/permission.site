@@ -2,24 +2,46 @@
 //  - Indicate if permissions are already granted, if the relevant API allows it.
 
 window.addEventListener("load", function () {
-  document.getElementById("darkmodeInput").addEventListener("change", () => {
-    if (document.body.classList.contains("dark-mode")) {
-      document.body.classList.remove("dark-mode");
-      localStorage.setItem("theme", "light");
-    } else {
+  function setTheme(mode) {
+    if (mode === "dark") {
       document.body.classList.add("dark-mode");
       localStorage.setItem("theme", "dark");
+      document.getElementById("darkmodeInput").checked = true;
+    } else {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+      document.getElementById("darkmodeInput").checked = false;
     }
-  });
-
-  const theme = localStorage.getItem("theme");
-  if (theme === "dark") {
-    document.body.classList.add("dark-mode");
-    document.getElementById("darkmodeInput").checked = true;
-  } else {
-    document.body.classList.remove("dark-mode");
-    document.getElementById("darkmodeInput").checked = false;
   }
+
+  // Check for a stored theme in localStorage
+  let theme = localStorage.getItem("theme");
+
+  // If there's no stored theme, detect the OS preference
+  if (!theme) {
+    const osPrefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    theme = osPrefersDark ? "dark" : "light";
+  }
+
+  // Apply the theme on page load based on the stored or detected theme
+  setTheme(theme);
+
+  // Listen for changes in the OS color scheme and update if no manual override
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      if (!localStorage.getItem("theme")) {
+        setTheme(e.matches ? "dark" : "light");
+      }
+    });
+
+  // Add event listener for the dark mode toggle
+  document.getElementById("darkmodeInput").addEventListener("change", () => {
+    const isDarkMode = document.body.classList.contains("dark-mode");
+    setTheme(isDarkMode ? "light" : "dark");
+  });
 
   var toggle = document.querySelector("#toggle");
   toggle.classList.add("instant");
