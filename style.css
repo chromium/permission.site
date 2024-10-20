@@ -1,14 +1,16 @@
 /* Light material design boilerplate. */
-html, body {
+html,
+body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background: #EEEEEE;
+  background: #eeeeee;
 }
 
 /* Only apply min-height to non-print media */
 @media not print {
-  html, body {
+  html,
+  body {
     min-height: 100%;
   }
 }
@@ -35,32 +37,34 @@ body {
 }
 
 button {
-  background: #FFF; border: none;
+  background: #fff;
+  border: none;
   font-size: 1.5em;
-  width: 400px; padding: 0.5em; margin: 10px 10px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  width: 400px;
+  padding: 0.5em;
+  margin: 10px 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: all 150ms;
 }
 button:hover {
-  background: #FFA;
+  background: #ffa;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   transform: translateY(-2px);
 }
 button.success {
-  background: #AFA;
+  background: #afa;
 }
 button.error {
-  background: #FAA;
+  background: #faa;
 }
 
-.darkMode{
+.darkMode {
   display: flex;
   width: 100%;
   justify-content: left;
   align-items: center;
   gap: 0.5rem;
-  
 }
 
 table {
@@ -89,40 +93,37 @@ table td:first-child {
 }
 
 #toggle .http,
-#toggle .https
-{
+#toggle .https {
   color: rgba(0, 0, 0, 0.5);
   transition: color 0.25s ease-in-out;
 }
 
 #toggle.https .http,
-#toggle.http .https
-{
+#toggle.http .https {
   color: rgba(0, 0, 0, 0.5);
 }
 
 #toggle.http:not(:hover) .http {
-  color: #DB4437;
+  color: #db4437;
 }
 
 #toggle.https:not(:hover) .https {
-  color: #1AC222;
+  color: #1ac222;
 }
 
 #toggle.http:hover .https {
   text-decoration: underline;
-  color: #1AC222;
+  color: #1ac222;
 }
 
 #toggle.https:hover .http {
   text-decoration: underline;
-  color: #DB4437;
+  color: #db4437;
 }
 
 a#toggle:hover {
   color: black;
 }
-
 
 .switch {
   display: inline-block;
@@ -139,12 +140,10 @@ a#toggle:hover {
   height: 20px;
   margin: -3px;
   border-radius: 10px;
-  background-color: #F1F1F1;
-  border:
-    inset 0.5px rgba(255, 255, 255, 0.12),
+  background-color: #f1f1f1;
+  border: inset 0.5px rgba(255, 255, 255, 0.12),
     inset 0.5px rgba(255, 255, 255, 0.12);
-  box-shadow:
-    0px 0px 2px 0px rgba(0, 0, 0, 0.12),
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12),
     0px 2px 2px 0px rgba(0, 0, 0, 0.24);
 
   transform: translateX(10px);
@@ -154,56 +153,52 @@ a#toggle:hover {
 #toggle.instant .switch,
 #toggle.instant .switch .knob,
 #toggle.instant .http,
-#toggle.instant .https
-{
+#toggle.instant .https {
   transition: transform 0s;
 }
 
-.http:not(:hover)  .switch,
-.https:hover       .switch
-{
+.http:not(:hover) .switch,
+.https:hover .switch {
   background-color: rgba(219, 68, 55, 0.26);
 }
 
-.http:not(:hover)  .switch .knob,
-.https:hover       .switch .knob
-{
+.http:not(:hover) .switch .knob,
+.https:hover .switch .knob {
   background-color: rgb(219, 68, 55);
   transform: translateX(0px);
 }
 
-.http:hover        .switch,
-.https:not(:hover) .switch
-{
+.http:hover .switch,
+.https:not(:hover) .switch {
   background-color: rgba(29, 194, 34, 0.5);
 }
 
-.http:hover        .switch .knob,
-.https:not(:hover) .switch .knob
-{
+.http:hover .switch .knob,
+.https:not(:hover) .switch .knob {
   background-color: rgb(29, 194, 34);
   transform: translateX(20px);
 }
 
-.jswarning
-{
+.jswarning {
   color: rgb(219, 68, 55);
   font-size: 2em;
 }
 
-.permission-status, .access-status {
+.permission-status,
+.access-status {
   font-size: small;
   text-transform: uppercase;
-  padding-top: .4rem;
+  padding-top: 0.4rem;
   text-align: left;
 }
 
-.permission-status > span, .access-status > span {
+.permission-status > span,
+.access-status > span {
   font-weight: 800;
 }
 
 .demo-instructions {
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   margin-top: 1rem;
   text-align: left;
   border: solid 1px;
@@ -214,14 +209,13 @@ a#toggle:hover {
 
 permission {
   background: #def0ff;
-  border: solid #005763;  
+  border: solid #005763;
   border-radius: 5px;
   width: 400px;
   padding: 0.5em;
   margin: 10px 10px;
   display: block;
 }
-
 
 /* Dark mode css */
 
@@ -248,8 +242,8 @@ permission {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider1:before {
@@ -260,16 +254,16 @@ permission {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider1 {
-  background-color: #2196F3;
+  background-color: #2196f3;
 }
 
 input:focus + .slider1 {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #2196f3;
 }
 
 input:checked + .slider1:before {
@@ -285,4 +279,44 @@ input:checked + .slider1:before {
 
 .slider1.round:before {
   border-radius: 50%;
+}
+
+/* Dark Mode */
+
+/* Dark mode styles */
+body.dark-mode {
+  background: #333;
+  color: #eee;
+  transition: 0.5s all;
+}
+
+body.dark-mode button {
+  background: #444;
+  color: #eee;
+  transition: 0.5s all;
+}
+
+body.dark-mode .switch {
+  background-color: rgba(29, 194, 34, 0.5);
+  transition: 0.5s all;
+}
+
+body.dark-mode .content {
+  background-color: #444;
+  transition: 0.5s all;
+}
+
+body.dark-mode .slider1 {
+  background-color: #888;
+  transition: 0.5s all;
+}
+
+body.dark-mode .slider1:before {
+  background-color: #eee;
+  transition: 0.5s all;
+}
+
+#darkmodeInput:checked + .slider1 {
+  background-color: #2196f3;
+  transition: 0.5s all;
 }

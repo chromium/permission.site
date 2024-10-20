@@ -1,39 +1,26 @@
 //  - Information about clearing settings in Chrome (can't link to chrome:// URLs)
 //  - Indicate if permissions are already granted, if the relevant API allows it.
 
-let mode = "light";
-
-function toggleMode() {
-  if (mode === "light") {
-    document.body.style.backgroundColor = "#333";
-    const buttons = document.querySelectorAll("button");
-    buttons.forEach((button) => {
-      button.style.backgroundColor = "#666";
-      button.style.color = "#f1f1f1";
-    });
-    document.getElementsByClassName("https")[0].style.color = "#f5f5f5";
-    document.getElementsByClassName("AsyncClipAPI")[0].style.color = "#f5f5f5";
-    document.getElementsByClassName("notes")[0].style.color = "#f5f5f5";
-    document.getElementById("tableNotes").style.color = "#fff";
-    document.getElementById("darkModeText").style.color = "#fff";
-    mode = "dark";
-  } else {
-    document.body.style.backgroundColor = "#EEE";
-    const buttons = document.querySelectorAll("button");
-    buttons.forEach((button) => {
-      button.style.backgroundColor = "#fff";
-      button.style.color = "#000";
-    });
-    document.getElementsByClassName("https")[0].style.color = "#666";
-    document.getElementsByClassName("AsyncClipAPI")[0].style.color = "#000";
-    document.getElementsByClassName("notes")[0].style.color = "#000";
-    document.getElementById("tableNotes").style.color = "#000";
-    document.getElementById("darkModeText").style.color = "#000";
-    mode = "light";
-  }
-}
-
 window.addEventListener("load", function () {
+  document.getElementById("darkmodeInput").addEventListener("change", () => {
+    if (document.body.classList.contains("dark-mode")) {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    }
+  });
+
+  const theme = localStorage.getItem("theme");
+  if (theme === "dark") {
+    document.body.classList.add("dark-mode");
+    document.getElementById("darkmodeInput").checked = true;
+  } else {
+    document.body.classList.remove("dark-mode");
+    document.getElementById("darkmodeInput").checked = false;
+  }
+
   var toggle = document.querySelector("#toggle");
   toggle.classList.add("instant");
   if (window.location.protocol == "https:") {
