@@ -4,6 +4,18 @@
 
 window.addEventListener("load", function() {
 
+  const toggleDarkModeButton = document.getElementById('toggle-dark-mode');
+  const darkModeStatus = document.getElementById('dark-mode-status');
+
+  toggleDarkModeButton.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    if (document.body.classList.contains('dark-mode')) {
+      darkModeStatus.textContent = 'Dark Mode';
+    } else {
+      darkModeStatus.textContent = 'Light Mode';
+    }
+  });
+
   var toggle = document.querySelector("#toggle");
   toggle.classList.add("instant");
   if (window.location.protocol == "https:") {
