@@ -213,3 +213,36 @@ permission {
   display: block;
   z-index: 99999; /* github-fork-ribbon-wrapper uses 9999 */
 }
+
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background: #333;
+  color: #FFF;
+}
+
+body.dark-mode button {
+  background: #444;
+  color: #FFF;
+}
+
+body.dark-mode .content {
+  background: #444;
+}
+
+body.dark-mode .permission-status > span,
+body.dark-mode .access-status > span {
+  color: #FFF;
+}
+
+/* Dark Mode Toggle Button Styles */
+#dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+#toggle-dark-mode {
+  margin-right: 1em;
+}
