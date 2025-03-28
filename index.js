@@ -127,134 +127,169 @@ window.addEventListener("load", function() {
 
   var register = {
     "notifications": function () {
-      Notification.requestPermission(
-        displayOutcomeForNotifications
-      );
+    if ("Notification" in window) {
+      Notification.requestPermission().then(displayOutcomeForNotifications);
+    } else {
+      console.warn("Notifications API not supported");
+      displayOutcome("notifications", "error");
+    }
     },
-    "location": function() {
-      navigator.geolocation.getCurrentPosition(
-        displayOutcome("location", "success"),
-        displayOutcome("location", "error")
-      );
-    },
-    "camera": function() {
-      navigator.mediaDevices ?
-        navigator.mediaDevices.getUserMedia(
-          {video: true}).then(
-            displayOutcome("camera", "success"),
-            displayOutcome("camera", "error")
-        ) :
-        navigator.getUserMedia(
-          {video: true},
-          displayOutcome("camera", "success"),
-          displayOutcome("camera", "error")
+    "location": function () {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          () => displayOutcome("location", "success"),
+          () => displayOutcome("location", "error")
         );
+      } else {
+        console.warn("Geolocation API not supported");
+        displayOutcome("location", "error");
+      }
     },
-    "microphone": function() {
-      navigator.mediaDevices ?
-        navigator.mediaDevices.getUserMedia(
-          {audio: true}).then(
-            displayOutcome("microphone", "success"),
-            displayOutcome("microphone", "error")
-        ) :
+    "camera": function () {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(() => displayOutcome("camera", "success"))
+          .catch(() => displayOutcome("camera", "error"));
+      } else if (navigator.getUserMedia) {
         navigator.getUserMedia(
-          {audio: true},
-          displayOutcome("microphone", "success"),
-          displayOutcome("microphone", "error")
+          { video: true },
+          () => displayOutcome("camera", "success"),
+          () => displayOutcome("camera", "error")
         );
+      } else {
+        console.warn("Camera API not supported");
+        displayOutcome("camera", "error");
+      }
     },
-    "camera+microphone": function() {
-      navigator.mediaDevices ?
-        navigator.mediaDevices.getUserMedia(
-          {audio: true, video: true}).then(
-            displayOutcome("camera+microphone", "success"),
-            displayOutcome("camera+microphone", "error")
-        ) :
+    "microphone": function () {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+          .then(() => displayOutcome("microphone", "success"))
+          .catch(() => displayOutcome("microphone", "error"));
+      } else if (navigator.getUserMedia) {
         navigator.getUserMedia(
-          {audio: true, video: true},
-          displayOutcome("camera+microphone", "success"),
-          displayOutcome("camera+microphone", "error")
+          { audio: true },
+          () => displayOutcome("microphone", "success"),
+          () => displayOutcome("microphone", "error")
         );
+      } else {
+        console.warn("Microphone API not supported");
+        displayOutcome("microphone", "error");
+      }
     },
-    "pan-tilt-zoom": function() {
-      navigator.mediaDevices ?
-        navigator.mediaDevices.getUserMedia(
-          {video: {pan: true, tilt: true, zoom: true}}).then(
-            displayOutcome("pan-tilt-zoom", "success"),
-            displayOutcome("pan-tilt-zoom", "error")
-        ) :
-        navigator.getUserMedia(
-          {video: {pan: true, tilt: true, zoom: true}},
-          displayOutcome("pan-tilt-zoom", "success"),
-          displayOutcome("pan-tilt-zoom", "error")
-        );
+    "camera+microphone": function () {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+        .then(() => displayOutcome("camera+microphone", "success"))
+        .catch(() => displayOutcome("camera+microphone", "error"));
+    } else {
+      console.warn("Camera+Microphone API not supported");
+      displayOutcome("camera+microphone", "error");
+    }
     },
-    "pan-tilt-zoom+microphone": function() {
-      navigator.mediaDevices ?
-        navigator.mediaDevices.getUserMedia(
-          {video: {pan: true, tilt: true, zoom: true}, audio: true}).then(
-            displayOutcome("pan-tilt-zoom+microphone", "success"),
-            displayOutcome("pan-tilt-zoom+microphone", "error")
-        ) :
-        navigator.getUserMedia(
-          {video: {pan: true, tilt: true, zoom: true}, audio: true},
-          displayOutcome("pan-tilt-zoom+microphone", "success"),
-          displayOutcome("pan-tilt-zoom+microphone", "error")
-        );
+    
+    "pan-tilt-zoom": function () {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({
+          video: { pan: true, tilt: true, zoom: true }
+        })
+          .then(() => displayOutcome("pan-tilt-zoom", "success"))
+          .catch(() => displayOutcome("pan-tilt-zoom", "error"));
+      } else {
+        console.warn("Pan-Tilt-Zoom API not supported");
+        displayOutcome("pan-tilt-zoom", "error");
+      }
     },
-    "screenshare": function() {
-      navigator.mediaDevices.getDisplayMedia().then(
-        displayOutcome("screenshare", "success"),
-        displayOutcome("screenshare", "error")
-      );
+
+    "pan-tilt-zoom+microphone": function () {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({
+          video: { pan: true, tilt: true, zoom: true },
+          audio: true
+        })
+          .then(() => displayOutcome("pan-tilt-zoom+microphone", "success"))
+          .catch(() => displayOutcome("pan-tilt-zoom+microphone", "error"));
+      } else {
+        console.warn("Pan-Tilt-Zoom+Microphone API not supported");
+        displayOutcome("pan-tilt-zoom+microphone", "error");
+      }
     },
-    "midi": function() {
-      navigator.requestMIDIAccess({
-        sysex: false
-      }).then(
-        displayOutcome("midi", "success"),
-        displayOutcome("midi", "error")
-      );
+
+    "screenshare": function () {
+      if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
+        navigator.mediaDevices.getDisplayMedia()
+          .then(() => displayOutcome("screenshare", "success"))
+          .catch(() => displayOutcome("screenshare", "error"));
+      } else {
+        console.warn("Screenshare API not supported");
+        displayOutcome("screenshare", "error");
+      }
     },
-    "midi+sysex": function() {
-      navigator.requestMIDIAccess({
-        sysex: true
-      }).then(
-        displayOutcome("midi+sysex", "success"),
-        displayOutcome("midi+sysex", "error")
-      );
+
+    "midi": function () {
+      if (navigator.requestMIDIAccess) {
+        navigator.requestMIDIAccess({ sysex: false })
+          .then(() => displayOutcome("midi", "success"))
+          .catch(() => displayOutcome("midi", "error"));
+      } else {
+        console.warn("MIDI API not supported");
+        displayOutcome("midi", "error");
+      }
     },
-    "bluetooth": function() {
-      navigator.bluetooth.requestDevice({
-        // filters: [...] <- Prefer filters to save energy & show relevant devices.
-        // acceptAllDevices here ensures dialog can populate, we don't care with what.
-        acceptAllDevices:true
-      })
-      .then(device => device.gatt.connect())
-      .then(
-        displayOutcome("bluetooth", "success"),
-        displayOutcome("bluetooth", "error")
-      );
+
+    "midi+sysex": function () {
+      if (navigator.requestMIDIAccess) {
+        navigator.requestMIDIAccess({ sysex: true })
+          .then(() => displayOutcome("midi+sysex", "success"))
+          .catch(() => displayOutcome("midi+sysex", "error"));
+      } else {
+        console.warn("MIDI+Sysex API not supported");
+        displayOutcome("midi+sysex", "error");
+      }
     },
-    "usb": function() {
-      navigator.usb.requestDevice({filters: [{}]}).then(
-        displayOutcome("usb", "success"),
-        displayOutcome("usb", "error")
-      );
+
+    "bluetooth": function () {
+      if (navigator.bluetooth && navigator.bluetooth.requestDevice) {
+        navigator.bluetooth.requestDevice({ acceptAllDevices: true })
+          .then(device => device.gatt.connect())
+          .then(() => displayOutcome("bluetooth", "success"))
+          .catch(() => displayOutcome("bluetooth", "error"));
+      } else {
+        console.warn("Bluetooth API not supported");
+        displayOutcome("bluetooth", "error");
+      }
     },
-    "serial": function() {
-      navigator.serial.requestPort({filters: []}).then(
-        displayOutcome("serial", "success"),
-        displayOutcome("serial", "error")
-      );
+    "usb": function () {
+    if (navigator.usb && navigator.usb.requestDevice) {
+      navigator.usb.requestDevice({ filters: [{}] })
+        .then(() => displayOutcome("usb", "success"))
+        .catch(() => displayOutcome("usb", "error"));
+    } else {
+      console.warn("USB API not supported");
+      displayOutcome("usb", "error");
+    }
     },
-    "hid": function() {
-      navigator.hid.requestDevice({filters: []}).then(
-        devices => {
-          displayOutcome("hid", devices.length > 0 ? "success" : "error")();
-        },
-        displayOutcome("hid", "error")
-      );
+    "serial": function () {
+      if (navigator.serial && navigator.serial.requestPort) {
+        navigator.serial.requestPort({ filters: [] })
+          .then(() => displayOutcome("serial", "success"))
+          .catch(() => displayOutcome("serial", "error"));
+      } else {
+        console.warn("Serial API not supported");
+        displayOutcome("serial", "error");
+      }
+    },
+    "hid": function () {
+      if (navigator.hid && navigator.hid.requestDevice) {
+        navigator.hid.requestDevice({ filters: [] })
+          .then(devices => {
+            displayOutcome("hid", devices.length > 0 ? "success" : "error");
+          })
+          .catch(() => displayOutcome("hid", "error"));
+      } else {
+        console.warn("HID API not supported");
+        displayOutcome("hid", "error");
+      }
     },
     "eme": function() {
       // https://w3c.github.io/encrypted-media/#requestMediaKeySystemAccess
@@ -262,167 +297,220 @@ window.addEventListener("load", function() {
       // descending order of privileges such that a supported permission-requiring
       // configuration should be attempted before a configuration that does not
       // require permissions.
+      if (!navigator.requestMediaKeySystemAccess) {
+        console.warn("EME API not supported");
+        displayOutcome("eme", "error")("EME API not supported");
+        return;
+      }
 
-      var knownKeySystems = [
-        "com.example.somesystem",  // Ensure no real system is the first tried.
+      let knownKeySystems = [
+        "com.example.somesystem", // Placeholder, not a real system
         "com.widevine.alpha",
         "com.microsoft.playready",
         "com.adobe.primetime",
         "com.apple.fps.2_0",
         "com.apple.fps",
         "com.apple.fps.1_0",
-        "com.example.somesystem"  // Ensure no real system is the last tried.
+        "com.example.somesystem" // Placeholder again
       ];
-      var tryKeySystem = function(keySystem) {
-        // http://w3c.github.io/encrypted-media/#idl-def-mediakeysystemconfiguration
-        // One of videoCapabilities or audioCapabilities must be present. Pick
-        // a set that all browsers should support at least one of.
-        var capabilities = [
-          { contentType: 'audio/mp4; codecs="mp4a.40.2"' },
-          { contentType: 'audio/webm; codecs="opus"' },
-        ];
-        navigator.requestMediaKeySystemAccess(
-          keySystem,
-          [
-            { distinctiveIdentifier: "required",
-              persistentState: "required",
-              audioCapabilities: capabilities,
-              label: "'distinctiveIdentifier' and 'persistentState' required"
-            },
-            { distinctiveIdentifier: "required",
-              audioCapabilities: capabilities,
-              label: "'distinctiveIdentifier' required"
-            },
-            { persistentState: "required",
-              audioCapabilities: capabilities,
-              label: "'persistentState' required"
-            },
-            { audioCapabilities: capabilities,
-              label: "empty"
-            },
-            { label: "no capabilities" }
-          ]
-        ).then(
-          function (mediaKeySystemAccess) {
-            displayOutcome("eme", "success")(
-              "Key System: " + keySystem,
-              "Configuration: " + mediaKeySystemAccess.getConfiguration().label,
-              mediaKeySystemAccess);
-          },
-          function (error) {
-            if (knownKeySystems.length > 0)
-              return tryKeySystem(knownKeySystems.shift());
 
-            displayOutcome("eme", "error")(
-              error,
-              error.name == "NotSupportedError" ? "No known key systems supported or permitted." : "");
-          }
-        );
-      };
-      tryKeySystem(knownKeySystems.shift());
-    },
-    "idle-detection": (function () {
-      let controller = null;
-
-      return async function () {
-        if (controller) {
-          controller.abort();
-          controller = null;
-          displayOutcome("idle-detection", "default")();
+      const tryKeySystem = (keySystem) => {
+        if (!keySystem) {
+          displayOutcome("eme", "error")("No known key systems supported.");
           return;
         }
 
-        try {
-          const status = await IdleDetector.requestPermission();
-          if (status != "granted") {
-            displayOutcome("idle-detection", "error")(`Permission status: ${status}`);
-            return;
-          }
+        const capabilities = [
+          { contentType: 'audio/mp4; codecs="mp4a.40.2"' },
+          { contentType: 'audio/webm; codecs="opus"' }
+        ];
 
-          controller = new AbortController();
-          const detector = new IdleDetector();
-          detector.addEventListener('change', () => {
-            console.log(`Idle change: ${detector.userState}, ${detector.screenState}.`);
-          });
-          await detector.start({signal: controller.signal});
-          displayOutcome("idle-detection", "success")();
-        } catch (e) {
-          controller = null;
-          displayOutcome("idle-detection", "error")(e);
-        }
+        navigator.requestMediaKeySystemAccess(
+          keySystem,
+          [
+            { distinctiveIdentifier: "required", persistentState: "required", audioCapabilities: capabilities },
+            { distinctiveIdentifier: "required", audioCapabilities: capabilities },
+            { persistentState: "required", audioCapabilities: capabilities },
+            { audioCapabilities: capabilities },
+            { label: "no capabilities" }
+          ]
+        ).then(
+          (mediaKeySystemAccess) => {
+            displayOutcome("eme", "success")(
+              `Key System: ${keySystem}`,
+              `Configuration: ${mediaKeySystemAccess.getConfiguration().label}`,
+              mediaKeySystemAccess
+            );
+          },
+          (error) => {
+            console.warn(`Key system ${keySystem} not supported: ${error.message}`);
+            tryKeySystem(knownKeySystems.shift());
+          }
+        );
       };
-    }()),
-    "copy": (function() {
+
+      tryKeySystem(knownKeySystems.shift());
+    },
+    "idle-detection": async function () {
+      if (!("IdleDetector" in window)) {
+        console.warn("Idle Detection API not supported");
+        displayOutcome("idle-detection", "error")("Idle Detection API not supported");
+        return;
+      }
+
+      let controller = null;
+
+      if (controller) {
+        controller.abort();
+        controller = null;
+        displayOutcome("idle-detection", "default")();
+        return;
+      }
+
+      try {
+        const status = await IdleDetector.requestPermission();
+        if (status !== "granted") {
+          displayOutcome("idle-detection", "error")(`Permission status: ${status}`);
+          return;
+        }
+
+        controller = new AbortController();
+        const detector = new IdleDetector();
+
+        detector.addEventListener("change", () => {
+          console.log(`Idle change: ${detector.userState}, ${detector.screenState}.`);
+        });
+
+        await detector.start({ signal: controller.signal });
+        displayOutcome("idle-detection", "success")();
+      } catch (e) {
+        console.error("Idle detection failed:", e);
+        controller = null;
+        displayOutcome("idle-detection", "error")(e);
+      }
+    },
+    "copy": (function () {
       var interceptCopy = false;
 
-      document.addEventListener("copy", function(e){
+      document.addEventListener("copy", function (e) {
         if (interceptCopy) {
           // From http://www.w3.org/TR/clipboard-apis/#h4_the-copy-action
-          e.clipboardData.setData("text/plain",
-            "This text was copied from the permission.site clipboard example."
-          );
-          e.clipboardData.setData("text/html",
-            "This text was copied from the " +
-            "<a href='https://permission.site/'>" +
-            "permission.site</a> clipboard example."
-          );
-          e.preventDefault();
+          if (e.clipboardData) {
+            e.clipboardData.setData("text/plain",
+              "This text was copied from the permission.site clipboard example."
+            );
+            e.clipboardData.setData("text/html",
+              "This text was copied from the " +
+              "<a href='https://permission.site/'>" +
+              "permission.site</a> clipboard example."
+            );
+            e.preventDefault();
+          } else {
+            console.warn("Clipboard API not supported.");
+            displayOutcome("copy", "error")("Clipboard API not supported.");
+          }
         }
       });
 
-      return function() {
+      return function () {
         interceptCopy = true;
-        document.execCommand("copy");
+        if (document.execCommand) {
+          document.execCommand("copy");
+          displayOutcome("copy", "success")("Copy command executed.");
+        } else {
+          console.warn("document.execCommand is not supported.");
+          displayOutcome("copy", "error")("document.execCommand is not supported.");
+        }
         interceptCopy = false;
       };
-    }()),
-    "popup": function() {
+    })(),
+
+    "popup": function () {
+      if (!window.open) {
+        console.warn("window.open is not supported.");
+        displayOutcome("popup", "error")("Popup API not supported.");
+        return;
+      }
+      
       var w = window.open(
         location.href,
         "Popup",
         "resizable,scrollbars,status"
-      )
+      );
       displayOutcome("popup", w ? "success" : "error")(w);
     },
-    "popup-delayed": function() {
-      setTimeout(function() {
+
+    "popup-delayed": function () {
+      if (!window.open) {
+        console.warn("window.open is not supported.");
+        displayOutcome("popup-delayed", "error")("Popup API not supported.");
+        return;
+      }
+
+      setTimeout(function () {
         var w = window.open(
           location.href,
           "Popup",
           "resizable,scrollbars,status"
-        )
+        );
         displayOutcome("popup-delayed", w ? "success" : "error")(w);
       }, 5000);
     },
-    "fullscreen": function() {
+
+    "fullscreen": function () {
       try {
+        if (!document.documentElement.requestFullscreen) {
+          console.warn("Fullscreen API not supported.");
+          displayOutcome("fullscreen", "error")("Fullscreen API not supported.");
+          return;
+        }
+
         if (!isFullscreen()) {
           document.documentElement.requestFullscreen().then(
             displayOutcome("fullscreen", "success")("enter"),
             displayOutcome("fullscreen", "error")
           );
         } else {
-          document.exitFullscreen().then(
-            displayOutcome("fullscreen", "default")("exit"),
-            displayOutcome("fullscreen", "error")
-          );
+          if (document.exitFullscreen) {
+            document.exitFullscreen().then(
+              displayOutcome("fullscreen", "default")("exit"),
+              displayOutcome("fullscreen", "error")
+            );
+          } else {
+            console.warn("document.exitFullscreen is not supported.");
+            displayOutcome("fullscreen", "error")("document.exitFullscreen is not supported.");
+          }
         }
       } catch (e) {
+        console.error("Fullscreen error:", e);
         displayOutcome("fullscreen", "error")(e);
       }
     },
-    "pointerlock": function() {
+
+    "pointerlock": function () {
       try {
+        if (!document.body.requestPointerLock) {
+          console.warn("Pointer Lock API not supported.");
+          displayOutcome("pointerlock", "error")("Pointer Lock API not supported.");
+          return;
+        }
+
         if (!window.pointerLocked) {
           document.body.requestPointerLock().then(
             displayOutcome("pointerlock", "success")("locked"),
             displayOutcome("pointerlock", "error")
           );
         } else {
-          document.exitPointerLock();
-          displayOutcome("pointerlock", "default")("unlocked");
+          if (document.exitPointerLock) {
+            document.exitPointerLock();
+            displayOutcome("pointerlock", "default")("unlocked");
+          } else {
+            console.warn("document.exitPointerLock is not supported.");
+            displayOutcome("pointerlock", "error")("document.exitPointerLock is not supported.");
+          }
         }
       } catch (e) {
+        console.error("Pointer Lock error:", e);
         displayOutcome("pointerlock", "error")(e);
       }
     },
@@ -449,26 +537,58 @@ window.addEventListener("load", function() {
       triggerDownload();
       triggerDownload();
     },
-    "keygen": function() {
+    "keygen": function () {
+      if (!document.createElement) {
+        console.warn("document.createElement is not supported.");
+        displayOutcome("keygen", "error")("document.createElement is not supported.");
+        return;
+      }
+
       var keygen = document.createElement("keygen");
-      document.getElementById("keygen-container").appendChild(keygen);
+      var container = document.getElementById("keygen-container");
+
+      if (container) {
+        container.appendChild(keygen);
+        displayOutcome("keygen", "success")("Keygen element added.");
+      } else {
+        console.warn("Element with ID 'keygen-container' not found.");
+        displayOutcome("keygen", "error")("Element with ID 'keygen-container' not found.");
+      }
     },
-    "persistent-storage": function() {
+
+    "persistent-storage": function () {
       // https://storage.spec.whatwg.org
+      if (!navigator.storage || !navigator.storage.persist) {
+        console.warn("Persistent Storage API not supported.");
+        displayOutcome("persistent-storage", "error")("Persistent Storage API not supported.");
+        return;
+      }
+
       navigator.storage.persist().then(
-        function(persisted) {
+        function (persisted) {
           displayOutcome("persistent-storage", persisted ? "success" : "default")(persisted);
         },
-        displayOutcome("persistent-storage", "error")
-      )
+        function (error) {
+          console.error("Persistent Storage error:", error);
+          displayOutcome("persistent-storage", "error")(error);
+        }
+      );
     },
-    
-    "protocol-handler": function() {
+
+    "protocol-handler": function () {
       // https://www.w3.org/TR/html5/webappapis.html#navigatorcontentutils
+      if (!navigator.registerProtocolHandler) {
+        console.warn("Protocol Handler API is not supported.");
+        displayOutcome("protocol-handler", "error")("Protocol Handler API is not supported.");
+        return;
+      }
+
       var url = window.location + '%s';
       try {
         navigator.registerProtocolHandler('web+permissionsite', url, 'title');
-      } catch(e) {
+        displayOutcome("protocol-handler", "success")("Protocol handler registered successfully.");
+      } catch (e) {
+        console.error("Protocol Handler error:", e);
         displayOutcome("protocol-handler", "error")(e);
       }
     },
@@ -533,13 +653,17 @@ window.addEventListener("load", function() {
       // From https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API
       // This code is public domain, per https://developer.mozilla.org/en-US/docs/MDN/About#Copyrights_and_licenses
 
-      // sample arguments for registration
+      if (!navigator.credentials || !navigator.credentials.create) {
+          console.warn("Web Authentication API is not supported in this browser.");
+          displayOutcome("webauthn-attestation", "error")("Web Authentication API is not supported.");
+          return;
+      }
+
+      // Sample arguments for registration
       var createCredentialDefaultArgs = {
           publicKey: {
               // Relying Party (a.k.a. - Service):
-              rp: {
-                  name: "Acme"
-              },
+              rp: { name: "Acme" },
 
               // User:
               user: {
@@ -548,56 +672,55 @@ window.addEventListener("load", function() {
                   displayName: "John P. Smith"
               },
 
-              pubKeyCredParams: [{
-                  type: "public-key",
-                  alg: -7
-              }],
+              pubKeyCredParams: [{ type: "public-key", alg: -7 }],
 
               attestation: "direct",
 
               timeout: 60000,
 
-              challenge: new Uint8Array([ // must be a cryptographically random number sent from a server
+              challenge: new Uint8Array([ // Must be a cryptographically random number sent from a server
                   0x8C, 0x0A, 0x26, 0xFF, 0x22, 0x91, 0xC1, 0xE9, 0xB9, 0x4E, 0x2E, 0x17, 0x1A, 0x98, 0x6A, 0x73,
                   0x71, 0x9D, 0x43, 0x48, 0xD5, 0xA7, 0x6A, 0x15, 0x7E, 0x38, 0x94, 0x52, 0x77, 0x97, 0x0F, 0xEF
               ]).buffer
           }
       };
 
-      // sample arguments for login
+      // Sample arguments for login
       var getCredentialDefaultArgs = {
           publicKey: {
               timeout: 60000,
               // allowCredentials: [newCredential] // see below
-              challenge: new Uint8Array([ // must be a cryptographically random number sent from a server
+              challenge: new Uint8Array([ // Must be a cryptographically random number sent from a server
                   0x79, 0x50, 0x68, 0x71, 0xDA, 0xEE, 0xEE, 0xB9, 0x94, 0xC3, 0xC2, 0x15, 0x67, 0x65, 0x26, 0x22,
                   0xE3, 0xF3, 0xAB, 0x3B, 0x78, 0x2E, 0xD5, 0x6F, 0x81, 0x26, 0xE2, 0xA6, 0x01, 0x7D, 0x74, 0x50
               ]).buffer
           },
       };
 
-      // register / create a new credential
+      // Register / Create a new credential
       navigator.credentials.create(createCredentialDefaultArgs)
           .then((cred) => {
               console.log("NEW CREDENTIAL", cred);
 
-              // normally the credential IDs available for an account would come from a server
-              // but we can just copy them from above...
+              // Normally the credential IDs available for an account would come from a server
+              // But we can just copy them from above...
               var idList = [{
                   id: cred.rawId,
                   transports: ["usb", "nfc", "ble"],
                   type: "public-key"
               }];
               getCredentialDefaultArgs.publicKey.allowCredentials = idList;
+
               return navigator.credentials.get(getCredentialDefaultArgs);
           })
           .then((assertion) => {
-            displayOutcome("webauthn-attestation", "success")(assertion);
+              displayOutcome("webauthn-attestation", "success")(assertion);
           })
           .catch((err) => {
-            displayOutcome("webauthn-attestation", "error")(err);
+              console.error("WebAuthn error:", err);
+              displayOutcome("webauthn-attestation", "error")(err);
           });
-    },
+  },
     "nfc": function() {
       if ('NDEFReader' in window) {
         const reader = new NDEFReader();
