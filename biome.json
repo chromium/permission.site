@@ -16,8 +16,7 @@
       },
       "complexity": {
         "useOptionalChain": "off",
-        "noForEach": "off",
-        "useArrowFunction": "off"
+        "noForEach": "off"
       }
     }
   }

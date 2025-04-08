@@ -1,11 +1,13 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "site.permissions",
-    "sha256_cert_fingerprints": [
-      "F2:6A:8A:48:DF:F8:8A:67:97:29:86:E9:D7:B3:E4:0E:B0:9E:7F:E3:4A:B2:F2:C8:43:C9:55:3B:80:87:52:AD",
-      "76:52:FD:07:3A:0A:64:A3:03:0D:37:4B:C8:CB:11:E7:EF:C0:82:F2:4E:4D:F2:59:F0:71:64:69:83:EF:3E:4F"
-    ]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "site.permissions",
+      "sha256_cert_fingerprints": [
+        "F2:6A:8A:48:DF:F8:8A:67:97:29:86:E9:D7:B3:E4:0E:B0:9E:7F:E3:4A:B2:F2:C8:43:C9:55:3B:80:87:52:AD",
+        "76:52:FD:07:3A:0A:64:A3:03:0D:37:4B:C8:CB:11:E7:EF:C0:82:F2:4E:4D:F2:59:F0:71:64:69:83:EF:3E:4F"
+      ]
+    }
   }
-}]
+]
