@@ -213,3 +213,7 @@ permission {
   display: block;
   z-index: 99999; /* github-fork-ribbon-wrapper uses 9999 */
 }
+
+.permission-element-box {
+  display: inline-block;
+}
