@@ -1,5 +1,6 @@
 /* Light material design boilerplate. */
-html, body {
+html,
+body {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -8,7 +9,9 @@ html, body {
 
 /* Only apply min-height to non-print media */
 @media not print {
-  html, body {
+
+  html,
+  body {
     min-height: 100%;
   }
 }
@@ -35,32 +38,41 @@ body {
 }
 
 button {
-  background: #FFF; border: none;
+  background: #FFF;
+  border: none;
   font-size: 1.5em;
-  width: 400px; padding: 0.5em; margin: 10px 10px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  width: 400px;
+  padding: 0.5em;
+  margin: 10px 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: all 150ms;
 }
+
 button:hover {
   background: #FFA;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   transform: translateY(-2px);
 }
+
 button.success {
   background: #AFA;
 }
+
 button.error {
   background: #FAA;
 }
+
 table {
   margin: 1em auto;
   border-collapse: collapse;
 }
+
 table td {
   border: 1px solid #888;
   padding: 8px;
 }
+
 table td:first-child {
   text-align: right;
 }
@@ -79,15 +91,13 @@ table td:first-child {
 }
 
 #toggle .http,
-#toggle .https
-{
+#toggle .https {
   color: rgba(0, 0, 0, 0.5);
   transition: color 0.25s ease-in-out;
 }
 
 #toggle.https .http,
-#toggle.http .https
-{
+#toggle.http .https {
   color: rgba(0, 0, 0, 0.5);
 }
 
@@ -144,51 +154,47 @@ a#toggle:hover {
 #toggle.instant .switch,
 #toggle.instant .switch .knob,
 #toggle.instant .http,
-#toggle.instant .https
-{
+#toggle.instant .https {
   transition: transform 0s;
 }
 
-.http:not(:hover)  .switch,
-.https:hover       .switch
-{
+.http:not(:hover) .switch,
+.https:hover .switch {
   background-color: rgba(219, 68, 55, 0.26);
 }
 
-.http:not(:hover)  .switch .knob,
-.https:hover       .switch .knob
-{
+.http:not(:hover) .switch .knob,
+.https:hover .switch .knob {
   background-color: rgb(219, 68, 55);
   transform: translateX(0px);
 }
 
-.http:hover        .switch,
-.https:not(:hover) .switch
-{
+.http:hover .switch,
+.https:not(:hover) .switch {
   background-color: rgba(29, 194, 34, 0.5);
 }
 
-.http:hover        .switch .knob,
-.https:not(:hover) .switch .knob
-{
+.http:hover .switch .knob,
+.https:not(:hover) .switch .knob {
   background-color: rgb(29, 194, 34);
   transform: translateX(20px);
 }
 
-.jswarning
-{
+.jswarning {
   color: rgb(219, 68, 55);
   font-size: 2em;
 }
 
-.permission-status, .access-status {
+.permission-status,
+.access-status {
   font-size: small;
   text-transform: uppercase;
   padding-top: .4rem;
   text-align: left;
 }
 
-.permission-status > span, .access-status > span {
+.permission-status>span,
+.access-status>span {
   font-weight: 800;
 }
 
@@ -205,13 +211,14 @@ a#toggle:hover {
 permission {
   position: relative;
   background: #def0ff;
-  border: solid #005763;  
+  border: solid #005763;
   border-radius: 5px;
   width: 400px;
   padding: 0.5em;
   margin: 10px 10px;
   display: block;
-  z-index: 99999; /* github-fork-ribbon-wrapper uses 9999 */
+  z-index: 99999;
+  /* github-fork-ribbon-wrapper uses 9999 */
 }
 
 .permission-element-box {

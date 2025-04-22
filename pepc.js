@@ -1,34 +1,40 @@
-const API_ACCESS_STATUSES = {
+const API_STATUS_TO_DISPLAY_TEXT = {
     success: '🟢 success',
     error: '🔴 error',
     unknown: '⚫️ unknown',
 };
 // Display the feature access status (whether the feature can actually be accessed successfully in the browser)
-function updateAccessStatus(permissionName, accessStatus, message) {
-    const textToDisplay = API_ACCESS_STATUSES[accessStatus];
+function updateaccessStatus(permissionName, accessStatus, errorMessage) {
+    const textToDisplay = API_STATUS_TO_DISPLAY_TEXT[accessStatus];
     document.querySelector(`#${permissionName}-access-status`).innerText =
         textToDisplay;
-    if (message) {
-        document.querySelector(`#${permissionName}-error-message`).innerText = message
+    if (errorMessage) {
+        document.querySelector(`#${permissionName}-error-message`).innerText = errorMessage;
     }
 }
-// Utils
+// Utils (copied from `index.js`)
 function successCallback(permissionName) {
-    return () => updateAccessStatus(permissionName, 'success');
+    return () => updateaccessStatus(permissionName, 'success');
 }
 function errorCallback(permissionName) {
-    return (error) => updateAccessStatus(permissionName, 'error', error.message);
+    return (error) => updateaccessStatus(permissionName, 'error', error.message);
 }
 
 const PEPC_TYPES_WITH_GRANTED_HANDLER = {
-    'camera': () => { },
-    'microphone': () => { },
-    'camera-microphone': () => { },
     'geolocation': function () {
         navigator.geolocation.getCurrentPosition(
             successCallback('geolocation'),
             errorCallback('geolocation')
         );
+    },
+    'camera': () => {
+        // TODO: Verify camera API works.
+    },
+    'microphone': () => {
+        // TODO: Verify microphone API works.
+    },
+    'camera-microphone': () => {
+        // TODO: Verify camera-microphone API works.
     }
 }
 

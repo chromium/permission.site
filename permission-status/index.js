@@ -1,4 +1,4 @@
-const PERMISSIONS_API_STATUSES = {
+const API_STATUS_TO_DISPLAY_TEXT = {
   // key = status ID, value: user-friendly string to display
   granted: '🟢 granted',
   denied: '🔴 denied',
@@ -13,7 +13,7 @@ const API_ACCESS_STATUSES = {
 
 // Display the Permissions API status (https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API)
 function updatePermissionsApiStatus(permissionName, permissionStatus) {
-  const textToDisplay = PERMISSIONS_API_STATUSES[permissionStatus];
+  const textToDisplay = API_STATUS_TO_DISPLAY_TEXT[permissionStatus];
   document.querySelector(`#${permissionName}-permission-status`).innerText =
     textToDisplay;
 }
@@ -58,39 +58,39 @@ window.addEventListener('load', function () {
     camera: function () {
       navigator.mediaDevices
         ? navigator.mediaDevices
-            .getUserMedia({ video: true })
-            .then(successCallback('camera'), errorCallback('camera'))
+          .getUserMedia({ video: true })
+          .then(successCallback('camera'), errorCallback('camera'))
         : navigator.getUserMedia(
-            { video: true },
-            successCallback('camera'),
-            errorCallback('camera')
-          );
+          { video: true },
+          successCallback('camera'),
+          errorCallback('camera')
+        );
     },
     microphone: function () {
       navigator.mediaDevices
         ? navigator.mediaDevices
-            .getUserMedia({ audio: true })
-            .then(successCallback('microphone'), errorCallback('microphone'))
+          .getUserMedia({ audio: true })
+          .then(successCallback('microphone'), errorCallback('microphone'))
         : navigator.getUserMedia(
-            { audio: true },
-            successCallback('microphone'),
-            errorCallback('microphone')
-          );
+          { audio: true },
+          successCallback('microphone'),
+          errorCallback('microphone')
+        );
     },
     // camera-microphone and not camera+microphone to ensure functioning CSS selector
     'camera-microphone': function () {
       navigator.mediaDevices
         ? navigator.mediaDevices
-            .getUserMedia({ audio: true, video: true })
-            .then(
-              successCallback('camera-microphone'),
-              errorCallback('camera-microphone')
-            )
-        : navigator.getUserMedia(
-            { audio: true, video: true },
+          .getUserMedia({ audio: true, video: true })
+          .then(
             successCallback('camera-microphone'),
             errorCallback('camera-microphone')
-          );
+          )
+        : navigator.getUserMedia(
+          { audio: true, video: true },
+          successCallback('camera-microphone'),
+          errorCallback('camera-microphone')
+        );
     },
   };
 
