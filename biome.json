@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "ignore": ["./package.json"]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "linter": {
+    "rules": {
+      "style": {
+        "noVar": "off",
+        "noArguments": "off",
+        "useTemplate": "off"
+      },
+      "complexity": {
+        "useOptionalChain": "off",
+        "noForEach": "off"
+      }
+    }
+  }
+}

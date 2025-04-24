@@ -1,0 +1,9 @@
+{
+	"scripts": {
+		"lint": "npx @biomejs/biome ci",
+		"format": "npx @biomejs/biome check --write"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4"
+	}
+}
