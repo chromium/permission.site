@@ -4,12 +4,11 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background: #EEEEEE;
+  background: #eeeeee;
 }
 
 /* Only apply min-height to non-print media */
 @media not print {
-
   html,
   body {
     min-height: 100%;
@@ -38,7 +37,7 @@ body {
 }
 
 button {
-  background: #FFF;
+  background: #fff;
   border: none;
   font-size: 1.5em;
   width: 400px;
@@ -49,18 +48,18 @@ button {
 }
 
 button:hover {
-  background: #FFA;
+  background: #ffa;
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   transform: translateY(-2px);
 }
 
 button.success {
-  background: #AFA;
+  background: #afa;
 }
 
 button.error {
-  background: #FAA;
+  background: #faa;
 }
 
 table {
@@ -102,27 +101,26 @@ table td:first-child {
 }
 
 #toggle.http:not(:hover) .http {
-  color: #DB4437;
+  color: #db4437;
 }
 
 #toggle.https:not(:hover) .https {
-  color: #1AC222;
+  color: #1ac222;
 }
 
 #toggle.http:hover .https {
   text-decoration: underline;
-  color: #1AC222;
+  color: #1ac222;
 }
 
 #toggle.https:hover .http {
   text-decoration: underline;
-  color: #DB4437;
+  color: #db4437;
 }
 
 a#toggle:hover {
   color: black;
 }
-
 
 .switch {
   display: inline-block;
@@ -139,13 +137,11 @@ a#toggle:hover {
   height: 20px;
   margin: -3px;
   border-radius: 10px;
-  background-color: #F1F1F1;
-  border:
-    inset 0.5px rgba(255, 255, 255, 0.12),
-    inset 0.5px rgba(255, 255, 255, 0.12);
-  box-shadow:
-    0px 0px 2px 0px rgba(0, 0, 0, 0.12),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.24);
+  background-color: #f1f1f1;
+  border: inset 0.5px rgba(255, 255, 255, 0.12), inset 0.5px
+    rgba(255, 255, 255, 0.12);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px
+    rgba(0, 0, 0, 0.24);
 
   transform: translateX(10px);
   transition: transform 0.25s ease-in-out, background-color 0.25s ease-in-out;
@@ -193,14 +189,13 @@ a#toggle:hover {
   text-align: left;
 }
 
-.permission-status>span,
-.access-status>span {
+.permission-status > span,
+.access-status > span {
   font-weight: 800;
 }
 
 .demo-instructions {
   padding: .5rem 1rem;
-  margin-top: 1rem;
   text-align: left;
   border: solid 1px;
   max-width: 80rem;

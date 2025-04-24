@@ -1,14 +1,14 @@
 const API_STATUS_TO_DISPLAY_TEXT = {
   // key = status ID, value: user-friendly string to display
-  granted: '🟢 granted',
-  denied: '🔴 denied',
-  prompt: '🔵 prompt',
+  granted: "🟢 granted",
+  denied: "🔴 denied",
+  prompt: "🔵 prompt",
 };
 
 const API_ACCESS_STATUSES = {
-  success: '🟢 success',
-  error: '🔴 error',
-  unknown: '⚫️ unknown',
+  success: "🟢 success",
+  error: "🔴 error",
+  unknown: "⚫️ unknown",
 };
 
 // Display the Permissions API status (https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API)
@@ -24,73 +24,77 @@ function updateAccessStatus(permissionName, accessStatus, message) {
   document.querySelector(`#${permissionName}-access-status`).innerText =
     textToDisplay;
   if (message) {
-    document.querySelector(`#${permissionName}-error-message`).innerText = message
+    document.querySelector(`#${permissionName}-error-message`).innerText =
+      message;
   }
 }
 // Utils
 function successCallback(permissionName) {
-  return () => updateAccessStatus(permissionName, 'success');
+  return () => {
+    updateAccessStatus(permissionName, "success");
+  };
 }
 function errorCallback(permissionName) {
-  return (error) => updateAccessStatus(permissionName, 'error', error.message);
+  return (error) => updateAccessStatus(permissionName, "error", error.message);
 }
 
 // Main
-window.addEventListener('load', function () {
+window.addEventListener("load", () => {
   // Display the page's origin for demo instructions purposes
-  document
-    .querySelectorAll('.origin')
-    .forEach((el) => (el.innerText = document.location.origin));
+  document.querySelectorAll(".origin").forEach((el) => {
+    el.innerText = document.location.origin;
+  });
 
   navigator.getUserMedia =
+    navigator.getUserMedia ||
     navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia ||
     navigator.msGetUserMedia;
 
   const register = {
-    geolocation: function () {
+    geolocation: () => {
       navigator.geolocation.getCurrentPosition(
-        successCallback('geolocation'),
-        errorCallback('geolocation')
+        successCallback("geolocation"),
+        errorCallback("geolocation"),
       );
     },
-    camera: function () {
+    camera: () => {
       navigator.mediaDevices
         ? navigator.mediaDevices
-          .getUserMedia({ video: true })
-          .then(successCallback('camera'), errorCallback('camera'))
+            .getUserMedia({ video: true })
+            .then(successCallback("camera"), errorCallback("camera"))
         : navigator.getUserMedia(
-          { video: true },
-          successCallback('camera'),
-          errorCallback('camera')
-        );
+            { video: true },
+            successCallback("camera"),
+            errorCallback("camera"),
+          );
     },
-    microphone: function () {
+    microphone: () => {
       navigator.mediaDevices
         ? navigator.mediaDevices
-          .getUserMedia({ audio: true })
-          .then(successCallback('microphone'), errorCallback('microphone'))
+            .getUserMedia({ audio: true })
+            .then(successCallback("microphone"), errorCallback("microphone"))
         : navigator.getUserMedia(
-          { audio: true },
-          successCallback('microphone'),
-          errorCallback('microphone')
-        );
+            { audio: true },
+            successCallback("microphone"),
+            errorCallback("microphone"),
+          );
     },
     // camera-microphone and not camera+microphone to ensure functioning CSS selector
-    'camera-microphone': function () {
+    "camera-microphone": () => {
       navigator.mediaDevices
         ? navigator.mediaDevices
-          .getUserMedia({ audio: true, video: true })
-          .then(
-            successCallback('camera-microphone'),
-            errorCallback('camera-microphone')
-          )
+            .getUserMedia({ audio: true, video: true })
+            .then(
+              successCallback("camera-microphone"),
+              errorCallback("camera-microphone"),
+            )
         : navigator.getUserMedia(
-          { audio: true, video: true },
-          successCallback('camera-microphone'),
-          errorCallback('camera-microphone')
-        );
+            { audio: true, video: true },
+            successCallback("camera-microphone"),
+            errorCallback("camera-microphone"),
+          );
     },
   };
 
@@ -110,18 +114,18 @@ window.addEventListener('load', function () {
           updatePermissionsApiStatus(permissionName, permissionStatus.state);
           // Log the Permissions API status change in the console
           console.info(
-            `${permissionName} permission state has changed to '${permissionStatus.state}'`
+            `${permissionName} permission state has changed to '${permissionStatus.state}'`,
           );
         };
       }, // Rejected promise callback if Permissions API isn't supported in this browser of for this capability
       () => {
         console.warn(
-          `${permissionName}: In this browser, the status of this permission can't be queried via the Permissions API`
+          `${permissionName}: In this browser, the status of this permission can't be queried via the Permissions API`,
         );
-      }
+      },
     );
 
-    document.getElementById(permissionName).addEventListener('click', () => {
+    document.getElementById(permissionName).addEventListener("click", () => {
       register[permissionName]();
     });
   }
