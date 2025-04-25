@@ -1,4 +1,4 @@
-const PERMISSIONS_API_STATUSES = {
+const API_STATUS_TO_DISPLAY_TEXT = {
   // key = status ID, value: user-friendly string to display
   granted: "🟢 granted",
   denied: "🔴 denied",
@@ -13,7 +13,7 @@ const API_ACCESS_STATUSES = {
 
 // Display the Permissions API status (https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API)
 function updatePermissionsApiStatus(permissionName, permissionStatus) {
-  const textToDisplay = PERMISSIONS_API_STATUSES[permissionStatus];
+  const textToDisplay = API_STATUS_TO_DISPLAY_TEXT[permissionStatus];
   document.querySelector(`#${permissionName}-permission-status`).innerText =
     textToDisplay;
 }
@@ -46,6 +46,7 @@ window.addEventListener("load", () => {
   });
 
   navigator.getUserMedia =
+    navigator.getUserMedia ||
     navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia ||

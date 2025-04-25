@@ -10,27 +10,67 @@
   <link rel="shortcut icon" href="favicon.ico" />
   <link rel="apple-touch-icon" href="app-icon.png" />
   <link rel="stylesheet" href="style.css" />
+  <script src="./pepc.js"></script>
 </head>
 
 <body>
   <div class="before"></div>
   <div class="content">
-    <div>
-      <permission id="camera" type="camera"></permission>
-    </div>
-    <div>
-      <permission id="microphone" type="microphone"></permission>
-    </div>
-    <div>
-      <permission id="camera-microphone" type="camera microphone"></permission>
-    </div>
-    <div>
-      <permission id="geolocation" type="geolocation"></permission>
-    </div>
+    <span class="permission-element-box">
+      <div>
+        <permission id="geolocation" type="geolocation">
+          (This <code>&lt;permission&gt;</code> element is inactive.)
+        </permission>
+      </div>
+      <div class="access-status">
+        Access status: <span id="geolocation-access-status">⚫️ unknown</span>
+      </div>
+      <div class="access-status">
+        Error message: <span id="geolocation-error-message">N/A</span>
+      </div>
+    </span>
+    <span class="permission-element-box">
+      <div>
+        <permission id="camera" type="camera">
+          (This <code>&lt;permission&gt;</code> element is inactive.)
+        </permission>
+      </div>
+      <div class="access-status">
+        Access status: <span id="camera-access-status">⚫️ unknown</span>
+      </div>
+      <div class="access-status">
+        Error message: <span id="camera-error-message">N/A</span>
+      </div>
+    </span>
+    <span class="permission-element-box">
+      <div>
+        <permission id="microphone" type="microphone">
+          (This <code>&lt;permission&gt;</code> element is inactive.)
+        </permission>
+      </div>
+      <div class="access-status">
+        Access status: <span id="microphone-access-status">⚫️ unknown</span>
+      </div>
+      <div class="access-status">
+        Error message: <span id="microphone-error-message">N/A</span>
+      </div>
+    </span>
+    <span class="permission-element-box">
+      <div>
+        <permission id="camera-microphone" type="camera microphone">
+          (This <code>&lt;permission&gt;</code> element is inactive.)
+        </permission>
+      </div>
+      <div class="access-status">
+        Access status:
+        <span id="camera-microphone-access-status">⚫️ unknown</span>
+      </div>
+      <div class="access-status">
+        Error message: <span id="camera-microphone-error-message">N/A</span>
+      </div>
+    </span>
     <div class="demo-instructions">
       <h2>👩🏻‍💻 Demo instructions</h2>
-      <p>You will see empty rectangles unless this browser implementes basic support for the
-        &lt;permission&gt;&nbsp;element.</p>
       <p>In Chrome M134 or later, go to <code>chrome://flags#permission-element</code> and enable the experiment.</p>
       <p>Alternatively in Chrome M121 or later, follow these instructions to enable experimental support:</p>
       <ul>
@@ -44,6 +84,11 @@
           <pre>chrome://version</pre>
         </li>
       </ul>
+      <p>After granting permissions through a permission element, the underlying API will be called to verify access.
+        The result is reported as
+        <span class="access-status">Access status</span>.
+        TODO: Access status is currently only supported by geolocation, not the other permissions.
+      </p>
     </div>
   </div>
   <div class="github-fork-ribbon-wrapper right">

@@ -212,5 +212,10 @@ permission {
   padding: 0.5em;
   margin: 10px 10px;
   display: block;
-  z-index: 99999; /* github-fork-ribbon-wrapper uses 9999 */
+  z-index: 99999;
+  /* github-fork-ribbon-wrapper uses 9999 */
+}
+
+.permission-element-box {
+  display: inline-block;
 }
