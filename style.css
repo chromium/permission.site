@@ -211,7 +211,6 @@ permission {
   width: 400px;
   padding: 0.5em;
   margin: 10px 10px;
-  display: block;
   z-index: 99999;
   /* github-fork-ribbon-wrapper uses 9999 */
 }
