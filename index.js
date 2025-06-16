@@ -279,7 +279,7 @@ window.addEventListener("load", () => {
       var knownKeySystems = [
         "com.example.somesystem", // Ensure no real system is the first tried.
         "com.widevine.alpha",
-        "com.microsoft.playready",
+        "com.microsoft.playready.recommendation.3000",
         "com.adobe.primetime",
         "com.apple.fps.2_0",
         "com.apple.fps",
