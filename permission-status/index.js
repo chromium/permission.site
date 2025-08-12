@@ -12,9 +12,9 @@ const API_ACCESS_STATUSES = {
 };
 
 // Display the Permissions API status (https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API)
-function updatePermissionsApiStatus(permissionName, permissionStatus) {
+function updatePermissionsApiStatus(permissionName, permissionStatus, fromQuery = false) {
   const textToDisplay = API_STATUS_TO_DISPLAY_TEXT[permissionStatus];
-  document.querySelector(`#${permissionName}-permission-status`).innerText =
+  document.querySelector(`#${permissionName}-permission-status${fromQuery ? '-query' : ''}`).innerText =
     textToDisplay;
 }
 
@@ -32,10 +32,22 @@ function updateAccessStatus(permissionName, accessStatus, message) {
 function successCallback(permissionName) {
   return () => {
     updateAccessStatus(permissionName, "success");
+    navigator.permissions.query({ name: permissionName }).then(
+      (permissionStatus) => {
+        updatePermissionsApiStatus(permissionName, permissionStatus.state, true);
+      }
+    );
   };
 }
 function errorCallback(permissionName) {
-  return (error) => updateAccessStatus(permissionName, "error", error.message);
+  return (error) => {
+    updateAccessStatus(permissionName, "error", error.message);
+    navigator.permissions.query({ name: permissionName }).then(
+      (permissionStatus) => {
+        updatePermissionsApiStatus(permissionName, permissionStatus.state, true);
+      }
+    );
+  }
 }
 
 // Main
@@ -62,39 +74,39 @@ window.addEventListener("load", () => {
     camera: () => {
       navigator.mediaDevices
         ? navigator.mediaDevices
-            .getUserMedia({ video: true })
-            .then(successCallback("camera"), errorCallback("camera"))
+          .getUserMedia({ video: true })
+          .then(successCallback("camera"), errorCallback("camera"))
         : navigator.getUserMedia(
-            { video: true },
-            successCallback("camera"),
-            errorCallback("camera"),
-          );
+          { video: true },
+          successCallback("camera"),
+          errorCallback("camera"),
+        );
     },
     microphone: () => {
       navigator.mediaDevices
         ? navigator.mediaDevices
-            .getUserMedia({ audio: true })
-            .then(successCallback("microphone"), errorCallback("microphone"))
+          .getUserMedia({ audio: true })
+          .then(successCallback("microphone"), errorCallback("microphone"))
         : navigator.getUserMedia(
-            { audio: true },
-            successCallback("microphone"),
-            errorCallback("microphone"),
-          );
+          { audio: true },
+          successCallback("microphone"),
+          errorCallback("microphone"),
+        );
     },
     // camera-microphone and not camera+microphone to ensure functioning CSS selector
     "camera-microphone": () => {
       navigator.mediaDevices
         ? navigator.mediaDevices
-            .getUserMedia({ audio: true, video: true })
-            .then(
-              successCallback("camera-microphone"),
-              errorCallback("camera-microphone"),
-            )
-        : navigator.getUserMedia(
-            { audio: true, video: true },
+          .getUserMedia({ audio: true, video: true })
+          .then(
             successCallback("camera-microphone"),
             errorCallback("camera-microphone"),
-          );
+          )
+        : navigator.getUserMedia(
+          { audio: true, video: true },
+          successCallback("camera-microphone"),
+          errorCallback("camera-microphone"),
+        );
     },
   };
 
