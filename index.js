@@ -502,6 +502,32 @@ window.addEventListener("load", () => {
         displayOutcome("persistent-storage", "error"),
       );
     },
+    "open-file-picker": () => {
+      if ("showOpenFilePicker" in window) {
+        window.showOpenFilePicker().then(
+          displayOutcome("open-file-picker", "success"),
+          displayOutcome("open-file-picker", "error"),
+        );
+      } else {
+        displayOutcome(
+          "open-file-picker",
+          "error",
+        )("window.showOpenFilePicker not available");
+      }
+    },
+    "open-directory-picker": () => {
+      if ("showDirectoryPicker" in window) {
+        window.showDirectoryPicker().then(
+          displayOutcome("open-directory-picker", "success"),
+          displayOutcome("open-directory-picker", "error"),
+        );
+      } else {
+        displayOutcome(
+          "open-directory-picker",
+          "error",
+        )("window.showDirectoryPicker not available");
+      }
+    },
 
     "protocol-handler": () => {
       // https://www.w3.org/TR/html5/webappapis.html#navigatorcontentutils
