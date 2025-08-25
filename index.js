@@ -16,17 +16,17 @@ window.addEventListener("load", () => {
   }, 10);
 
   function displayOutcome(type, outcome) {
-    return () => {
-      var argList = [outcome, type].concat([].slice.call(arguments));
+    return (...args) => {
+      var argList = [outcome, type].concat(...args);
       switch (outcome) {
         case "success":
-          console.info.apply(console, argList);
+          console.info(...argList);
           break;
         case "error":
-          console.error.apply(console, argList);
+          console.error(...argList);
           break;
         default:
-          console.log.apply(console, argList);
+          console.log(...argList);
       }
       document
         .getElementById(type)
