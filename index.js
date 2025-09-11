@@ -502,32 +502,32 @@ window.addEventListener("load", () => {
         displayOutcome("persistent-storage", "error"),
       );
     },
-    "open-file-picker": () => {
+    "show-open-file-picker": () => {
       if ("showOpenFilePicker" in window) {
         window
           .showOpenFilePicker()
           .then(
-            displayOutcome("open-file-picker", "success"),
-            displayOutcome("open-file-picker", "error"),
+            displayOutcome("show-open-file-picker", "success"),
+            displayOutcome("show-open-file-picker", "error"),
           );
       } else {
         displayOutcome(
-          "open-file-picker",
+          "show-open-file-picker",
           "error",
         )("window.showOpenFilePicker not available");
       }
     },
-    "open-directory-picker": () => {
+    "show-directory-picker": () => {
       if ("showDirectoryPicker" in window) {
         window
           .showDirectoryPicker()
           .then(
-            displayOutcome("open-directory-picker", "success"),
-            displayOutcome("open-directory-picker", "error"),
+            displayOutcome("show-directory-picker", "success"),
+            displayOutcome("show-directory-picker", "error"),
           );
       } else {
         displayOutcome(
-          "open-directory-picker",
+          "show-directory-picker",
           "error",
         )("window.showDirectoryPicker not available");
       }
