@@ -218,3 +218,25 @@ permission {
 .permission-element-box {
   display: inline-block;
 }
+
+geolocation { 
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  user-select: none;
+}
+
+geolocation:hover { background-color: #e0e0e0; }
+
+.output {
+  font-family: monospace;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-top: 10px;
+  background-color: #fafafa;
+  min-height: 80px;
+  white-space: pre-wrap;
+}
