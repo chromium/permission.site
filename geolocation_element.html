@@ -9,28 +9,6 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" href="app-icon.png" />
     <link rel="stylesheet" href="style.css" />
-    <style>
-      geolocation { 
-        display: inline-block;
-        padding: 8px 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        background-color: #f0f0f0;
-        cursor: pointer;
-        user-select: none;
-      }
-      geolocation:hover { background-color: #e0e0e0; }
-      h2 { margin-top: 30px; }
-      .output {
-        font-family: monospace;
-        border: 1px solid #ddd;
-        padding: 15px;
-        margin-top: 10px;
-        background-color: #fafafa;
-        min-height: 80px;
-        white-space: pre-wrap;
-      }
-    </style>
   </head>
   <body>
     <div class="container">
@@ -38,24 +16,25 @@
       <h2>1. Manual Location Request</h2>
       <p>Click the element below to request the current location.</p>
       <geolocation id="geo-manual" tabindex="0">
-        Find My Location
+        Geolocation element is not reported
       </geolocation>
       <div id="manual-output" class="output">Waiting for user interaction...</div>
 
       <h2>2. Automatic Location Request</h2>
       <p>
         This element has the <code>autolocate</code> attribute and will
-        request the location on page load.
+        request the location on page load, if the current permission status
+        already allows it.
       </p>
       <geolocation id="geo-auto" autolocate tabindex="0">
-        Find My Location (autolocate)
+        Geolocation element is not reported
       </geolocation>
       <div id="auto-output" class="output">Waiting for permission...</div>
       
       <div class="instructions">
         <h3>Demo Instructions</h3>
         <p>In Chrome M143 or later, go to <code>chrome://flags#geolocation-element</code> and enable the experiment.</p>
-        <p>Alternatively in Chrome M121 or later, follow these instructions to enable experimental support:</p>
+        <p>Alternatively, follow these instructions to enable experimental support:</p>
         <ul>
           <li>Shut down the browser process.</li>
           <li>
