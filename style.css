@@ -219,7 +219,7 @@ permission {
   display: inline-block;
 }
 
-geolocation { 
+geolocation {
   display: inline-block;
   padding: 8px 12px;
   border: 1px solid #ccc;
@@ -229,7 +229,9 @@ geolocation {
   user-select: none;
 }
 
-geolocation:hover { background-color: #e0e0e0; }
+geolocation:hover {
+  background-color: #e0e0e0;
+}
 
 .output {
   font-family: monospace;
