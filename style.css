@@ -233,7 +233,7 @@ geolocation:hover {
   background-color: #e0e0e0;
 }
 
-.output {
+.geolocation-event-logger {
   font-family: monospace;
   border: 1px solid #ddd;
   padding: 15px;
