@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+    <meta http-equiv="origin-trial"
+      content="Aiy9E+Nh9WIdqqo5C6FDDQxB93rVyqOVEjpIWaWelu9KLft4na/aWje1YGyNH9dy/hx5B+Z2u1U96vWzSScXwwwAAABaeyJvcmlnaW4iOiJodHRwczovL3Blcm1pc3Npb24uc2l0ZTo0NDMiLCJmZWF0dXJlIjoiUGVybWlzc2lvbkVsZW1lbnQiLCJleHBpcnkiOjE3NjI4MTkyMDB9">
+    <title>permission.site (geolocation element)</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="app-icon.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Geolocation Element Demo</h1>
+      <h2>1. Manual Location Request</h2>
+      <p>Click the element below to request the current location.</p>
+      <geolocation id="geo-manual" tabindex="0">
+        Geolocation element is not supported
+      </geolocation>
+      <div id="manual-output" class="geolocation-event-logger">Waiting for user interaction...</div>
+
+      <h2>2. Automatic Location Request</h2>
+      <p>
+        This element has the <code>autolocate</code> attribute and will
+        request the location on page load, if the current permission status
+        already allows it.
+      </p>
+      <geolocation id="geo-auto" autolocate tabindex="0">
+        Geolocation element is not supported
+      </geolocation>
+      <div id="auto-output" class="geolocation-event-logger">Waiting for permission...</div>
+
+      <h2>3. Watch Location</h2>
+      <p>
+        This element has the <code>watch</code> attribute and will continuously
+        report location updates as they occur.
+      </p>
+      <geolocation id="geo-watch" watch tabindex="0">
+        Geolocation watch element is not supported
+      </geolocation>
+      <div id="watch-output" class="geolocation-event-logger">Waiting for location updates...</div>
+      
+      <div class="instructions">
+        <h3>Demo Instructions</h3>
+        <p>In Chrome M143 or later, go to <code>chrome://flags#geolocation-element</code> and enable the experiment.</p>
+        <p>Alternatively, follow these instructions to enable experimental support:</p>
+        <ul>
+          <li>Shut down the browser process.</li>
+          <li>
+            Restart the browser with these command line flag:
+            <pre>--enable-features=PermissionElement,GeolocationElement</pre>
+          </li>
+          <li>
+            Ensure the flags actually took effect by verifying they appear on:
+            <pre>chrome://version</pre>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="github-fork-ribbon-wrapper right">
+      <div class="github-fork-ribbon">
+        <a href="https://github.com/chromium/permission.site">On GitHub</a>
+      </div>
+    </div>
+    <link rel="stylesheet" href="third_party/github.css" />
+    <script>
+      // Get references to the DOM elements
+      const manualGeoElement = document.getElementById('geo-manual');
+      const autoGeoElement = document.getElementById('geo-auto');
+      const watchGeoElement = document.getElementById('geo-watch');
+      const manualOutputDiv = document.getElementById('manual-output');
+      const autoOutputDiv = document.getElementById('auto-output');
+      const watchOutputDiv = document.getElementById('watch-output');
+
+      /**
+       * A helper function to create a formatted log string from a location event.
+       * @param {Event} event - The 'onlocation' event object.
+       * @returns {string} A formatted HTML string.
+       */
+      function createLogEntry(event) {
+        const timestamp = new Date().toLocaleTimeString();
+        let logEntry = `<strong>[${timestamp}]</strong>\n`;
+
+        if (event.target.error) {
+          logEntry += `  Error: ${event.target.error.message} (Code: ${event.target.error.code})\n`;
+        } else if (event.target.position) {
+          const coords = event.target.position.coords;
+          logEntry += `  Latitude:  ${coords.latitude}\n`;
+          logEntry += `  Longitude: ${coords.longitude}\n`;
+          logEntry += `  Accuracy:  ${coords.accuracy} meters\n`;
+        } else {
+          logEntry += "  Event fired but no position or error data was found.\n";
+        }
+        return logEntry;
+      }
+
+      // Assign a specific handler for the manual element
+      manualGeoElement.onlocation = function(event) {
+        manualOutputDiv.innerHTML = createLogEntry(event);
+      };
+
+      // Assign a specific handler for the automatic element
+      autoGeoElement.onlocation = function(event) {
+        autoOutputDiv.innerHTML = createLogEntry(event);
+      };
+
+      // Assign a handler for the watch element that accumulates updates
+      watchGeoElement.onlocation = function(event) {
+        // Convert newlines to <br> for HTML display and prepend the newest entry.
+        const entryHtml = '<div class="log-entry">' +
+                          createLogEntry(event).replace(/\n/g, '<br>') +
+                          '</div>';
+        // If this is the first real update, replace the placeholder text.
+        if (watchOutputDiv.innerHTML.trim() === 'Waiting for location updates...') {
+          watchOutputDiv.innerHTML = entryHtml;
+        } else {
+          watchOutputDiv.innerHTML = entryHtml + '<hr>' + watchOutputDiv.innerHTML;
+        }
+      };
+    </script>
+  </body>
+</html>
