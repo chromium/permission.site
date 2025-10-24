@@ -12,10 +12,15 @@ const API_ACCESS_STATUSES = {
 };
 
 // Display the Permissions API status (https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API)
-function updatePermissionsApiStatus(permissionName, permissionStatus) {
+function updatePermissionsApiStatus(
+  permissionName,
+  permissionStatus,
+  fromQuery = false,
+) {
   const textToDisplay = API_STATUS_TO_DISPLAY_TEXT[permissionStatus];
-  document.querySelector(`#${permissionName}-permission-status`).innerText =
-    textToDisplay;
+  document.querySelector(
+    `#${permissionName}-permission-status${fromQuery ? "-query" : ""}`,
+  ).innerText = textToDisplay;
 }
 
 // Display the feature access status (whether the feature can actually be accessed successfully in the browser)
@@ -32,10 +37,30 @@ function updateAccessStatus(permissionName, accessStatus, message) {
 function successCallback(permissionName) {
   return () => {
     updateAccessStatus(permissionName, "success");
+    navigator.permissions
+      .query({ name: permissionName })
+      .then((permissionStatus) => {
+        updatePermissionsApiStatus(
+          permissionName,
+          permissionStatus.state,
+          true,
+        );
+      });
   };
 }
 function errorCallback(permissionName) {
-  return (error) => updateAccessStatus(permissionName, "error", error.message);
+  return (error) => {
+    updateAccessStatus(permissionName, "error", error.message);
+    navigator.permissions
+      .query({ name: permissionName })
+      .then((permissionStatus) => {
+        updatePermissionsApiStatus(
+          permissionName,
+          permissionStatus.state,
+          true,
+        );
+      });
+  };
 }
 
 // Main
