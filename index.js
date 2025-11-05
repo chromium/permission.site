@@ -895,4 +895,40 @@ window.addEventListener("load", () => {
   for (var type in register) {
     document.getElementById(type).addEventListener("click", register[type]);
   }
+
+  // Theme toggle wiring
+  (function () {
+    var themeToggle = document.getElementById("theme-toggle");
+    var applyTheme = function (theme) {
+      if (theme === "dark") {
+        document.body.classList.add("dark");
+        themeToggle.classList.remove("light");
+        themeToggle.classList.add("dark");
+      } else {
+        document.body.classList.remove("dark");
+        themeToggle.classList.remove("dark");
+        themeToggle.classList.add("light");
+      }
+    };
+
+    // Load saved preference
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved) applyTheme(saved);
+    } catch (e) {
+      // ignore localStorage errors
+    }
+
+    themeToggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      var isDark = document.body.classList.contains("dark");
+      var next = isDark ? "light" : "dark";
+      applyTheme(next);
+      try {
+        localStorage.setItem("theme", next);
+      } catch (e) {
+        // ignore
+      }
+    });
+  })();
 });

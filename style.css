@@ -147,6 +147,68 @@ a#toggle:hover {
   transition: transform 0.25s ease-in-out, background-color 0.25s ease-in-out;
 }
 
+/* Theme toggle styles */
+#theme-toggle-wrapper {
+  display: block;
+  margin: 1.5em 0;
+}
+
+#theme-toggle {
+  font-size: 1.1em;
+  padding: 0.4em;
+  margin: 0.25em;
+  color: black;
+  text-decoration: none;
+}
+
+#theme-toggle .light-label,
+#theme-toggle .dark-label {
+  color: rgba(0,0,0,0.6);
+  transition: color 0.25s ease-in-out;
+}
+
+#theme-toggle.light .light-label {
+  color: #1ac222;
+}
+
+#theme-toggle.dark .dark-label {
+  color: #1ac222;
+}
+
+/* Dark theme */
+body.dark {
+  background: #121212;
+  color: #e6e6e6;
+}
+
+body.dark button {
+  background: #1f1f1f;
+  color: #e6e6e6;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.6);
+}
+
+/* layout adjustments for dark theme handled globally */
+
+body.dark table td {
+  border-color: #444;
+}
+
+body.dark .permission-status,
+body.dark .access-status {
+  color: #ddd;
+}
+
+/* Ensure the theme switch knob moves appropriately */
+#theme-toggle.light .switch .knob {
+  transform: translateX(10px);
+  background-color: #f1f1f1;
+}
+
+#theme-toggle.dark .switch .knob {
+  transform: translateX(20px);
+  background-color: #29a329;
+}
+
 #toggle.instant .switch,
 #toggle.instant .switch .knob,
 #toggle.instant .http,
