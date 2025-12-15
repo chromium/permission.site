@@ -1,10 +1,50 @@
+/* 1. Define Variables (Light Mode Default) */
+:root {
+  --bg-color: #eeeeee;
+  --text-color: #222222;
+  --btn-bg: #ffffff;
+  --btn-text: #000000;
+  --btn-shadow: rgba(0, 0, 0, 0.16);
+  --btn-hover: #ffa;
+  --btn-success: #afa;
+  --btn-error: #faa;
+  --border-color: #888;
+  --toggle-text-light: #1ac222; /* Green for active light label */
+  
+  /* Toggle Switch Colors */
+  --switch-bg: rgba(34, 31, 31, 0.26);
+  --knob-bg: #f1f1f1;
+}
+
+/* 2. Define Dark Mode Variables */
+body.dark {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --btn-bg: #2c2c2c;
+  --btn-text: #ffffff;
+  --btn-shadow: rgba(0, 0, 0, 0.5);
+  
+  /* Muted Status Colors for Dark Mode */
+  --btn-hover: #555540;
+  --btn-success: #1e4d1e;
+  --btn-error: #5a1e1e;
+  
+  --border-color: #555;
+  
+  /* Toggle Switch Colors Dark */
+  --switch-bg: rgba(255, 255, 255, 0.3);
+  --knob-bg: #222;
+}
+
 /* Light material design boilerplate. */
 html,
 body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background: #eeeeee;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
 }
 
 /* Only apply min-height to non-print media */
@@ -37,29 +77,30 @@ body {
 }
 
 button {
-  background: #fff;
+  background: var(--btn-bg);
+  color: var(--btn-text);
   border: none;
   font-size: 1.5em;
   width: 400px;
   padding: 0.5em;
   margin: 10px 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px var(--btn-shadow), 0 3px 6px var(--btn-shadow);
   transition: all 150ms;
 }
 
 button:hover {
-  background: #ffa;
+  background: var(--btn-hover);
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 10px 20px var(--btn-shadow), 0 6px 6px var(--btn-shadow);
   transform: translateY(-2px);
 }
 
 button.success {
-  background: #afa;
+  background: var(--btn-success);
 }
 
 button.error {
-  background: #faa;
+  background: var(--btn-error);
 }
 
 table {
@@ -68,7 +109,7 @@ table {
 }
 
 table td {
-  border: 1px solid #888;
+  border: 1px solid var(--border-color);
   padding: 8px;
 }
 
@@ -85,7 +126,7 @@ table td:first-child {
   font-size: 1.5em;
   padding: 1em;
   margin: 1em;
-  color: black;
+  color: var(--text-color);
   text-decoration: none;
 }
 
@@ -95,10 +136,23 @@ table td:first-child {
   transition: color 0.25s ease-in-out;
 }
 
+/* ================================================== */
+/* FIX: Make inactive labels visible in Dark Mode     */
+/* ================================================== */
+body.dark #toggle .http,
+body.dark #toggle .https {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 #toggle.https .http,
 #toggle.http .https {
   color: rgba(0, 0, 0, 0.5);
 }
+
+/* Override the dark mode fix specifically for the 'inactive' state logic in the original CSS
+   actually, we can just rely on the specificity of the ID selectors below to color the ACTIVE ones,
+   and let the rule above color the INACTIVE ones. 
+*/
 
 #toggle.http:not(:hover) .http {
   color: #db4437;
@@ -119,7 +173,7 @@ table td:first-child {
 }
 
 a#toggle:hover {
-  color: black;
+  color: var(--text-color);
 }
 
 .switch {
@@ -127,7 +181,7 @@ a#toggle:hover {
   width: 34px;
   height: 14px;
   border-radius: 7px;
-  background-color: rgba(34, 31, 31, 0.26);
+  background-color: var(--switch-bg);
   margin: auto 0.5em;
   transition: background-color 0.25s ease-in-out;
 }
@@ -137,7 +191,7 @@ a#toggle:hover {
   height: 20px;
   margin: -3px;
   border-radius: 10px;
-  background-color: #f1f1f1;
+  background-color: var(--knob-bg);
   border: inset 0.5px rgba(255, 255, 255, 0.12), inset 0.5px
     rgba(255, 255, 255, 0.12);
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px
@@ -197,7 +251,7 @@ a#toggle:hover {
 .demo-instructions {
   padding: .5rem 1rem;
   text-align: left;
-  border: solid 1px;
+  border: solid 1px var(--border-color);
   max-width: 80rem;
   align-self: center;
   margin: 1rem auto;
@@ -241,4 +295,94 @@ geolocation:hover {
   background-color: #fafafa;
   min-height: 80px;
   white-space: pre-wrap;
+}
+
+/* ============================ */
+/* New Theme Toggle Styles   */
+/* ============================ */
+
+#theme-toggle-wrapper {
+  /* Move from center flow to top-left corner */
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  margin: 0;
+  z-index: 1000;
+}
+
+/* On very small mobile screens, ensure it doesn't overlap content */
+@media (max-width: 500px) {
+  #theme-toggle-wrapper {
+    position: static; /* Return to normal flow on tiny screens */
+    display: block;
+    margin: 1em auto;
+    text-align: center;
+  }
+}
+
+#theme-toggle {
+  font-size: 1rem; /* Slightly smaller to fit the corner better */
+  padding: 0.4em;
+  margin: 0;
+  color: var(--text-color);
+  text-decoration: none;
+  display: inline-flex; /* Aligns text and switch nicely */
+  align-items: center;
+}
+
+#theme-toggle .light-label,
+#theme-toggle .dark-label {
+  color: rgba(0,0,0,0.6);
+  transition: color 0.25s ease-in-out;
+  font-size: 0.9em;
+}
+
+/* In dark mode, brighten the inactive labels */
+body.dark #theme-toggle .light-label,
+body.dark #theme-toggle .dark-label {
+  color: rgba(255,255,255,0.6);
+}
+
+/* Active State Colors */
+body:not(.dark) #theme-toggle .light-label {
+  color: var(--toggle-text-light);
+  font-weight: bold;
+}
+
+body.dark #theme-toggle .dark-label {
+  color: var(--toggle-text-light);
+  font-weight: bold;
+}
+
+#theme-toggle .switch {
+  display: inline-block;
+  width: 34px;
+  height: 14px;
+  border-radius: 7px;
+  background-color: rgba(128, 128, 128, 0.3);
+  margin: 0 0.5em; /* Adjusted margin for corner layout */
+  position: relative;
+}
+
+#theme-toggle .switch .knob {
+  width: 20px;
+  height: 20px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  transition: transform 0.25s ease-in-out, background-color 0.25s;
+  position: absolute;
+  left: 0;
+  border: none;
+}
+
+/* Switch Animation States */
+body:not(.dark) #theme-toggle .switch .knob {
+  transform: translateX(0px);
+}
+
+body.dark #theme-toggle .switch .knob {
+  transform: translateX(20px);
+  background-color: #29a329;
 }

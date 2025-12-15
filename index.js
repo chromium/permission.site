@@ -895,4 +895,45 @@ window.addEventListener("load", () => {
   for (var type in register) {
     document.getElementById(type).addEventListener("click", register[type]);
   }
+
+  // ============================
+  //    Theme Toggle Logic
+  // ============================
+  (function () {
+    var themeToggle = document.getElementById("theme-toggle");
+    var applyTheme = function (isDark) {
+      if (isDark) {
+        document.body.classList.add("dark");
+      } else {
+        document.body.classList.remove("dark");
+      }
+    };
+
+    // 1. Check Local Storage first
+    var saved = localStorage.getItem("theme");
+    if (saved) {
+      applyTheme(saved === "dark");
+    } else {
+      // 2. Fallback to System Preference if no save exists
+      var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(systemPrefersDark);
+    }
+
+    // 3. Handle Click
+    themeToggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      var isDark = document.body.classList.contains("dark");
+      var nextState = !isDark; // Toggle
+      
+      applyTheme(nextState);
+      
+      try {
+        localStorage.setItem("theme", nextState ? "dark" : "light");
+      } catch (e) {
+        // ignore localStorage errors
+      }
+    });
+  })();
+  // ============================
+
 });

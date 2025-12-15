@@ -4,7 +4,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=0.6">
-  <!-- Origin trial token needed for Web USB -->
   <meta http-equiv="origin-trial"
     content="AsxscPRBb7U1KJIlQrsFrZ3ea0LHwRhNkbqBKsSuLP5y3sqIqnanjKbGk4oe5+/HkownaJhI2wP6m1S70Y8xkQsAAABUeyJvcmlnaW4iOiAiaHR0cHM6Ly9wZXJtaXNzaW9uLnNpdGU6NDQzIiwgImZlYXR1cmUiOiAiV2ViVVNCIiwgImV4cGlyeSI6IDE0NjUzODkxOTd9">
   <title>permission.site</title>
@@ -35,6 +34,15 @@
       </a>
     </div>
 
+    <div id="theme-toggle-wrapper">
+      <a id="theme-toggle" href="#" title="Toggle light / dark theme">
+        <span class="light-label">Light</span>
+        <div class="switch">
+          <div class="knob"></div>
+        </div>
+        <span class="dark-label">Dark</span>
+      </a>
+    </div>
     <button id="notifications">Notifications</button>
     <button id="location">Location</button>
     <button id="camera">Camera</button>
@@ -100,8 +108,7 @@
         <td>Encrypted Media (EME)</td>
         <td>May succeed without permission depending on the implementation.<br>
           Attempts to use known key systems. (See the source for the list of supported key systems.)
-          <!-- Clear Key is not supported because it is not expected to require permissions. -->
-        </td>
+          </td>
       </tr>
       <tr>
         <td>Async Clipboard</td>
