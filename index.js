@@ -135,46 +135,28 @@ window.addEventListener("load", () => {
       );
     },
     camera: () => {
-      navigator.mediaDevices
-        ? navigator.mediaDevices
-            .getUserMedia({ video: true })
-            .then(
-              displayOutcome("camera", "success"),
-              displayOutcome("camera", "error"),
-            )
-        : navigator.getUserMedia(
-            { video: true },
-            displayOutcome("camera", "success"),
-            displayOutcome("camera", "error"),
-          );
+      (navigator.mediaDevices ?? navigator)
+        .getUserMedia({ video: true })
+        .then(
+          displayOutcome("camera", "success"),
+          displayOutcome("camera", "error"),
+        );
     },
     microphone: () => {
-      navigator.mediaDevices
-        ? navigator.mediaDevices
-            .getUserMedia({ audio: true })
-            .then(
-              displayOutcome("microphone", "success"),
-              displayOutcome("microphone", "error"),
-            )
-        : navigator.getUserMedia(
-            { audio: true },
-            displayOutcome("microphone", "success"),
-            displayOutcome("microphone", "error"),
-          );
+      (navigator.mediaDevices ?? navigator)
+        .getUserMedia({ audio: true })
+        .then(
+          displayOutcome("microphone", "success"),
+          displayOutcome("microphone", "error"),
+        );
     },
     "camera+microphone": () => {
-      navigator.mediaDevices
-        ? navigator.mediaDevices
-            .getUserMedia({ audio: true, video: true })
-            .then(
-              displayOutcome("camera+microphone", "success"),
-              displayOutcome("camera+microphone", "error"),
-            )
-        : navigator.getUserMedia(
-            { audio: true, video: true },
-            displayOutcome("camera+microphone", "success"),
-            displayOutcome("camera+microphone", "error"),
-          );
+      (navigator.mediaDevices ?? navigator)
+        .getUserMedia({ audio: true, video: true })
+        .then(
+          displayOutcome("camera+microphone", "success"),
+          displayOutcome("camera+microphone", "error"),
+        );
     },
     "pan-tilt-zoom": () => {
       navigator.mediaDevices
@@ -191,24 +173,18 @@ window.addEventListener("load", () => {
           );
     },
     "pan-tilt-zoom+microphone": () => {
-      navigator.mediaDevices
-        ? navigator.mediaDevices
-            .getUserMedia({
-              video: { pan: true, tilt: true, zoom: true },
-              audio: true,
-            })
-            .then(
-              displayOutcome("pan-tilt-zoom+microphone", "success"),
-              displayOutcome("pan-tilt-zoom+microphone", "error"),
-            )
-        : navigator.getUserMedia(
-            { video: { pan: true, tilt: true, zoom: true }, audio: true },
-            displayOutcome("pan-tilt-zoom+microphone", "success"),
-            displayOutcome("pan-tilt-zoom+microphone", "error"),
-          );
+      (navigator.mediaDevices ?? navigator)
+        .getUserMedia({
+          video: { pan: true, tilt: true, zoom: true },
+          audio: true,
+        })
+        .then(
+          displayOutcome("pan-tilt-zoom+microphone", "success"),
+          displayOutcome("pan-tilt-zoom+microphone", "error"),
+        );
     },
     screenshare: () => {
-      navigator.mediaDevices
+      (navigator.mediaDevices ?? navigator)
         .getDisplayMedia()
         .then(
           displayOutcome("screenshare", "success"),
