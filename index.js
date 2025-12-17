@@ -80,6 +80,38 @@ window.addEventListener("load", () => {
     );
   }
 
+  // Generic Sensor Helper
+  function testGenericSensor(SensorClass, id) {
+    return () => {
+      try {
+        if (!SensorClass) {
+          // If the class is undefined (e.g. ProximitySensor not enabled), report error
+          displayOutcome(
+            id,
+            "error",
+          )("Sensor API not available (check flags?)");
+          return;
+        }
+
+        const sensor = new SensorClass();
+        sensor.onerror = (event) => {
+          if (event.error.name === "NotAllowedError") {
+            displayOutcome(id, "denied")(event.error.message);
+          } else {
+            displayOutcome(id, "error")(event.error.message, event.error.name);
+          }
+        };
+        sensor.onreading = () => {
+          displayOutcome(id, "success")("Reading retrieved");
+          sensor.stop();
+        };
+        sensor.start();
+      } catch (e) {
+        displayOutcome(id, "error")(e.message || e);
+      }
+    };
+  }
+
   navigator.getUserMedia =
     navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
@@ -866,6 +898,40 @@ window.addEventListener("load", () => {
         displayOutcome("motion", "error")("Device Motion is not supported");
       }
     },
+
+    // Generic Sensor API entries
+    "ambient-light-sensor": testGenericSensor(
+      window.AmbientLightSensor,
+      "ambient-light-sensor",
+    ),
+    accelerometer: testGenericSensor(window.Accelerometer, "accelerometer"),
+    "linear-acceleration-sensor": testGenericSensor(
+      window.LinearAccelerationSensor,
+      "linear-acceleration-sensor",
+    ),
+    "gravity-sensor": testGenericSensor(window.GravitySensor, "gravity-sensor"),
+    gyroscope: testGenericSensor(window.Gyroscope, "gyroscope"),
+    magnetometer: testGenericSensor(window.Magnetometer, "magnetometer"),
+    "uncalibrated-magnetometer": testGenericSensor(
+      window.UncalibratedMagnetometer,
+      "uncalibrated-magnetometer",
+    ),
+    "absolute-orientation-sensor": testGenericSensor(
+      window.AbsoluteOrientationSensor,
+      "absolute-orientation-sensor",
+    ),
+    "relative-orientation-sensor": testGenericSensor(
+      window.RelativeOrientationSensor,
+      "relative-orientation-sensor",
+    ),
+    "geolocation-sensor": testGenericSensor(
+      window.GeolocationSensor,
+      "geolocation-sensor",
+    ),
+    "proximity-sensor": testGenericSensor(
+      window.ProximitySensor,
+      "proximity-sensor",
+    ),
   };
 
   for (var type in register) {

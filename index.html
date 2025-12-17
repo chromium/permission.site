@@ -4,7 +4,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=0.6">
-  <!-- Origin trial token needed for Web USB -->
   <meta http-equiv="origin-trial"
     content="AsxscPRBb7U1KJIlQrsFrZ3ea0LHwRhNkbqBKsSuLP5y3sqIqnanjKbGk4oe5+/HkownaJhI2wP6m1S70Y8xkQsAAABUeyJvcmlnaW4iOiAiaHR0cHM6Ly9wZXJtaXNzaW9uLnNpdGU6NDQzIiwgImZlYXR1cmUiOiAiV2ViVVNCIiwgImV4cGlyeSI6IDE0NjUzODkxOTd9">
   <title>permission.site</title>
@@ -62,6 +61,22 @@
     <button id="orientation">Device Orientation</button>
     <button id="motion">Device Motion</button>
 
+    <hr>
+    
+    <button id="ambient-light-sensor">Ambient Light Sensor</button>
+    <button id="accelerometer">Accelerometer</button>
+    <button id="linear-acceleration-sensor">Linear Acceleration Sensor</button>
+    <button id="gravity-sensor">Gravity Sensor</button>
+    <button id="gyroscope">Gyroscope</button>
+    <button id="magnetometer">Magnetometer</button>
+    <button id="uncalibrated-magnetometer">Uncalibrated Magnetometer</button>
+    <button id="absolute-orientation-sensor">Absolute Orientation Sensor</button>
+    <button id="relative-orientation-sensor">Relative Orientation Sensor</button>
+    <button id="geolocation-sensor">Geolocation Sensor</button>
+    <button id="proximity-sensor">Proximity Sensor</button>
+
+    <hr>
+
     <button id="keygen">&lt;keygen&gt;</button>
     <div id="keygen-container"></div>
 
@@ -97,11 +112,15 @@
           <code>chrome://flags/#enable-experimental-web-platform-features</code>.</td>
       </tr>
       <tr>
+        <td>Generic Sensors (Proximity, etc.)</td>
+        <td>Some sensors may require enabling the 
+          <code>chrome://flags/#enable-generic-sensor-extra-classes</code> flag.</td>
+      </tr>
+      <tr>
         <td>Encrypted Media (EME)</td>
         <td>May succeed without permission depending on the implementation.<br>
           Attempts to use known key systems. (See the source for the list of supported key systems.)
-          <!-- Clear Key is not supported because it is not expected to require permissions. -->
-        </td>
+          </td>
       </tr>
       <tr>
         <td>Async Clipboard</td>
