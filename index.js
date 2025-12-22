@@ -187,10 +187,12 @@ window.addEventListener("load", () => {
     },
     "window-management": () => {
       if ("getScreenDetails" in window) {
-        window.getScreenDetails().then(
-          displayOutcome("window-management", "success"),
-          displayOutcome("window-management", "error"),
-        );
+        window
+          .getScreenDetails()
+          .then(
+            displayOutcome("window-management", "success"),
+            displayOutcome("window-management", "error"),
+          );
       } else {
         displayOutcome(
           "window-management",
