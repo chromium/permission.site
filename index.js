@@ -191,18 +191,12 @@ window.addEventListener("load", () => {
         );
     },
     "pan-tilt-zoom": () => {
-      navigator.mediaDevices
-        ? navigator.mediaDevices
-            .getUserMedia({ video: { pan: true, tilt: true, zoom: true } })
-            .then(
-              displayOutcome("pan-tilt-zoom", "success"),
-              displayOutcome("pan-tilt-zoom", "error"),
-            )
-        : navigator.getUserMedia(
-            { video: { pan: true, tilt: true, zoom: true } },
-            displayOutcome("pan-tilt-zoom", "success"),
-            displayOutcome("pan-tilt-zoom", "error"),
-          );
+      (navigator.mediaDevices ?? navigator)
+        .getUserMedia({ video: { pan: true, tilt: true, zoom: true } })
+        .then(
+          displayOutcome("pan-tilt-zoom", "success"),
+          displayOutcome("pan-tilt-zoom", "error"),
+        );
     },
     "pan-tilt-zoom+microphone": () => {
       (navigator.mediaDevices ?? navigator)
