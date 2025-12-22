@@ -1,10 +1,23 @@
+:root {
+  color-scheme: light dark;
+  --main-background-color: #eee;
+  --button-background-color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-background-color: #222;
+    --button-background-color: #555;
+  }
+}
+
 /* Light material design boilerplate. */
 html,
 body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background: #eeeeee;
+  background-color: var(--main-background-color);
 }
 
 /* Only apply min-height to non-print media */
@@ -37,7 +50,8 @@ body {
 }
 
 button {
-  background: #fff;
+  background-color: var(--button-background-color);
+  color: currentColor;
   border: none;
   font-size: 1.5em;
   width: 400px;
@@ -48,18 +62,18 @@ button {
 }
 
 button:hover {
-  background: #ffa;
+  background: color-mix(in oklab, #ff0 50%, transparent);
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   transform: translateY(-2px);
 }
 
 button.success {
-  background: #afa;
+  background: color-mix(in oklab, #0f0 50%, transparent);
 }
 
 button.error {
-  background: #faa;
+  background: color-mix(in oklab, #f00 50%, transparent);
 }
 
 table {
@@ -85,19 +99,19 @@ table td:first-child {
   font-size: 1.5em;
   padding: 1em;
   margin: 1em;
-  color: black;
+  color: currentColor;
   text-decoration: none;
 }
 
 #toggle .http,
 #toggle .https {
-  color: rgba(0, 0, 0, 0.5);
+  color: color-mix(in oklab, currentColor 50%, transparent);
   transition: color 0.25s ease-in-out;
 }
 
 #toggle.https .http,
 #toggle.http .https {
-  color: rgba(0, 0, 0, 0.5);
+  color: color-mix(in oklab, currentColor 50%, transparent);
 }
 
 #toggle.http:not(:hover) .http {
@@ -119,7 +133,7 @@ table td:first-child {
 }
 
 a#toggle:hover {
-  color: black;
+  color: currentColor;
 }
 
 .switch {
@@ -204,9 +218,10 @@ a#toggle:hover {
 }
 
 permission {
+  --color: #2192ef;
   position: relative;
-  background: #def0ff;
-  border: solid #005763;
+  background: color-mix(in oklab, currentColor 30%, transparent);
+  border: solid color-mix(in oklab, currentColor 70%, transparent);
   border-radius: 5px;
   width: 400px;
   padding: 0.5em;
