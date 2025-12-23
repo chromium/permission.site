@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=0.6">
-  <!-- Origin trial token needed for Web USB -->
   <meta http-equiv="origin-trial"
     content="AsxscPRBb7U1KJIlQrsFrZ3ea0LHwRhNkbqBKsSuLP5y3sqIqnanjKbGk4oe5+/HkownaJhI2wP6m1S70Y8xkQsAAABUeyJvcmlnaW4iOiAiaHR0cHM6Ly9wZXJtaXNzaW9uLnNpdGU6NDQzIiwgImZlYXR1cmUiOiAiV2ViVVNCIiwgImV4cGlyeSI6IDE0NjUzODkxOTd9">
   <title>permission.site</title>
@@ -13,18 +11,14 @@
   <link rel="stylesheet" href="style.css">
   <script src="index.js"></script>
 </head>
-
 <body>
-
   <noscript>
     <div class="jswarning">
       This site does not function without JavaScript!
     </div>
   </noscript>
-
   <div class="before"></div>
   <div class="content">
-
     <div id="toggle-wrapper">
       <a id="toggle" class="neutral" href="" title="Switch between HTTP and HTTPS.">
         <span class="http">HTTP</span>
@@ -34,7 +28,6 @@
         <span class="https">HTTPS</span>
       </a>
     </div>
-
     <button id="notifications">Notifications</button>
     <button id="location">Location</button>
     <button id="camera">Camera</button>
@@ -62,33 +55,24 @@
     <button id="ar">Augmented Reality (AR)</button>
     <button id="orientation">Device Orientation</button>
     <button id="motion">Device Motion</button>
-
     <button id="keygen">&lt;keygen&gt;</button>
     <div id="keygen-container"></div>
-
     <hr>
-
     <button id="fullscreen">Fullscreen</button>
     <button id="pointerlock">Pointer Lock</button>
     <button id="keyboardlock">Keyboard Lock</button>
-
     <hr>
-
     <button id="copy">Copy</button>
     <button id="download">Auto Download</button>
     <button id="popup">Popup</button>
     <button id="popup-delayed">Popup (delayed 5 seconds)</button>
-
     <hr>
-
     <p>Async Clipboard API</p>
-
     <button id="read-text">Read text</button>
     <button id="write-text">Write text</button>
     <br>
     <button id="read-text-delayed">Read text (delayed)</button>
     <button id="write-text-delayed">Write text (delayed)</button>
-
     <br><br><br>
     <p>Notes:</p>
     <table>
@@ -101,8 +85,7 @@
         <td>Encrypted Media (EME)</td>
         <td>May succeed without permission depending on the implementation.<br>
           Attempts to use known key systems. (See the source for the list of supported key systems.)
-          <!-- Clear Key is not supported because it is not expected to require permissions. -->
-        </td>
+          </td>
       </tr>
       <tr>
         <td>Async Clipboard</td>
@@ -134,10 +117,8 @@
         </td>
       </tr>
     </table>
-
   </div>
   <div class="after"></div>
-
   <div class="github-fork-ribbon-wrapper right">
     <div class="github-fork-ribbon">
       <a href="https://github.com/chromium/permission.site">On GitHub</a>
