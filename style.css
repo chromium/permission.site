@@ -252,8 +252,9 @@ geolocation:hover {
   font-family: monospace;
   border: 1px solid #ddd;
   padding: 15px;
-  margin-top: 10px;
-  background-color: #fafafa;
+  margin-top: 10px;  
+  color: light-dark(#000, #fafafa);  
+  background-color: light-dark(#fafafa, #000);
   min-height: 80px;
   white-space: pre-wrap;
 }
