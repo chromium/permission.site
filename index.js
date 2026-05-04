@@ -134,6 +134,13 @@ window.addEventListener("load", () => {
         displayOutcome("location", "error"),
       );
     },
+    "approx-location": () => {
+      navigator.geolocation.getCurrentPosition(
+        displayOutcome("approx-location", "success"),
+        displayOutcome("approx-location", "error"),
+        {accuracyMode: "approximate"},
+      );
+    },
     camera: () => {
       (navigator.mediaDevices ?? navigator)
         .getUserMedia({ video: true })
