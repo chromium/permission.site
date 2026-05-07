@@ -1,6 +1,7 @@
 {
 	"scripts": {
-		"lint": "npx @biomejs/biome ci",
+		"lint": "npx @biomejs/biome check",
+		"lint-ci": "npx @biomejs/biome ci --reporter github",
 		"format": "npx @biomejs/biome check --write"
 	},
 	"devDependencies": {

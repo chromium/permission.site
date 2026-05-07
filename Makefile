@@ -1,4 +1,4 @@
-NPM_COMMANDS = lint format
+NPM_COMMANDS = lint lint-ci format
 
 .PHONY: $(NPM_COMMANDS)
 $(NPM_COMMANDS): setup
