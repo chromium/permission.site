@@ -57,14 +57,18 @@ button {
   width: 400px;
   padding: 0.5em;
   margin: 10px 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
   transition: all 150ms;
 }
 
 button:hover {
   background: color-mix(in oklab, #ff0 50%, transparent);
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.19),
+    0 6px 6px rgba(0, 0, 0, 0.23);
   transform: translateY(-2px);
 }
 
@@ -152,13 +156,17 @@ a#toggle:hover {
   margin: -3px;
   border-radius: 10px;
   background-color: #f1f1f1;
-  border: inset 0.5px rgba(255, 255, 255, 0.12), inset 0.5px
-    rgba(255, 255, 255, 0.12);
-  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px
-    rgba(0, 0, 0, 0.24);
+  border:
+    inset 0.5px rgba(255, 255, 255, 0.12),
+    inset 0.5px rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0px 0px 2px 0px rgba(0, 0, 0, 0.12),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.24);
 
   transform: translateX(10px);
-  transition: transform 0.25s ease-in-out, background-color 0.25s ease-in-out;
+  transition:
+    transform 0.25s ease-in-out,
+    background-color 0.25s ease-in-out;
 }
 
 #toggle.instant .switch,
@@ -199,7 +207,7 @@ a#toggle:hover {
 .access-status {
   font-size: small;
   text-transform: uppercase;
-  padding-top: .4rem;
+  padding-top: 0.4rem;
   text-align: left;
 }
 
@@ -209,7 +217,7 @@ a#toggle:hover {
 }
 
 .demo-instructions {
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   text-align: left;
   border: solid 1px;
   max-width: 80rem;
