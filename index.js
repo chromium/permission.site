@@ -329,7 +329,7 @@ window.addEventListener("load", () => {
         }
 
         try {
-          const status = await IdleDetector.requestPermission();
+          let status = await IdleDetector.requestPermission();
           if (status !== "granted") {
             displayOutcome(
               "idle-detection",
