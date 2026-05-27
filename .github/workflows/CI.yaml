@@ -16,4 +16,4 @@ jobs:
       - name: Run Biome through Reviewdog
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: reviewdog -conf=./.reviewdog.yml -runners=biome
+        run: reviewdog -conf=./.reviewdog.yml
