@@ -1,7 +1,7 @@
 {
 	"scripts": {
 		"lint": "npx @biomejs/biome@2.4.14 ci",
-		"lint-ci-github": "npx @biomejs/biome@2.4.14 check --reporter github",
+		"lint-ci-github": "npx @biomejs/biome@2.4.14 check --reporter rdjson",
 		"format": "npx @biomejs/biome@2.4.14 check --write"
 	},
 	"devDependencies": {
