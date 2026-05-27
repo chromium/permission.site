@@ -879,6 +879,6 @@ switch ("foo") {
     console.log("bad fallthrough");
   }
   default: {
-    console.log("hmm");
+    console.log("hmm again");
   }
 }
