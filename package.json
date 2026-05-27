@@ -1,7 +1,7 @@
 {
 	"scripts": {
 		"lint": "npx @biomejs/biome@2.4.14 check",
-		"lint-ci": "npx @biomejs/biome@2.4.14 check --reporter=json",
+		"lint-ci": "env CI=\"\" npx @biomejs/biome@2.4.14 check",
 		"lint-ci-formatter-annotations": "npx @biomejs/biome@2.4.14 check --formatter-enabled=true --linter-enabled=false || echo \"Ignoring exit code.\"",
 		"lint-ci-comments-rdjson": "npx @biomejs/biome@2.4.14 check --reporter rdjson",
 		"format": "npx @biomejs/biome@2.4.14 check --write"
