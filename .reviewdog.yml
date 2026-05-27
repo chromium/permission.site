@@ -1,0 +1,3 @@
+runner:
+  biome:
+    cmd: npx @biomejs/biome@2.4.14 check --reporter rdjson
