@@ -21,3 +21,4 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: make lint-ci-rdjson | reviewdog -f=rdjson -reporter=github-pr-review
       - run: make lint
+      - run: make lint-ci-format-check

@@ -2,6 +2,7 @@
 	"scripts": {
 		"lint": "npx @biomejs/biome@2.4.14 check",
 		"lint-ci-rdjson": "npx @biomejs/biome@2.4.14 check --reporter rdjson",
+		"lint-ci-format-check": "npx @biomejs/biome@2.4.14 format --check",
 		"format": "npx @biomejs/biome@2.4.14 check --write"
 	},
 	"devDependencies": {
