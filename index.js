@@ -329,7 +329,7 @@ window.addEventListener("load", () => {
         }
 
         try {
-          let status = await IdleDetector.requestPermission();
+          const status = await IdleDetector.requestPermission();
           if (status !== "granted") {
             displayOutcome(
               "idle-detection",
@@ -873,3 +873,12 @@ window.addEventListener("load", () => {
     document.getElementById(type).addEventListener("click", register[type]);
   }
 });
+
+switch ("foo") {
+  case "foo": {
+    console.log("bad fallthrough");
+  }
+  default: {
+    console.log("hmm");
+  }
+}
