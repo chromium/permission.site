@@ -870,6 +870,6 @@ window.addEventListener("load", () => {
   };
 
   for (var type in register) {
-      document.getElementById(type).addEventListener("click", register[type]);
+        document.getElementById(type).addEventListener("click", register[type]);
   }
 });

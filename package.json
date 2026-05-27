@@ -1,8 +1,9 @@
 {
 	"scripts": {
 		"lint": "npx @biomejs/biome@2.4.14 check",
-		"lint-ci-rdjson": "npx @biomejs/biome@2.4.14 check --reporter rdjson",
-		"lint-ci-format-check": "npx @biomejs/biome@2.4.14 ci --linter-enabled=false",
+		"lint-ci": "npx @biomejs/biome@2.4.14 check --reporter=json",
+		"lint-ci-formatter-annotations": "npx @biomejs/biome@2.4.14 check --formatter-enabled=true --linter-enabled=false || echo \"Ignoring exit code.\"",
+		"lint-ci-comments-rdjson": "npx @biomejs/biome@2.4.14 check --reporter rdjson",
 		"format": "npx @biomejs/biome@2.4.14 check --write"
 	},
 	"devDependencies": {
