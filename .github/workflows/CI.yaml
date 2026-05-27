@@ -13,7 +13,8 @@ jobs:
         with:
           reviewdog_version: latest
       - run: make setup
-      - name: Run Biome through Reviewdog
-        env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: reviewdog -conf=./.reviewdog.yml -runners=biome
+      - uses: mongolyy/reviewdog-action-biome@bf7dffa9b14e8904941a18a28782b74fc40104f0 # v1.11.1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          fail_on_error: true
