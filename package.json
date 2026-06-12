@@ -1,12 +1,12 @@
 {
 	"scripts": {
-		"lint": "npx @biomejs/biome@2.4.14 check",
-		"lint-ci": "env CI=\"\" npx @biomejs/biome@2.4.14 check",
-		"lint-ci-formatter-annotations": "npx @biomejs/biome@2.4.14 ci --formatter-enabled=true --linter-enabled=false || echo \"Ignoring exit code.\"",
-		"lint-ci-comments-rdjson": "npx @biomejs/biome@2.4.14 check --reporter rdjson",
-		"format": "npx @biomejs/biome@2.4.14 check --write"
+		"lint": "npx @biomejs/biome@2.5.0 check",
+		"lint-ci": "env CI=\"\" npx @biomejs/biome@2.5.0 check",
+		"lint-ci-formatter-annotations": "npx @biomejs/biome@2.5.0 ci --formatter-enabled=true --linter-enabled=false || echo \"Ignoring exit code.\"",
+		"lint-ci-comments-rdjson": "npx @biomejs/biome@2.5.0 check --reporter rdjson",
+		"format": "npx @biomejs/biome@2.5.0 check --write"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.14"
+		"@biomejs/biome": "^2.5.0"
 	}
 }
