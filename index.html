@@ -20,6 +20,7 @@
   <div class="before"></div>
   <div class="content">
     <div id="toggle-wrapper">
+      <!-- biome-ignore lint/a11y/useValidAnchor: The URL must be conditionally calculated, and is set by JS. -->
       <a id="toggle" class="neutral" href="" title="Switch between HTTP and HTTPS.">
         <span class="http">HTTP</span>
         <div class="switch">
@@ -30,6 +31,7 @@
     </div>
     <button id="notifications">Notifications</button>
     <button id="location">Location</button>
+    <button id="approximate-location">Location (approximate)</button>
     <button id="camera">Camera</button>
     <button id="microphone">Microphone</button>
     <button id="camera+microphone">Camera + Microphone</button>
@@ -79,7 +81,8 @@
       <tr>
         <td>Augmented Reality (AR)</td>
         <td>Implemented behind the experimental flag
-          <code>chrome://flags/#enable-experimental-web-platform-features</code>.</td>
+          <code>chrome://flags/#enable-experimental-web-platform-features</code>.
+        </td>
       </tr>
       <tr>
         <td>Encrypted Media (EME)</td>

@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": ["**", "!package.json"]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "linter": {
+    "rules": {
+      "a11y": {
+        "useButtonType": "off"
+      },
+      "complexity": {
+        "useOptionalChain": "off",
+        "noForEach": "off"
+      },
+      "correctness": {
+        // We have selectors for experimental elements.
+        "noUnknownTypeSelector": "off"
+      },
+      "style": {
+        "useTemplate": "off"
+      }
+    }
+  },
+  "vcs": {
+    "clientKind": "git",
+    "enabled": true,
+    "useIgnoreFile": true
+  }
+}

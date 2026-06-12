@@ -1,13 +1,18 @@
 name: CI
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
       - run: make setup
-      - run: make lint
+      # Adds formatter annotations to the commit. This is in charge of reporting
+      # fromatting errors but not halting the CI job on failure — we use
+      # `--error-on-warnings=false` here and a single full pass with `make
+      # lint-ci` below.
+      - run: make lint-ci-formatter-annotations
+      - run: make lint-ci

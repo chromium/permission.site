@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=0.6" />
@@ -96,17 +96,17 @@
       }
 
       // Assign a specific handler for the manual element
-      manualGeoElement.onlocation = function(event) {
+      manualGeoElement.onlocation = (event) => {
         manualOutputDiv.innerHTML = createLogEntry(event);
       };
 
       // Assign a specific handler for the automatic element
-      autoGeoElement.onlocation = function(event) {
+      autoGeoElement.onlocation = (event) => {
         autoOutputDiv.innerHTML = createLogEntry(event);
       };
 
       // Assign a handler for the watch element that accumulates updates
-      watchGeoElement.onlocation = function(event) {
+      watchGeoElement.onlocation = (event) => {
         // Convert newlines to <br> for HTML display and prepend the newest entry.
         const entryHtml = '<div class="log-entry">' +
                           createLogEntry(event).replace(/\n/g, '<br>') +
