@@ -339,7 +339,7 @@ window.addEventListener("load", () => {
           }
 
           controller = new AbortController();
-          let detector = new IdleDetector();
+          const detector = new IdleDetector();
           detector.addEventListener("change", () => {
             console.log(
               `Idle change: ${detector.userState}, ${detector.screenState}.`,
@@ -870,6 +870,6 @@ window.addEventListener("load", () => {
   };
 
   for (var type in register) {
-    document.getElementById(type).addEventListener("click", register[type]);
+      document.getElementById(type).addEventListener("click", register[type]);
   }
 });
