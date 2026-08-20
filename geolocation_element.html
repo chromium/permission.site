@@ -9,6 +9,44 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" href="app-icon.png" />
     <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Maximum contrast between page background and foreground: pure black on
+         pure white in light mode, pure white on pure black in dark mode. Both
+         are a 21:1 contrast ratio, the highest sRGB allows. */
+      :root {
+        --main-background-color: #fff;
+        --button-background-color: #fff;
+        --main-foreground-color: #000;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --main-background-color: #000;
+          --button-background-color: #000;
+          --main-foreground-color: #fff;
+        }
+      }
+
+      body {
+        color: var(--main-foreground-color);
+      }
+
+      geolocation,
+      .geolocation-event-logger,
+      .instructions,
+      pre,
+      code {
+        background-color: var(--main-background-color);
+        color: var(--main-foreground-color);
+        border-color: currentColor;
+      }
+
+      /* Invert on hover, which keeps the same 21:1 ratio. */
+      geolocation:hover {
+        background-color: var(--main-foreground-color);
+        color: var(--main-background-color);
+      }
+    </style>
   </head>
   <body>
     <div class="container">
