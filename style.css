@@ -377,3 +377,89 @@ microphone:hover {
   padding: 6px 12px;
   margin: 0;
 }
+
+.demo-links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.demo-link-card {
+  box-sizing: border-box;
+  width: 400px;
+  margin: 10px;
+  padding: 16px 20px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  text-decoration: none;
+  color: currentColor;
+  background-color: var(--button-background-color);
+  border: 1px solid light-dark(#dcdcdc, #444);
+  border-radius: 6px;
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+.demo-link-card:hover {
+  transform: translateY(-2px);
+  border-color: light-dark(#1a73e8, #8ab4f8);
+  background-color: color-mix(
+    in oklab,
+    light-dark(#1a73e8, #8ab4f8) 6%,
+    var(--button-background-color)
+  );
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.19),
+    0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.demo-link-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.demo-link-title {
+  font-size: 1.15em;
+  font-weight: 700;
+  color: light-dark(#1a73e8, #8ab4f8);
+}
+
+.demo-link-arrow {
+  font-size: 1.2em;
+  color: color-mix(in oklab, currentColor 60%, transparent);
+  transition: transform 150ms ease;
+}
+
+.demo-link-card:hover .demo-link-arrow {
+  transform: translateX(4px);
+  color: light-dark(#1a73e8, #8ab4f8);
+}
+
+.demo-link-badge {
+  margin-bottom: 8px;
+}
+
+.demo-link-badge code {
+  font-size: 0.85em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: color-mix(in oklab, currentColor 10%, transparent);
+}
+
+.demo-link-desc {
+  font-size: 0.9em;
+  line-height: 1.4;
+  color: color-mix(in oklab, currentColor 80%, transparent);
+}

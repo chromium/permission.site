@@ -246,6 +246,21 @@ window.addEventListener("DOMContentLoaded", () => {
     "Microphone Only",
   );
 
+  // Setup Media Capture elements in Icon-Only Mode
+  setupMediaCaptureElement(
+    document.getElementById("um-both-icon-only"),
+    "Usermedia Icon-Only (Camera & Mic)",
+    { audio: {}, video: {} },
+  );
+  setupMediaCaptureElement(
+    document.getElementById("cam-icon-only"),
+    "Camera Icon-Only",
+  );
+  setupMediaCaptureElement(
+    document.getElementById("mic-icon-only"),
+    "Microphone Icon-Only",
+  );
+
   // Setup Legacy elements
   setupLegacyElement(
     document.getElementById("um-legacy-audio"),
