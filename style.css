@@ -412,10 +412,10 @@ microphone:hover {
 
 .demo-link-card:hover {
   transform: translateY(-2px);
-  border-color: light-dark(#1a73e8, #8ab4f8);
+  border-color: light-dark(#1a73e8, #d2e3fc);
   background-color: color-mix(
     in oklab,
-    light-dark(#1a73e8, #8ab4f8) 6%,
+    light-dark(#1a73e8, #d2e3fc) 6%,
     var(--button-background-color)
   );
   box-shadow:
@@ -433,7 +433,7 @@ microphone:hover {
 .demo-link-title {
   font-size: 1.15em;
   font-weight: 700;
-  color: light-dark(#1a73e8, #8ab4f8);
+  color: light-dark(#1a73e8, #d2e3fc);
 }
 
 .demo-link-arrow {
@@ -444,7 +444,7 @@ microphone:hover {
 
 .demo-link-card:hover .demo-link-arrow {
   transform: translateX(4px);
-  color: light-dark(#1a73e8, #8ab4f8);
+  color: light-dark(#1a73e8, #d2e3fc);
 }
 
 .demo-link-badge {
@@ -458,7 +458,7 @@ microphone:hover {
   background-color: color-mix(in oklab, currentColor 10%, transparent);
 }
 
-.demo-link-desc {
+.demo-link-description {
   font-size: 0.9em;
   line-height: 1.4;
   color: color-mix(in oklab, currentColor 80%, transparent);
