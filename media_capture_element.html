@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" href="app-icon.png" />
     <link rel="stylesheet" href="style.css" />
     <script>
-      (function() {
+      (() => {
         const OT_TOKEN =
           "As0h1KZNvjE/ahZ5XIjLEylA1lNDTQ+VFANatlPIrPi5fntBf9nZPUBNeIbHvOupoy1hXWZYE4q4rniDLGWSuAoAAABseyJvcmlnaW4iOiJodHRwczovL3Blcm1pc3Npb24uc2l0ZTo0NDMiLCJmZWF0dXJlIjoiVXNlck1lZGlhRWxlbWVudCIsImV4cGlyeSI6MTc5MDAzNTIwMCwiaXNTdWJkb21haW4iOnRydWV9";
         const isLegacy = sessionStorage.getItem("legacyModeActive") === "true";
@@ -48,7 +48,21 @@
         </span>
       </div>
 
-      <h2>2. Legacy &lt;usermedia&gt; Element</h2>
+      <h2>2. Media Capture Elements in Icon-Only Mode</h2>
+      <p>Click these elements to request media rendered in icon-only mode (<code>displaymode="icon-only"</code>).</p>
+      <div>
+        <span class="permission-element-box">
+          <usermedia id="um-both-icon-only" displaymode="icon-only" tabindex="0">No Usermedia Element</usermedia>
+        </span>
+        <span class="permission-element-box">
+          <camera id="cam-icon-only" displaymode="icon-only" tabindex="0">No Camera Element</camera>
+        </span>
+        <span class="permission-element-box">
+          <microphone id="mic-icon-only" displaymode="icon-only" tabindex="0">No Microphone Element</microphone>
+        </span>
+      </div>
+
+      <h2>3. Legacy &lt;usermedia&gt; Element</h2>
       <p>Click these elements to request media using the legacy <code>type</code> attribute (acting like permission elements).</p>
       <div>
         <span class="permission-element-box">
