@@ -239,12 +239,19 @@ window.addEventListener("load", () => {
         );
     },
     hid: () => {
-      navigator.hid.requestDevice({ filters: [] }).then(
-        (devices) => {
-          displayOutcome("hid", devices.length > 0 ? "success" : "error")();
-        },
-        displayOutcome("hid", "error"),
-      );
+      navigator.hid
+        .requestDevice({ filters: [] })
+        .then((devices) => {
+          if (devices.length === 0) {
+            throw new Error("No device selected");
+          }
+          return Promise.all(
+            devices.map((device) =>
+              device.opened ? Promise.resolve() : device.open(),
+            ),
+          );
+        })
+        .then(displayOutcome("hid", "success"), displayOutcome("hid", "error"));
     },
     eme: () => {
       // https://w3c.github.io/encrypted-media/#requestMediaKeySystemAccess

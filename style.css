@@ -463,3 +463,52 @@ microphone:hover {
   line-height: 1.4;
   color: color-mix(in oklab, currentColor 80%, transparent);
 }
+
+.hid-status {
+  margin: 0.75em auto 1.5em;
+  max-width: 400px;
+  font-size: 0.95em;
+  color: color-mix(in oklab, currentColor 75%, transparent);
+  word-break: break-word;
+}
+
+.hid-device-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5em auto 2em;
+  max-width: 400px;
+  text-align: left;
+}
+
+.hid-device-item {
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  background-color: var(--button-background-color);
+  border: 1px solid light-dark(#dcdcdc, #444);
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.hid-device-meta {
+  font-size: 0.85em;
+  font-family: monospace;
+  color: color-mix(in oklab, currentColor 70%, transparent);
+  margin-top: 2px;
+}
+
+.hid-device-state {
+  font-size: 0.8em;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background-color: color-mix(in oklab, currentColor 12%, transparent);
+  white-space: nowrap;
+}
+
+.hid-device-state.open {
+  background-color: color-mix(in oklab, #1ac222 25%, transparent);
+  color: light-dark(#137333, #81c995);
+}
