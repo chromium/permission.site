@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+  <title>permission.site (WebHID)</title>
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="app-icon.png" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="hid.js"></script>
+</head>
+
+<body>
+  <noscript>
+    <div class="jswarning">
+      This site does not function without JavaScript!
+    </div>
+  </noscript>
+
+  <div class="before"></div>
+  <div class="content">
+    <h1>WebHID Demo</h1>
+
+    <button id="connect-hid" type="button">Connect &amp; Open HID Device</button>
+    <div id="hid-status" class="hid-status">Ready.</div>
+
+    <h2>Connected Devices</h2>
+    <ul id="device-list" class="hid-device-list">
+      <li class="hid-device-item">No devices connected.</li>
+    </ul>
+  </div>
+  <div class="after"></div>
+
+  <div class="github-fork-ribbon-wrapper right">
+    <div class="github-fork-ribbon">
+      <a href="https://github.com/chromium/permission.site">On GitHub</a>
+    </div>
+  </div>
+  <link rel="stylesheet" href="third_party/github.css" />
+</body>
+
+</html>
