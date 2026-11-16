@@ -503,12 +503,12 @@ microphone:hover {
   font-size: 0.8em;
   font-weight: 700;
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 4px;
   background-color: color-mix(in oklab, currentColor 12%, transparent);
   white-space: nowrap;
 }
 
 .hid-device-state.open {
-  background-color: color-mix(in oklab, #1ac222 25%, transparent);
-  color: light-dark(#137333, #81c995);
+  background-color: light-dark(#e6f4ea, #0f5223);
+  color: light-dark(#0d652d, #c4eed0);
 }
