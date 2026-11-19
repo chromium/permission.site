@@ -22,28 +22,28 @@ function setButtonOutcome(outcome) {
 
 function createMessageListItem(text) {
   const li = document.createElement("li");
-  li.className = "hid-device-item";
+  li.className = "chooser-item";
   li.textContent = text;
   return li;
 }
 
 function createDeviceListItem(device) {
   const li = document.createElement("li");
-  li.className = "hid-device-item";
+  li.className = "chooser-item";
 
   const info = document.createElement("div");
   const name = document.createElement("div");
   name.textContent = device.productName || "Unnamed HID Device";
 
   const meta = document.createElement("div");
-  meta.className = "hid-device-meta";
+  meta.className = "chooser-meta";
   meta.textContent = `${hex16(device.vendorId)}:${hex16(device.productId)}`;
 
   info.appendChild(name);
   info.appendChild(meta);
 
   const state = document.createElement("span");
-  state.className = `hid-device-state${device.opened ? " open" : ""}`;
+  state.className = `chooser-state${device.opened ? " active" : ""}`;
   state.textContent = device.opened ? "Opened" : "Permitted";
 
   li.appendChild(info);
