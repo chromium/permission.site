@@ -61,6 +61,23 @@ window.addEventListener("load", () => {
       "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAABC0lEQVQYlTXPPUsCYQDA8b/e04tdQR5ZBpE3NAR6S0SDVDZKDQ2BY9TUy1foE0TQ1Edo6hOEkyUG0QuBRtQgl0hnenVdnZD5eLbU7xv8Avy5X16KhrQBg47EtpziXO6qBhAEeNEm0qr7VdBcLxt2mlnNbhVu0NMAgdj1wvjOoX2xdSt0L7MGgx2GGid8yLrJvJMUkbKfOF8N68bUIqcz2wQR7GUcYvJIr1dFQijvkh89xGV6BPPMwvMF/nQXJMgWiM+KLPX2tc0HNa/HUxDv2owpx7xV+023Hiwpdt7yhmcjj9/NdrIhn8LrPVmotctWVd01Nt27wH9T3YhHU5O+sT/6SuVZKa4cNGoAv/ZMas7pC/KaAAAAAElFTkSuQmCC";
     a.click();
   }
+  function requestMediaPermission(type, constraints, unsupportedMessage) {
+
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+
+          navigator.mediaDevices
+              .getUserMedia(constraints)
+              .then(() => displayOutcome(type, "success")())
+              .catch(() => displayOutcome(type, "error")());
+
+      } else {
+
+          console.warn(unsupportedMessage);
+          displayOutcome(type, "error")();
+
+      }
+
+  }
 
   function isFullscreen() {
     return (
@@ -142,36 +159,41 @@ window.addEventListener("load", () => {
       );
     },
     camera: () => {
-      (navigator.mediaDevices ?? navigator)
-        .getUserMedia({ video: true })
-        .then(
-          displayOutcome("camera", "success"),
-          displayOutcome("camera", "error"),
+     requestMediaPermission(
+            "camera",
+            { video: true },
+            "Camera API not supported"
         );
     },
     microphone: () => {
-      (navigator.mediaDevices ?? navigator)
-        .getUserMedia({ audio: true })
-        .then(
-          displayOutcome("microphone", "success"),
-          displayOutcome("microphone", "error"),
+      requestMediaPermission(
+            "microphone",
+            { audio: true },
+            "Microphone API not supported"
         );
     },
     "camera+microphone": () => {
-      (navigator.mediaDevices ?? navigator)
-        .getUserMedia({ audio: true, video: true })
-        .then(
-          displayOutcome("camera+microphone", "success"),
-          displayOutcome("camera+microphone", "error"),
-        );
+       requestMediaPermission(
+           "camera+microphone",
+           {
+               audio: true,
+               video: true
+           },
+           "Camera+Microphone API not supported"
+       );
     },
     "pan-tilt-zoom": () => {
-      (navigator.mediaDevices ?? navigator)
-        .getUserMedia({ video: { pan: true, tilt: true, zoom: true } })
-        .then(
-          displayOutcome("pan-tilt-zoom", "success"),
-          displayOutcome("pan-tilt-zoom", "error"),
-        );
+    requestMediaPermission(
+        "pan-tilt-zoom",
+        {
+            video: {
+                pan: true,
+                tilt: true,
+                zoom: true
+            }
+        },
+        "Pan-Tilt-Zoom API not supported"
+    );
     },
     "pan-tilt-zoom+microphone": () => {
       (navigator.mediaDevices ?? navigator)
